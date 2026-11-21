@@ -6,6 +6,8 @@
 - Commit and push the branch, then tell Dror what changed and what to check.
 - **Merge into `main` only when Dror explicitly says to merge.** Then merge and push `main` —
   GitHub Pages serves `main`, so every user's installed app updates on its next open.
+  Also republish Dror's private Claude artifact with the same `index.html` (its link is kept out
+  of this public repo; ask Dror for it if you don't have it).
 
 ## Project layout
 - `src/` — source. `shell.html` (HTML + CSS), `app.js` (app logic, FSRS, reader, cards),

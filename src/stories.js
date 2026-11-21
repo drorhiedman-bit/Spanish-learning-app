@@ -299,14 +299,14 @@ const STORIES = [
   targets: [
     { es: "laburar", en: "to work (Argentina)", match: ["labura", "laburo"] },
     { es: "che", en: "hey (Argentina)", match: ["che"] },
-    { es: "¿qué hacés?", en: "what are you up to? (vos form)", match: ["hacés"] },
+    { es: "¿qué hacés?", en: "what are you up to? (vos form)", match: ["hacés"], slang: true },
     { es: "¡dale!", en: "sure! OK!", match: ["dale"] },
     { es: "la birra", en: "beer (Argentina)", match: ["birras"] },
     { es: "re", en: "really, very (Argentina)", match: ["re"] },
     { es: "copado", en: "cool (Argentina)", match: ["copada"] },
     { es: "el bondi", en: "bus (Argentina)", match: ["bondi"] },
     { es: "buena onda", en: "good vibes, good mood", match: ["onda"] },
-    { es: "vos sos", en: "you are (voseo of tú eres)", match: ["sos"] },
+    { es: "vos sos", en: "you are (voseo of tú eres)", match: ["sos"], slang: true },
     { es: "traer", en: "to bring (traé = bring! vos)", match: ["traé"] },
     { es: "la parrilla", en: "grill", match: ["parrilla"] }
   ],
