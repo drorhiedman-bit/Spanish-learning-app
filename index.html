@@ -584,14 +584,14 @@ const STORIES = [
   targets: [
     { es: "laburar", en: "to work (Argentina)", match: ["labura", "laburo"] },
     { es: "che", en: "hey (Argentina)", match: ["che"] },
-    { es: "¿qué hacés?", en: "what are you up to? (vos form)", match: ["hacés"] },
+    { es: "¿qué hacés?", en: "what are you up to? (vos form)", match: ["hacés"], slang: true },
     { es: "¡dale!", en: "sure! OK!", match: ["dale"] },
     { es: "la birra", en: "beer (Argentina)", match: ["birras"] },
     { es: "re", en: "really, very (Argentina)", match: ["re"] },
     { es: "copado", en: "cool (Argentina)", match: ["copada"] },
     { es: "el bondi", en: "bus (Argentina)", match: ["bondi"] },
     { es: "buena onda", en: "good vibes, good mood", match: ["onda"] },
-    { es: "vos sos", en: "you are (voseo of tú eres)", match: ["sos"] },
+    { es: "vos sos", en: "you are (voseo of tú eres)", match: ["sos"], slang: true },
     { es: "traer", en: "to bring (traé = bring! vos)", match: ["traé"] },
     { es: "la parrilla", en: "grill", match: ["parrilla"] }
   ],
@@ -1006,7 +1006,8 @@ function splitSentences(text) {
 function tokensLower(text) { return text.split(SPLIT_WORDS).filter(t => IS_WORD.test(t)).map(t => t.toLowerCase()); }
 
 for (const k in GLOSS2) if (!(k in GLOSS)) GLOSS[k] = GLOSS2[k];
-let DEFS = {}, STORY_FORM = {}, GLOBAL_FORM = {}, JERGA_IDS = [];
+let DEFS = {}, STORY_FORM = {}, GLOBAL_FORM = {}, JERGA_IDS = [], SLANG = new Set();
+const isSlang = id => SLANG.has(id);
 // fragments of multi-word expressions — never map them globally
 const AMBIG = new Set(["una", "más", "pena", "orden", "ojo", "cuenta", "dio", "menos", "pesar", "hondo", "medida", "sobra", "embargo", "acuerdo", "bajo", "baja", "onda", "re", "mango", "mono", "mona"]);
 function buildDefs() {
@@ -1023,13 +1024,14 @@ function buildDefs() {
       for (const f of match) { STORY_FORM[st.id][f] = id; if (!GLOBAL_FORM[f] && !AMBIG.has(f)) GLOBAL_FORM[f] = id; }
     }
   }
-  JERGA_IDS = [];
+  JERGA_IDS = []; SLANG = new Set();
+  for (const st of allStories()) for (const t of st.targets || []) if (t.slang) SLANG.add("c_" + slug(t.es));
   for (const j of JERGA) {
     const id = "c_" + slug(j.es.split(" / ")[0]);
     const match = (j.match || tokensLower(j.es)).map(x => x.toLowerCase());
     if (!DEFS[id]) DEFS[id] = { id, es: j.es, en: j.en, storyId: null, level: 1, sentence: j.ex, sentEn: j.exEn, slang: true, region: j.region, match };
     else { DEFS[id].region = DEFS[id].region || j.region; DEFS[id].ex2 = j.ex; DEFS[id].ex2En = j.exEn; }
-    JERGA_IDS.push(id);
+    JERGA_IDS.push(id); SLANG.add(id);
     for (const f of match) if (!GLOBAL_FORM[f] && !AMBIG.has(f)) GLOBAL_FORM[f] = id;
   }
 }
@@ -1053,24 +1055,21 @@ function newQueue(limitStoryId) {
   if (limitStoryId) { Object.values(STORY_FORM[limitStoryId] || {}).forEach(push); return out; }
   // 1. words the user added from stories
   Object.keys(S.cards).filter(id => S.cards[id].st === "new").sort((a, b) => (S.cards[a].added || 0) - (S.cards[b].added || 0)).forEach(push);
-  // 2+3. words from stories already read, then the next story — interleaved with slang (2:1)
-  const storyIds = [];
-  for (const st of allStories()) if (S.read[st.id]) storyIds.push(...Object.values(STORY_FORM[st.id]));
-  const nx = nextStory(); if (nx) storyIds.push(...Object.values(STORY_FORM[nx.id]));
-  const sl = JERGA_IDS.filter(isNewCard);
-  let a = 0, b = 0;
-  const su = [...new Set(storyIds)].filter(id => !seen.has(id) && isNewCard(id));
-  while (a < su.length || b < sl.length) { if (a < su.length) push(su[a++]); if (a < su.length) push(su[a++]); if (b < sl.length) push(sl[b++]); }
+  // 2. words from stories already read  3. pre-learn the next story
+  for (const st of allStories()) if (S.read[st.id]) Object.values(STORY_FORM[st.id]).forEach(push);
+  const nx = nextStory(); if (nx) Object.values(STORY_FORM[nx.id]).forEach(push);
   // 4. everything else at or below level
   for (const st of allStories()) if (st.level <= S.level) Object.values(STORY_FORM[st.id]).forEach(push);
-  return out;
+  return out.filter(id => !isSlang(id)); // slang lives only in the "סלנג לטיני" mode
 }
-function dueList(storyId) {
+function slangNew() { return [...new Set(JERGA_IDS.concat([...SLANG]))].filter(id => getDef(id) && isNewCard(id)); }
+function dueList(storyId, kind) {
   const now = Date.now(), eod = endOfDay(now);
   return Object.keys(S.cards).filter(id => {
     const c = S.cards[id];
     if (!c || c.st === "new" || S.known[id] || !getDef(id)) return false;
     if (storyId && getDef(id).storyId !== storyId) return false;
+    if (!storyId && (kind === "slang") !== isSlang(id)) return false;
     return c.st === "learning" ? c.due <= now + 20 * MIN : c.due <= eod;
   }).sort((a, b) => S.cards[a].due - S.cards[b].due);
 }
@@ -1283,7 +1282,7 @@ function renderCards() {
   main().innerHTML = `
   <h2 class="h">כרטיסיות</h2>
   <section class="modes">
-    ${[["mixed", "🔀", "חדשות + ישנות", "מעורב, כמו באנקי"], ["review", "🔁", "רק ישנות", "חזרות שהגיע זמנן, ואם אין, חזרה חופשית"], ["new", "✨", "רק חדשות", "10 מילים חדשות בכל סבב, בלי הגבלה"], ["free", "🧠", "חזרה חופשית", "כל מה שלמדת, החלשות קודם, כמה שבא לך"], ["jerga", "🌎", "סלנג לטיני", "🇦🇷 ארגנטינה · 🇨🇴 קולומביה · ביטויים של אמריקה הלטינית"]].map(([k, ic, t, d]) => `
+    ${[["mixed", "🔀", "חדשות + ישנות", "מעורב, כמו באנקי"], ["review", "🔁", "רק ישנות", "חזרות שהגיע זמנן, ואם אין, חזרה חופשית"], ["new", "✨", "רק חדשות", "10 מילים חדשות בכל סבב, בלי הגבלה"], ["free", "🧠", "חזרה חופשית", "כל מה שלמדת, החלשות קודם, כמה שבא לך"], ["jerga", "🌎", "סלנג לטיני", `🇦🇷 ארגנטינה · 🇨🇴 קולומביה — רק כאן מופיע סלנג (${dueList(null, "slang").length} לחזרה · ${slangNew().length} חדשים)`]].map(([k, ic, t, d]) => `
       <button class="mode ${MODE === k ? "on" : ""}" data-m="${k}"><span class="mi">${ic}</span><span><b>${t}</b><small>${d}</small></span></button>`).join("")}
   </section>
   <section class="card-sum">
@@ -1318,7 +1317,7 @@ function startSession(mode, storyId) {
   rolloverDay();
   const due = dueList(storyId);
   let news = newQueue(storyId);
-  const learned = () => Object.keys(S.cards).filter(id => S.cards[id].st !== "new" && !S.known[id] && getDef(id))
+  const learned = () => Object.keys(S.cards).filter(id => S.cards[id].st !== "new" && !S.known[id] && getDef(id) && (mode === "jerga") === isSlang(id))
     .sort((a, b) => weakness(b) - weakness(a)).slice(0, 25);
   if (!storyId) {
     if (mode === "new") news = news.slice(0, 10);
@@ -1330,7 +1329,7 @@ function startSession(mode, storyId) {
   else if (mode === "review") q = due.length ? due : learned();
   else if (mode === "new") q = news;
   else if (mode === "free") q = learned();
-  else if (mode === "jerga") { const js = new Set(JERGA_IDS); q = dueList().filter(id => js.has(id)).concat(JERGA_IDS.filter(isNewCard).slice(0, 10)); if (!q.length) q = learned().filter(id => js.has(id)); }
+  else if (mode === "jerga") { q = dueList(null, "slang").concat(slangNew().slice(0, 10)); if (!q.length) q = learned(); }
   else if (mode === "extra") { q = due.concat(news); if (q.length < 10) q = q.concat(learned().filter(id => !q.includes(id))).slice(0, Math.max(q.length, 20)); }
   else { // interleave: one new after every 3 reviews
     let i = 0, j = 0;
@@ -1363,7 +1362,7 @@ function renderSession() {
   </div>
   <div class="flash ${fresh ? "is-new" : ""}" id="flash">
     ${fresh ? `<div class="newtag">מילה חדשה</div>` : ""}
-    ${d.region && REGIONS[d.region] ? `<div class="regtag">${REGIONS[d.region].flag} ${REGIONS[d.region].he}</div>` : ""}
+    ${isSlang(id) && d.region && REGIONS[d.region] ? `<div class="regtag">${REGIONS[d.region].flag} ${REGIONS[d.region].he}</div>` : ""}
     <div class="front">
       ${SES.reverse ? `<div class="f-word en" dir="ltr">${esc(d.en)}</div><div class="muted small">איך אומרים בספרדית?</div>`
       : `<div class="f-word es" dir="ltr">${esc(d.es)}</div><button class="icon spk" id="s-say" aria-label="הקרא">🔊</button>`}
@@ -1387,7 +1386,13 @@ function renderSession() {
   if (!SES.reverse && S.settings.autoplay) setTimeout(sayWord, 150);
   $("#s-flip").onclick = flip;
   $("#flash").onclick = () => { if (!SES.flipped) flip(); };
-  if ($("#s-known")) $("#s-known").onclick = () => { S.known[id] = true; delete S.cards[id]; save(); SES.i++; renderSession(); };
+  function markKnown() {
+    S.known[id] = true; delete S.cards[id]; save();
+    SES.q = SES.q.filter((x, k) => k <= SES.i || x !== id); // drop later repeats of this card
+    toast("סומן כמילה מוכרת ✓");
+    SES.i++; renderSession();
+  }
+  if ($("#s-known")) $("#s-known").onclick = markKnown;
   function flip() {
     SES.flipped = true;
     $(".back").hidden = false;
@@ -1398,8 +1403,10 @@ function renderSession() {
     if (SES.reverse && S.settings.autoplay) sayWord();
     const now = Date.now();
     const opts = [[1, "Otra vez", "שוב"], [2, "Difícil", "קשה"], [3, "Bien", "טוב"], [4, "Fácil", "קל"]];
-    $("#acts").innerHTML = `<div class="grades">${opts.map(([g, es, he]) => `<button class="grade g${g}" data-g="${g}"><b class="es">${es}</b><small>${he} · ${fmtIvl(schedule(c && c.st !== "new" ? c : null, g, now))}</small></button>`).join("")}</div>`;
+    $("#acts").innerHTML = `<div class="grades">${opts.map(([g, es, he]) => `<button class="grade g${g}" data-g="${g}"><b class="es">${es}</b><small>${he} · ${fmtIvl(schedule(c && c.st !== "new" ? c : null, g, now))}</small></button>`).join("")}</div>
+      <button class="btn ghost" id="s-known2">✓ אני מכיר — דלג (לא להציג שוב)</button>`;
     document.querySelectorAll(".grade").forEach(b => b.onclick = () => grade(+b.dataset.g));
+    $("#s-known2").onclick = markKnown;
   }
   function grade(g) {
     const before = S.cards[id];
@@ -1451,13 +1458,13 @@ function renderSessionEnd() {
     <h2 dir="ltr">¡Muy bien!</h2>
     <p>תרגלת ${s.done} כרטיסיות${s.again ? `, ${s.again} חזרו לסבב נוסף` : ""}.</p>
     <button class="btn primary big" id="d-more">🔁 להמשיך לתרגל</button>
-    <button class="btn ghost" id="d-new">✨ עוד 10 מילים חדשות</button>
+    <button class="btn ghost" id="d-new">✨ עוד 10 ${s.mode === "jerga" ? "ביטויי סלנג" : "מילים"} חדשות</button>
     <button class="btn ghost" id="d-home">חזרה לבית</button>
     ${nextStory() ? `<button class="btn ghost" id="d-story">📖 לסיפור הבא</button>` : ""}
   </section>`;
   $("#d-home").onclick = () => go("home");
-  $("#d-more").onclick = () => startSession("extra");
-  $("#d-new").onclick = () => startSession("new");
+  $("#d-more").onclick = () => startSession(s.mode === "jerga" ? "jerga" : "extra");
+  $("#d-new").onclick = () => startSession(s.mode === "jerga" ? "jerga" : "new");
   if ($("#d-story")) $("#d-story").onclick = () => go("reader", nextStory().id);
 }
 
