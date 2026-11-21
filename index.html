@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#FBF6EE">
 <title>Cuentos y Tarjetas</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cuentos">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -257,6 +263,9 @@ textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:1
 .vos-tgl{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;padding:12px 0 2px;text-align:start;font-size:14px}
 .vos-tgl .tgl{pointer-events:none;display:inline-block}
 .ct-row.vos{background:var(--sun-l);border-radius:8px;padding-inline:6px}
+.install{margin-top:14px;background:var(--paper);border:1.5px solid var(--teal);border-radius:var(--r);padding:14px}
+.install p{margin:4px 0 0;font-size:14px}
+.name-in{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px;font:inherit;background:var(--paper);margin-top:6px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -1200,7 +1209,7 @@ function rerenderSoft() { if (["home", "cards", "stories", "progress", "verbs"].
 function renderWelcome() {
   main().innerHTML = `
   <section class="hero">
-    <div class="hero-badge" dir="ltr">¡Hola, Dror!</div>
+    <div class="hero-badge" dir="ltr">¡Hola${S.name ? ", " + esc(S.name) : ""}!</div>
     <h1>Cuentos y Tarjetas</h1>
     <p>סיפורים קצרים בספרדית שבונים אוצר מילים, וכרטיסיות שדואגות שהמילים יישארו.</p>
     <ul class="how">
@@ -1208,11 +1217,14 @@ function renderWelcome() {
       <li><b>🃏 מתרגלים</b> את המילים מהסיפור בכרטיסיות חכמות (FSRS).</li>
       <li><b>🔁 פוגשים אותן שוב</b> בסיפורים הבאים, וכך הן נקלטות.</li>
     </ul>
+    <label class="muted small" for="w-name">איך קוראים לך? (לא חובה)</label>
+    <input class="name-in" id="w-name" maxlength="30" autocomplete="given-name" value="${esc(S.name || "")}">
     <button class="btn primary big" id="w-test">מבחן רמה קצר (3–4 דק׳)</button>
     <button class="btn ghost" id="w-skip">דלג — התחל ברמת Inicial</button>
   </section>`;
-  $("#w-test").onclick = () => go("placement");
-  $("#w-skip").onclick = () => { S.placement = { done: true, skipped: true, date: Date.now() }; S.level = 1; save(); go("home"); };
+  const keepName = () => { const n = ($("#w-name").value || "").trim(); if (n) { S.name = n; save(); } };
+  $("#w-test").onclick = () => { keepName(); go("placement"); };
+  $("#w-skip").onclick = () => { keepName(); S.placement = { done: true, skipped: true, date: Date.now() }; S.level = 1; save(); go("home"); };
 }
 
 /* ============ home ============ */
@@ -1251,7 +1263,10 @@ function renderHome() {
     <div class="ns-row"><div><div class="ns-title es" dir="ltr">${esc(nx.title)}</div><div class="muted">${esc(nx.titleEn)} · ${LV[nx.level].icon} ${LV[nx.level].es}</div></div><div class="ns-go">📖</div></div>
     <div class="muted small">${(nx.targets || []).length} מילים חדשות מחכות בפנים</div>
   </section>` : `<section class="next-story"><div class="eyebrow">סיימת את כל הסיפורים ברמה</div><p>צור סיפור חדש עם Claude במסך הסיפורים.</p></section>`}
+  ${installCard()}
   <section class="tip"><b>טיפ:</b> קרא את הסיפור קודם, ורק אחר כך תרגל את המילים שלו — מפגש בהקשר ואז שליפה מהזיכרון זה השילוב שהכי מחזיק.</section>`;
+  if ($("#h-install")) $("#h-install").onclick = async () => { if (!INSTALL.prompt) return; INSTALL.prompt.prompt(); try { await INSTALL.prompt.userChoice; } catch (e) { } INSTALL.prompt = null; renderHome(); };
+  if ($("#h-install-x")) $("#h-install-x").onclick = () => { S.installHidden = true; save(); renderHome(); };
   $("#h-practice").onclick = () => due + nw ? go("cards") : startSession("extra");
   $("#h-verbs").onclick = () => go("verbs");
   if ($("#h-story")) $("#h-story").onclick = () => go("reader", nx.id);
@@ -1767,7 +1782,8 @@ function renderProgress() {
   </section>
   <h3 class="h3">גיבוי</h3>
   <section class="settings">
-    <div class="set"><span>שמירה</span><span class="muted small">${Store.status === "cloud" ? "☁️ בחשבון Claude + בטלפון" : "📱 בטלפון בלבד"}</span></div>
+    <div class="set"><span>שמירה</span><span class="muted small">${Store.status === "cloud" ? "☁️ בחשבון Claude + בטלפון" : "📱 שמור בטלפון הזה" + (INSTALL.persisted ? " (קבוע)" : "")}</span></div>
+    ${Store.status !== "cloud" ? `<div class="set"><span class="muted small">הנתונים נשמרים רק במכשיר הזה ונשארים גם כשהאפליקציה מתעדכנת. מדי פעם כדאי ללחוץ "העתק גיבוי" ולשמור את הטקסט אצלך.</span></div>` : ""}
     <div class="set"><button class="btn ghost small" id="pg-copy">העתק גיבוי</button><button class="btn ghost small" id="pg-restore">שחזר מגיבוי</button></div>
     <textarea id="pg-ta" hidden placeholder="הדבק כאן את הגיבוי ולחץ שוב על שחזר" dir="ltr"></textarea>
   </section>
@@ -1797,6 +1813,27 @@ function renderProgress() {
 }
 function toggle(k, label, on) { return `<div class="set"><span>${label}</span><button class="tgl ${on ? "on" : ""}" data-k="${k}" role="switch" aria-checked="${on}"><i></i></button></div>`; }
 
+/* ============ install (GitHub Pages / PWA) ============ */
+const INSTALL = { prompt: null, persisted: false };
+const inClaude = () => !!(window.claude && typeof window.claude.use === "function");
+const isStandalone = () => (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent);
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); INSTALL.prompt = e; if (VIEW === "home") renderHome(); });
+window.addEventListener("appinstalled", () => { INSTALL.prompt = null; if (VIEW === "home") renderHome(); });
+function installCard() {
+  if (inClaude() || isStandalone() || S.installHidden || location.protocol === "file:") return "";
+  return `<section class="install"><b>📲 להתקין כאפליקציה בטלפון</b>
+    ${INSTALL.prompt ? `<p>בלחיצה אחת — ואז היא תיפתח מהמסך הראשי כמו כל אפליקציה.</p><button class="btn primary" id="h-install">התקן</button>`
+      : isIOS() ? `<p>בספארי: כפתור השיתוף <b>⬆️</b> ← <b>"הוסף למסך הבית"</b>.</p>`
+      : `<p>בכרום: תפריט <b>⋮</b> ← <b>"הוספה למסך הבית"</b> / <b>"התקנת אפליקציה"</b>.</p>`}
+    <button class="btn ghost small" id="h-install-x">הסתר</button></section>`;
+}
+function setupPWA() {
+  if (inClaude() || (location.protocol !== "https:" && location.hostname !== "localhost")) return;
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().then(ok => { INSTALL.persisted = ok; }); } catch (e) { }
+}
+
 /* ============ boot ============ */
 function boot() {
   S = normalize(lsGet("cyt_state"));
@@ -1805,6 +1842,7 @@ function boot() {
   document.querySelectorAll("#nav button").forEach(b => b.onclick = () => go(b.dataset.v));
   $("#scrim").onclick = closeSheet;
   go(S.placement.done ? "home" : "welcome");
+  setupPWA();
   initCloud();
 }
 document.addEventListener("DOMContentLoaded", boot);

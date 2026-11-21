@@ -4,8 +4,8 @@
 - **Every change starts on a new branch.** Never commit directly to `main`.
   Branch name: `feature/<short-description>` or `fix/<short-description>`.
 - Commit and push the branch, then tell Dror what changed and what to check.
-- **Merge into `main` only when Dror explicitly says to merge.** Then merge, push `main`,
-  and republish the live artifact from `main`.
+- **Merge into `main` only when Dror explicitly says to merge.** Then merge and push `main` —
+  GitHub Pages serves `main`, so every user's installed app updates on its next open.
 
 ## Project layout
 - `src/` — source. `shell.html` (HTML + CSS), `app.js` (app logic, FSRS, reader, cards),
@@ -26,6 +26,11 @@
 - UI is Hebrew (RTL); Spanish/English content is wrapped `dir="ltr"`.
 - Glosses: `"form": "english | lemma"`. Every new story word needs a gloss.
 
-## Live app
-Published as a Claude artifact: https://claude.ai/artifact/VG9uPZPJy9F59EmkXEDXZc
-(slug `e4dd869e-9235-4762-98ad-acbe5b8195cb`; capabilities: db, user, sample, tts).
+## Hosting (GitHub Pages)
+- Served from `main`, root folder: https://drorhiedman-bit.github.io/Spanish-learning-app/
+- PWA: `manifest.webmanifest`, `sw.js` (network-first, so updates reach phones on next open), `icons/`.
+- Each person's progress lives in their own browser's localStorage under the key `cyt_state`
+  (generated stories: `cyt_gen`). **Never rename these keys or drop fields** — `normalize()` in
+  `app.js` must keep accepting old saved state, so updates never wipe anyone's data.
+- `python3 tests/pwa.py` checks: update arrives, data survives the update, offline works
+  (serve the site first, see the file header).
