@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FBF6EE">
+<title>Cuentos y Tarjetas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF6EE; --paper:#FFFDF9; --ink:#2B2420; --muted:#8A7F76; --line:#EADFD0;
+  --terra:#C8553D; --terra-d:#A8432E; --teal:#1F6F6B; --teal-l:#E3F0EE; --sun:#E9A23B; --sun-l:#FCEFD6;
+  --sky:#3B6FB6; --sky-l:#E4ECF7; --red:#C0392B; --green:#2E8B57;
+  --r:18px; --shadow:0 1px 2px rgba(43,36,32,.06),0 6px 20px rgba(43,36,32,.07);
+  --safe-b:env(safe-area-inset-bottom,0px); --safe-t:env(safe-area-inset-top,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Rubik,system-ui,sans-serif;font-size:16px;line-height:1.5}
+.es{font-family:Lora,Georgia,serif}
+button{font:inherit;color:inherit;cursor:pointer}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);padding:calc(10px + var(--safe-t)) 18px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{font-family:Lora,serif;font-weight:600;font-size:18px;letter-spacing:.2px}
+.brand span{color:var(--terra)}
+#hdr-level{font-size:13px;background:var(--paper);border:1px solid var(--line);padding:4px 10px;border-radius:99px}
+#main{max-width:560px;margin:0 auto;padding:16px 16px calc(96px + var(--safe-b))}
+body.immersive header,body.immersive #nav{display:none}
+body.immersive #main{padding-top:calc(12px + var(--safe-t))}
+#nav{position:fixed;bottom:0;inset-inline:0;z-index:6;display:flex;justify-content:space-around;background:var(--paper);border-top:1px solid var(--line);padding:6px 6px calc(6px + var(--safe-b))}
+#nav button{flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;font-size:12px;color:var(--muted);border-radius:12px}
+#nav button i{font-style:normal;font-size:21px;line-height:1}
+#nav button.on{color:var(--terra);font-weight:500}
+#nav button.on i{transform:translateY(-1px)}
+.h{font-size:24px;margin:4px 0 14px}
+.h3{font-size:17px;margin:24px 0 10px}
+.muted{color:var(--muted)} .small{font-size:13px} .center{text-align:center}
+.eyebrow{font-size:12px;color:var(--muted);letter-spacing:.3px}
+.btn{display:block;width:100%;border:0;border-radius:14px;padding:13px 16px;font-weight:500;margin-top:10px;text-align:center;text-decoration:none;min-height:46px}
+.btn.big{padding:16px;font-size:17px}
+.btn.small{padding:8px 12px;font-size:14px;min-height:38px;width:auto;display:inline-block;margin:4px}
+.btn.primary{background:var(--terra);color:#fff;box-shadow:0 4px 14px rgba(200,85,61,.28)}
+.btn.primary:active{background:var(--terra-d)}
+.btn.primary:disabled{background:#D9CFC4;box-shadow:none;color:#fff}
+.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.icon{background:var(--paper);border:1px solid var(--line);width:42px;height:42px;border-radius:50%;display:inline-grid;place-items:center;font-size:18px;flex:none}
+.icon.big{width:54px;height:54px;font-size:22px;background:var(--teal);color:#fff;border:0}
+.icon.inline{width:30px;height:30px;font-size:14px;vertical-align:middle}
+section{animation:rise .25s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* welcome */
+.hero{padding:28px 6px 10px}
+.hero-badge{display:inline-block;background:var(--sun-l);color:#8a5a10;padding:5px 12px;border-radius:99px;font-family:Lora,serif;font-style:italic}
+.hero h1{font-family:Lora,serif;font-size:34px;line-height:1.15;margin:14px 0 8px}
+.how{list-style:none;padding:0;margin:20px 0}
+.how li{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:8px 0}
+/* home */
+.today{background:var(--paper);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.today-top{display:flex;justify-content:space-between;align-items:flex-start}
+.today-title{font-size:20px;font-weight:700}
+.streak{background:var(--sun-l);border-radius:99px;padding:5px 12px;font-weight:700}
+.stats3,.card-sum,.grid4{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.card-sum{grid-template-columns:1fr 1fr}
+.grid4{grid-template-columns:1fr 1fr}
+.stats3>div,.card-sum>div,.grid4>div{background:var(--bg);border-radius:14px;padding:10px;text-align:center}
+.grid4>div{background:var(--paper);box-shadow:var(--shadow)}
+.stats3 b,.card-sum b,.grid4 b{display:block;font-size:24px;line-height:1.2}
+.stats3 span,.card-sum span,.grid4 span{font-size:12px;color:var(--muted)}
+.next-story{margin-top:14px;background:var(--teal);color:#fff;border-radius:var(--r);padding:18px;cursor:pointer}
+.next-story .eyebrow,.next-story .muted{color:#cfe6e3}
+.ns-row{display:flex;justify-content:space-between;align-items:center;margin:6px 0}
+.ns-title{font-size:22px;font-weight:600}
+.ns-go{font-size:30px}
+.banner{margin-top:14px;background:var(--sun-l);border-radius:var(--r);padding:16px}
+.banner p{margin:4px 0 0}
+.tip{margin-top:14px;font-size:14px;color:var(--muted);padding:0 4px}
+/* cards hub */
+.modes{display:grid;gap:8px}
+.mode{display:flex;gap:12px;align-items:center;text-align:start;background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px}
+.mode .mi{font-size:22px}
+.mode small{display:block;color:var(--muted)}
+.mode.on{border-color:var(--terra);background:#FFF5F1}
+.bars{display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:120px 1fr 34px;gap:8px;align-items:center;font-size:14px}
+.track{height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.fill{height:100%;border-radius:99px}
+.fill.known{background:var(--teal)} .fill.stable{background:var(--green)} .fill.learning{background:var(--sun)} .fill.new{background:var(--sky)}
+.wl{margin-top:10px;background:var(--paper);border-radius:14px;overflow:hidden}
+.wl-row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;padding:9px 12px;border-bottom:1px solid var(--line);font-size:14px;align-items:center}
+.tag{font-size:11px;padding:2px 8px;border-radius:99px}
+.tag.new{background:var(--sky-l);color:var(--sky)} .tag.learning{background:var(--sun-l);color:#8a5a10} .tag.stable{background:#E2F2E8;color:var(--green)} .tag.known{background:var(--teal-l);color:var(--teal)}
+/* session */
+.ses-top{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.prog{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.prog div{height:100%;background:var(--terra);border-radius:99px;transition:width .3s}
+.flash{position:relative;background:var(--paper);border-radius:22px;box-shadow:var(--shadow);min-height:46vh;padding:34px 20px 22px;display:flex;flex-direction:column;justify-content:center;text-align:center;animation:rise .2s ease}
+.flash.is-new{border-top:5px solid var(--sky)}
+.newtag{position:absolute;top:12px;inset-inline-start:14px;font-size:12px;background:var(--sky-l);color:var(--sky);padding:2px 10px;border-radius:99px}
+.f-word{font-size:38px;font-weight:600;line-height:1.2;margin-bottom:14px;word-break:break-word}
+.f-word.en{font-family:Rubik,sans-serif;font-size:30px}
+.spk{margin:0 auto}
+.divider{height:1px;background:var(--line);margin:18px 0}
+.b-word{font-size:24px;font-weight:500}
+.b-word.en{font-family:Rubik,sans-serif}
+.ctx{margin:16px 0 8px;font-size:18px;line-height:1.6;background:var(--bg);border-radius:12px;padding:12px;text-align:left}
+mark{background:var(--sun-l);color:inherit;padding:0 3px;border-radius:4px;font-weight:600}
+.ctx-en{text-align:left;font-size:14px;color:var(--muted);margin-bottom:8px}
+.ctx-en summary{text-align:right;cursor:pointer}
+.ses-actions{margin-top:14px}
+.grades{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.grade{border:0;border-radius:14px;padding:12px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:64px;color:#fff}
+.grade b{font-size:15px}
+.grade small{font-size:11px;opacity:.9}
+.g1{background:var(--red)} .g2{background:#D9822B} .g3{background:var(--green)} .g4{background:var(--sky)}
+.done{text-align:center;padding:40px 10px}
+.done-emoji{font-size:56px}
+.done h2{font-family:Lora,serif;font-size:30px;margin:8px 0}
+/* stories */
+.gen{background:var(--paper);border:1.5px dashed var(--sun);border-radius:var(--r);padding:14px}
+.gen-head{display:flex;flex-direction:column;gap:2px}
+.gen-row{display:flex;gap:8px;margin-top:10px}
+.gen-row input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;background:var(--bg);min-width:0}
+.gen-row .btn{width:auto;margin:0;padding:10px 18px}
+.slist{display:grid;gap:8px}
+.srow{display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:start;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.srow.read{background:#F7FBF9;border-color:#CFE3DA}
+.sr-title{font-size:18px;font-weight:600}
+.sr-side{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex:none}
+.score{color:var(--green);font-weight:700;font-size:14px}
+.ai{font-family:Rubik;font-size:10px;background:var(--sun-l);color:#8a5a10;padding:1px 6px;border-radius:99px;vertical-align:middle}
+/* reader */
+.r-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:6px}
+.r-title{font-size:26px;margin:2px 0 0;line-height:1.2}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;margin:10px 0 6px;color:var(--ink)}
+.lg{display:inline-block;width:18px;height:3px;border-radius:2px;vertical-align:middle;margin-inline-end:4px}
+.lg.tgt{background:var(--sky)} .lg.lrn{background:var(--sun)}
+.story{background:var(--paper);border-radius:var(--r);padding:18px 18px 8px;box-shadow:var(--shadow);margin-top:8px}
+.para{position:relative;margin-bottom:14px}
+.para p{font-size:19.5px;line-height:1.8;margin:0;text-align:left}
+.w{border-radius:4px;padding:1px 0;cursor:pointer}
+.w.tgt{border-bottom:2.5px solid var(--sky)}
+.w.lrn{border-bottom:2.5px solid var(--sun)}
+.w.sel{background:var(--terra);color:#fff;border-bottom-color:transparent}
+.sent{transition:background .2s}
+.sent.cur{background:var(--teal-l);border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.tr-btn{display:block;margin:6px 0 0 auto;margin-inline-start:0;background:none;border:1px solid var(--line);border-radius:99px;font-size:11px;padding:2px 10px;color:var(--muted)}
+.tr-btn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tr{font-size:15px;color:var(--muted);background:var(--bg);border-radius:10px;padding:10px 12px;margin-top:6px;line-height:1.55;text-align:left}
+.quiz{margin-top:8px}
+.q{background:var(--paper);border-radius:14px;padding:14px;margin-bottom:10px}
+.q-t{font-weight:600;font-size:17px;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;margin-top:7px;font-size:16px;min-height:46px}
+.opt.right{background:#E2F2E8;border-color:var(--green)}
+.opt.wrong{background:#FBE5E1;border-color:var(--red)}
+.opt.nose{text-align:center;color:var(--muted);background:transparent;border-style:dashed;font-family:Rubik}
+.res{background:var(--paper);border-radius:var(--r);padding:18px;text-align:center;box-shadow:var(--shadow)}
+.res-score{font-size:40px;font-weight:700;color:var(--teal)}
+.player{position:fixed;bottom:calc(64px + var(--safe-b));inset-inline:0;margin:0 auto;max-width:420px;width:calc(100% - 24px);background:var(--ink);color:#fff;border-radius:99px;padding:7px 9px;display:flex;align-items:center;justify-content:space-between;gap:8px;z-index:4;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.player .icon:not(.big){background:transparent;color:#fff;border-color:#5a4f48}
+.rates{display:flex;gap:4px}
+.rate{background:transparent;border:1px solid #5a4f48;color:#ddd;border-radius:99px;padding:6px 10px;font-size:13px}
+.rate.on{background:#fff;color:var(--ink);border-color:#fff}
+/* word sheet */
+#scrim{position:fixed;inset:0;background:rgba(43,36,32,.18);opacity:0;pointer-events:none;transition:opacity .2s;z-index:8}
+#scrim.on{opacity:1;pointer-events:auto}
+#sheet{position:fixed;inset-inline:0;bottom:0;z-index:9;background:var(--paper);border-radius:22px 22px 0 0;box-shadow:0 -10px 30px rgba(0,0,0,.15);padding:8px 18px calc(18px + var(--safe-b));transform:translateY(105%);transition:transform .25s cubic-bezier(.2,.8,.2,1);max-width:560px;margin:0 auto}
+#sheet.on{transform:none}
+.grip{width:40px;height:5px;background:var(--line);border-radius:99px;margin:4px auto 12px}
+.ws-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ws-word{font-size:30px;font-weight:600;line-height:1.1}
+.ws-top .spk{margin:0}
+.ws-gloss{font-size:20px;margin:10px 0 4px;text-align:left}
+.ws-ai{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0}
+.ws-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.ws-acts .btn{margin:0}
+.indeck{display:grid;place-items:center;background:var(--teal-l);color:var(--teal);border-radius:14px;font-size:14px;font-weight:500;padding:8px;text-align:center}
+/* placement */
+.pt{padding-top:10px}
+.pt-s{font-size:24px;line-height:1.5;margin:14px 0 18px;background:var(--paper);padding:20px;border-radius:var(--r);box-shadow:var(--shadow);text-align:left}
+.pt-pass{font-size:18px;line-height:1.65;background:var(--paper);padding:16px;border-radius:var(--r);margin:12px 0;box-shadow:var(--shadow);text-align:left}
+.pt-q{font-weight:600;font-size:18px;margin-bottom:6px;text-align:left}
+.pt-res{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0}
+.pt-res div{background:var(--paper);border-radius:12px;padding:10px}
+.pt-res span{display:block;font-size:12px;color:var(--muted)}
+/* progress */
+.lvl-card{display:flex;gap:14px;align-items:center;background:var(--paper);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
+.lvl-icon{font-size:42px}
+.lvl-name{font-size:22px;font-weight:600}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:4px;margin-top:12px;gap:4px}
+.seg button{border:0;background:none;border-radius:10px;padding:9px 4px;font-size:14px}
+.seg button.on{background:var(--ink);color:#fff}
+.settings{background:var(--paper);border-radius:var(--r);padding:4px 14px;box-shadow:var(--shadow)}
+.set{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);min-height:52px}
+.set:last-of-type{border-bottom:0}
+.stepper{display:flex;align-items:center;gap:12px}
+.stepper button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--bg);font-size:18px}
+.tgl{width:50px;height:30px;border-radius:99px;border:0;background:var(--line);position:relative;flex:none;transition:background .2s}
+.tgl i{position:absolute;top:3px;inset-inline-start:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:inset-inline-start .2s}
+.tgl.on{background:var(--teal)}
+.tgl.on i{inset-inline-start:23px}
+textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:12px;padding:10px;font:12px monospace;margin-bottom:10px;background:var(--bg)}
+#toast{position:fixed;top:calc(14px + var(--safe-t));left:50%;transform:translate(-50%,-80px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:99px;font-size:14px;z-index:20;transition:transform .25s;pointer-events:none;white-space:nowrap}
+#toast.on{transform:translate(-50%,0)}
+
+/* v2: practice days, card context, verbs */
+.streak small{font-weight:400;font-size:12px;color:#8a5a10}
+.ctx-wrap{margin:14px 0 8px}
+.ctx-wrap .ctx{margin:0}
+.ctx .w{cursor:pointer;border-radius:4px}
+.ctx .w.hit{background:var(--sun-l);font-weight:600;padding:0 3px}
+.ctx .w.sel{background:var(--terra);color:#fff}
+.en-ctx{font-family:Rubik,sans-serif;font-size:16px;color:var(--ink)}
+.ctx-tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px;justify-content:center}
+.pill{background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:6px 12px;font-size:13px;min-height:34px}
+.cj-drill{background:var(--paper);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{border:1.5px solid var(--line);background:var(--bg);border-radius:99px;padding:7px 12px;font-size:14px;display:flex;gap:6px;align-items:center}
+.chip small{font-size:11px;color:var(--muted)}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.chip.on small{color:#cfe6e3}
+.seg.two{grid-template-columns:repeat(3,1fr);margin-top:4px}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;margin:0 -16px;padding-inline:16px}
+.tab{flex:none;border:1.5px solid var(--line);background:var(--paper);border-radius:14px;padding:8px 12px;display:flex;flex-direction:column;align-items:center;font-size:14px}
+.tab small{font-size:11px;color:var(--muted)}
+.tab.on{border-color:var(--terra);background:#FFF5F1}
+.tense-card{background:var(--paper);border-radius:var(--r);padding:16px;margin-top:10px;box-shadow:var(--shadow)}
+.tense-card p{margin:8px 0;font-size:15px}
+.tc-head{display:flex;justify-content:space-between;align-items:center}
+.tc-name{font-size:22px;font-weight:600}
+.tc-form{background:var(--bg);border-radius:12px;padding:8px 12px;font-size:15px;line-height:1.7;text-align:left}
+.tc-ex{background:var(--bg);border-radius:12px;padding:10px 12px;font-size:17px;margin-top:10px;text-align:left}
+.verb-pick{display:flex;gap:6px;overflow-x:auto;margin:14px -16px 8px;padding:0 16px 6px;scrollbar-width:none}
+.vchip{flex:none;font-family:Lora,serif;border:1.5px solid var(--line);background:var(--paper);border-radius:99px;padding:6px 12px;font-size:15px}
+.vchip.irr{border-style:dashed}
+.vchip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.conj-table{background:var(--paper);border-radius:var(--r);padding:12px 14px;box-shadow:var(--shadow)}
+.ct-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.ct-row{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;width:100%;background:none;border:0;border-bottom:1px solid var(--line);padding:10px 0;text-align:left;column-gap:10px}
+.ct-p{color:var(--muted);font-size:15px}
+.ct-f{font-size:19px;font-weight:600;color:var(--teal);text-align:right}
+.ct-he{grid-column:1/3;font-size:11px;color:var(--muted);text-align:left}
+.cjq{padding-top:6px}
+.cj-meta{display:flex;gap:8px;align-items:center}
+.cj-verb{font-size:26px;font-weight:600;margin:14px 0 4px;text-align:left}
+.cj-sent{font-size:22px;line-height:1.6;background:var(--paper);padding:18px;border-radius:var(--r);box-shadow:var(--shadow);margin:10px 0 6px;text-align:left}
+.blank{display:inline-block;min-width:70px;border-bottom:2.5px solid var(--terra);color:var(--terra);font-weight:600;text-align:center}
+.blank.ok{color:var(--green);border-color:var(--green)} .blank.bad{color:var(--red);border-color:var(--red)}
+.cj-fb{background:var(--paper);border-radius:var(--r);padding:14px;margin-top:12px;box-shadow:var(--shadow)}
+.cj-fb.ok{border-top:4px solid var(--green)} .cj-fb.bad{border-top:4px solid var(--red)}
+.cj-row{display:flex;gap:6px;margin-top:8px}
+.mini-tab{display:grid;gap:4px;margin-top:10px}
+.mini-tab div{display:flex;justify-content:space-between;background:var(--bg);border-radius:8px;padding:6px 10px;direction:ltr}
+.mini-tab div.hl{background:var(--sun-l)}
+#nav button{font-size:11px}
+.regtag{position:absolute;top:12px;inset-inline-end:14px;font-size:12px;background:var(--sun-l);color:#8a5a10;padding:2px 10px;border-radius:99px}
+.ex2{margin:4px 0 10px;font-size:16px;text-align:left;border-inline-start:3px solid var(--sun);padding:4px 10px}
+.vos-tgl{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;padding:12px 0 2px;text-align:start;font-size:14px}
+.vos-tgl .tgl{pointer-events:none;display:inline-block}
+.ct-row.vos{background:var(--sun-l);border-radius:8px;padding-inline:6px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="brand">Cuentos <span>y</span> Tarjetas</div><div id="hdr-level"></div></header>
+<main id="main"></main>
+<nav id="nav">
+  <button data-v="home"><i>🏠</i>בית</button>
+  <button data-v="cards"><i>🃏</i>כרטיסיות</button>
+  <button data-v="stories"><i>📖</i>סיפורים</button>
+  <button data-v="verbs"><i>⏱️</i>זמנים</button>
+  <button data-v="progress"><i>📈</i>התקדמות</button>
+</nav>
+<div id="scrim"></div>
+<div id="sheet" role="dialog" aria-label="תרגום מילה"></div>
+<div id="toast" role="status"></div>
+<script>
+// Built-in graded stories. level: 1=Inicial(A2) 2=Intermedio(B1) 3=Avanzado(B2)
+// targets: words introduced as flashcards. es = form as shown in the card, match = surface forms in text.
+const STORIES = [
+{
+  id: "s1", level: 1, title: "El hostal en Cusco", titleEn: "The hostel in Cusco",
+  paragraphs: [
+    { es: "Tomás llega a Cusco a las seis de la mañana. Está muy cansado porque el bus de Lima tardó veinte horas. Tiene una mochila grande y una mochila pequeña. Camina despacio por las calles porque la ciudad está muy alta y el aire es diferente.",
+      en: "Tomás arrives in Cusco at six in the morning. He is very tired because the bus from Lima took twenty hours. He has a big backpack and a small backpack. He walks slowly through the streets because the city is very high and the air is different." },
+    { es: "En el hostal, una chica en la recepción le da una llave. —Tu habitación está en el tercer piso —le dice—. La compartes con tres personas. Tomás tiene que subir muchas escaleras con la mochila. Cuando llega a la habitación, está todavía más cansado.",
+      en: "At the hostel, a girl at reception gives him a key. \"Your room is on the third floor,\" she tells him. \"You share it with three people.\" Tomás has to climb a lot of stairs with the backpack. When he gets to the room, he is even more tired." },
+    { es: "Mientras los otros duermen, Tomás deja la mochila debajo de la cama y se acuesta. Duerme tres horas. Cuando se despierta, tiene mucha hambre. Baja a la cocina y ve que el desayuno es gratis: pan, huevos, fruta y café.",
+      en: "While the others sleep, Tomás leaves the backpack under the bed and lies down. He sleeps for three hours. When he wakes up, he is very hungry. He goes down to the kitchen and sees that breakfast is free: bread, eggs, fruit and coffee." },
+    { es: "En la mesa hay una chica de Chile que se llama Valentina. —¿Vas a subir a Machu Picchu? —le pregunta. —Sí, pero primero voy a descansar un día —dice Tomás. Valentina se ríe. —Todos llegan cansados a Cusco. Mañana vas a estar mejor.",
+      en: "At the table there is a girl from Chile called Valentina. \"Are you going to go up to Machu Picchu?\" she asks him. \"Yes, but first I'm going to rest for a day,\" says Tomás. Valentina laughs. \"Everyone arrives in Cusco tired. Tomorrow you'll feel better.\"" }
+  ],
+  targets: [
+    { es: "llegar", en: "to arrive", match: ["llega", "llegan"] },
+    { es: "cansado", en: "tired", match: ["cansado", "cansados"] },
+    { es: "la mochila", en: "backpack", match: ["mochila"] },
+    { es: "la llave", en: "key", match: ["llave"] },
+    { es: "la habitación", en: "room (bedroom)", match: ["habitación"] },
+    { es: "compartir", en: "to share", match: ["compartes"] },
+    { es: "subir", en: "to go up, to climb", match: ["subir"] },
+    { es: "mientras", en: "while", match: ["mientras"] },
+    { es: "despertarse", en: "to wake up", match: ["despierta"] },
+    { es: "el desayuno", en: "breakfast", match: ["desayuno"] },
+    { es: "descansar", en: "to rest", match: ["descansar"] }
+  ],
+  questions: [
+    { q: "¿Por qué está cansado Tomás?", options: ["Porque el bus tardó veinte horas", "Porque no le gusta Cusco", "Porque trabajó toda la noche"], answer: 0 },
+    { q: "¿Con cuántas personas comparte la habitación?", options: ["Con una persona", "Con tres personas", "Con nadie"], answer: 1 },
+    { q: "¿Qué va a hacer Tomás primero?", options: ["Subir a Machu Picchu", "Volver a Lima", "Descansar un día"], answer: 2 }
+  ]
+},
+{
+  id: "s2", level: 1, title: "El mercado de La Paz", titleEn: "The market in La Paz",
+  paragraphs: [
+    { es: "Hoy es sábado y Lucía quiere cocinar para sus amigos. Va al mercado con una bolsa grande. El mercado está lleno de gente, colores y olores. Hay frutas que Lucía no conoce y señoras que venden de todo.",
+      en: "Today is Saturday and Lucía wants to cook for her friends. She goes to the market with a big bag. The market is full of people, colors and smells. There are fruits Lucía doesn't know and ladies who sell everything." },
+    { es: "—¿Cuánto cuestan las papas? —pregunta Lucía. —Cinco bolivianos el kilo, señorita —dice una señora. Lucía compra dos kilos de papas, cebollas y tomates. Después busca carne, pero no la encuentra. Le pregunta a un niño y él le muestra el lugar.",
+      en: "\"How much are the potatoes?\" Lucía asks. \"Five bolivianos a kilo, miss,\" says a lady. Lucía buys two kilos of potatoes, onions and tomatoes. Then she looks for meat, but she can't find it. She asks a boy and he shows her the place." },
+    { es: "Al final, Lucía ve una fruta rara, verde por fuera y blanca por dentro. —Es chirimoya —dice el vendedor—. Pruébela. Lucía la prueba y le encanta. Es dulce y suave. Compra cuatro para el postre.",
+      en: "At the end, Lucía sees a strange fruit, green on the outside and white on the inside. \"It's cherimoya,\" says the seller. \"Try it.\" Lucía tries it and loves it. It's sweet and soft. She buys four for dessert." },
+    { es: "Cuando vuelve a casa, la bolsa pesa mucho, pero Lucía está contenta. Gastó solo cuarenta bolivianos. Esa noche cocina una sopa con las papas, y sus amigos dicen que la chirimoya es el mejor postre del mundo.",
+      en: "When she gets back home, the bag is very heavy, but Lucía is happy. She spent only forty bolivianos. That night she cooks a soup with the potatoes, and her friends say the cherimoya is the best dessert in the world." }
+  ],
+  targets: [
+    { es: "cocinar", en: "to cook", match: ["cocinar", "cocina"] },
+    { es: "la bolsa", en: "bag", match: ["bolsa"] },
+    { es: "lleno", en: "full", match: ["lleno"] },
+    { es: "costar", en: "to cost", match: ["cuestan"] },
+    { es: "buscar", en: "to look for", match: ["busca"] },
+    { es: "encontrar", en: "to find", match: ["encuentra"] },
+    { es: "mostrar", en: "to show", match: ["muestra"] },
+    { es: "probar", en: "to try, to taste", match: ["pruébela", "prueba"] },
+    { es: "dulce", en: "sweet", match: ["dulce"] },
+    { es: "pesar", en: "to weigh", match: ["pesa"] },
+    { es: "gastar", en: "to spend (money)", match: ["gastó"] }
+  ],
+  questions: [
+    { q: "¿Para quién quiere cocinar Lucía?", options: ["Para su familia", "Para sus amigos", "Solo para ella"], answer: 1 },
+    { q: "¿Qué no encuentra Lucía al principio?", options: ["La carne", "Las papas", "Los tomates"], answer: 0 },
+    { q: "¿Cómo es la chirimoya?", options: ["Roja y ácida", "Verde por fuera y dulce", "Pequeña y salada"], answer: 1 }
+  ]
+},
+{
+  id: "s3", level: 1, title: "El bus de noche", titleEn: "The night bus",
+  paragraphs: [
+    { es: "Andrés tiene que viajar de Mendoza a Buenos Aires. El viaje dura catorce horas, así que compra un pasaje para el bus de noche. Elige un asiento al lado de la ventana porque quiere ver el paisaje antes de dormir.",
+      en: "Andrés has to travel from Mendoza to Buenos Aires. The trip lasts fourteen hours, so he buys a ticket for the night bus. He chooses a seat next to the window because he wants to see the landscape before sleeping." },
+    { es: "El bus sale a las ocho. Al lado de Andrés se sienta un señor mayor con un sombrero. El señor no habla mucho, pero le ofrece unas galletas. —Gracias —dice Andrés—. ¿Usted también va a Buenos Aires? —No, me bajo en Córdoba. Voy a visitar a mi hija.",
+      en: "The bus leaves at eight. An older man with a hat sits down next to Andrés. The man doesn't talk much, but he offers him some cookies. \"Thanks,\" says Andrés. \"Are you also going to Buenos Aires?\" \"No, I get off in Córdoba. I'm going to visit my daughter.\"" },
+    { es: "A medianoche, el bus para en una estación pequeña. Andrés baja para comprar agua. Hace frío y está muy oscuro. Cuando vuelve, no encuentra su celular. Lo busca en el asiento, debajo del asiento y en la mochila. Nada.",
+      en: "At midnight, the bus stops at a small station. Andrés gets off to buy water. It's cold and very dark. When he comes back, he can't find his phone. He looks for it on the seat, under the seat and in the backpack. Nothing." },
+    { es: "Entonces el señor del sombrero le toca el brazo y le muestra algo: es el celular. —Se le cayó cuando bajó —dice. Andrés le da las gracias muchas veces. Después duerme tranquilo hasta la mañana, cuando el sol ya entra por la ventana.",
+      en: "Then the man with the hat touches his arm and shows him something: it's the phone. \"You dropped it when you got off,\" he says. Andrés thanks him many times. Then he sleeps peacefully until morning, when the sun is already coming in through the window." }
+  ],
+  targets: [
+    { es: "viajar", en: "to travel", match: ["viajar"] },
+    { es: "el pasaje", en: "ticket (bus/plane)", match: ["pasaje"] },
+    { es: "elegir", en: "to choose", match: ["elige"] },
+    { es: "el asiento", en: "seat", match: ["asiento"] },
+    { es: "la ventana", en: "window", match: ["ventana"] },
+    { es: "sentarse", en: "to sit down", match: ["sienta"] },
+    { es: "ofrecer", en: "to offer", match: ["ofrece"] },
+    { es: "bajarse", en: "to get off", match: ["bajo", "baja", "bajó"] },
+    { es: "oscuro", en: "dark", match: ["oscuro"] },
+    { es: "caerse", en: "to fall, to drop", match: ["cayó"] },
+    { es: "tranquilo", en: "calm, peaceful", match: ["tranquilo"] }
+  ],
+  questions: [
+    { q: "¿Por qué Andrés elige un asiento al lado de la ventana?", options: ["Para ver el paisaje", "Para dormir mejor", "Porque hace calor"], answer: 0 },
+    { q: "¿Adónde va el señor del sombrero?", options: ["A Buenos Aires", "A Mendoza", "A Córdoba"], answer: 2 },
+    { q: "¿Quién encuentra el celular de Andrés?", options: ["El chofer", "El señor del sombrero", "Nadie"], answer: 1 }
+  ]
+},
+{
+  id: "s4", level: 2, title: "Trabajo remoto en Medellín", titleEn: "Remote work in Medellín",
+  paragraphs: [
+    { es: "Cuando Camila vivía en Bogotá, trabajaba en una oficina gris desde las ocho hasta las seis. Siempre estaba cansada y casi nunca veía el sol. Hace un año, su empresa le permitió trabajar desde cualquier lugar, y ella decidió mudarse a Medellín.",
+      en: "When Camila lived in Bogotá, she worked in a gray office from eight to six. She was always tired and almost never saw the sun. A year ago, her company allowed her to work from anywhere, and she decided to move to Medellín." },
+    { es: "Al principio todo le parecía perfecto: el clima era agradable, la gente era amable y su apartamento tenía un balcón con vista a las montañas. Sin embargo, pronto se dio cuenta de que trabajar sola en casa también tenía desventajas. Extrañaba a sus compañeros y a veces se sentía aislada.",
+      en: "At first everything seemed perfect to her: the weather was pleasant, people were kind and her apartment had a balcony with a view of the mountains. However, she soon realized that working alone at home also had disadvantages. She missed her coworkers and sometimes felt isolated." },
+    { es: "Por eso empezó a ir a un café cerca de su casa. Allí conoció a otros trabajadores remotos: un programador argentino, una diseñadora mexicana y un traductor de Brasil. Ahora se reúnen todos los viernes para almorzar y hablar de sus proyectos.",
+      en: "That's why she started going to a café near her home. There she met other remote workers: an Argentinian programmer, a Mexican designer and a translator from Brazil. Now they meet every Friday to have lunch and talk about their projects." },
+    { es: "Este año Camila ha aprendido mucho, no solo sobre su trabajo, sino también sobre sí misma. Ha descubierto que necesita rutina y contacto con otras personas. El próximo mes viajará a Ecuador, pero esta vez no irá sola: sus nuevos amigos han decidido acompañarla.",
+      en: "This year Camila has learned a lot, not only about her work but also about herself. She has discovered that she needs routine and contact with other people. Next month she will travel to Ecuador, but this time she won't go alone: her new friends have decided to go with her." }
+  ],
+  targets: [
+    { es: "la empresa", en: "company", match: ["empresa"] },
+    { es: "permitir", en: "to allow", match: ["permitió"] },
+    { es: "mudarse", en: "to move (house)", match: ["mudarse"] },
+    { es: "agradable", en: "pleasant", match: ["agradable"] },
+    { es: "sin embargo", en: "however", match: ["embargo"] },
+    { es: "darse cuenta (de)", en: "to realize", match: ["dio", "cuenta"] },
+    { es: "extrañar", en: "to miss (someone/something)", match: ["extrañaba"] },
+    { es: "aislado", en: "isolated", match: ["aislada"] },
+    { es: "reunirse", en: "to meet, to get together", match: ["reúnen"] },
+    { es: "descubrir", en: "to discover", match: ["descubierto"] },
+    { es: "acompañar", en: "to accompany, to go with", match: ["acompañarla"] }
+  ],
+  questions: [
+    { q: "¿Cómo se sentía Camila cuando trabajaba en Bogotá?", options: ["Siempre cansada", "Muy feliz", "Enferma"], answer: 0 },
+    { q: "¿Cuál era el problema de trabajar en casa?", options: ["El clima", "Se sentía sola", "El apartamento era pequeño"], answer: 1 },
+    { q: "¿Qué pasará el próximo mes?", options: ["Volverá a Bogotá", "Viajará a Ecuador con sus amigos", "Cambiará de trabajo"], answer: 1 }
+  ]
+},
+{
+  id: "s5", level: 2, title: "La tormenta en la Patagonia", titleEn: "The storm in Patagonia",
+  paragraphs: [
+    { es: "Mateo y su hermana Sofía habían planeado la caminata durante meses. Querían recorrer el circuito W en Torres del Paine, en la Patagonia chilena. El primer día hacía un tiempo increíble: el cielo estaba despejado y los lagos brillaban como espejos.",
+      en: "Mateo and his sister Sofía had planned the hike for months. They wanted to walk the W circuit in Torres del Paine, in Chilean Patagonia. The first day the weather was incredible: the sky was clear and the lakes shone like mirrors." },
+    { es: "El segundo día, sin embargo, el viento empezó a soplar con mucha fuerza. Un guardaparque les advirtió que se acercaba una tormenta. —Si siguen hasta el mirador, tengan cuidado —les dijo—. El camino se pone peligroso con la lluvia.",
+      en: "On the second day, however, the wind started to blow very hard. A park ranger warned them that a storm was approaching. \"If you continue to the viewpoint, be careful,\" he told them. \"The trail gets dangerous in the rain.\"" },
+    { es: "Sofía quería seguir, pero Mateo tenía dudas. Discutieron unos minutos y finalmente decidieron esperar en el refugio. Fue una buena decisión: una hora después, llovía tanto que no se veía nada. En el refugio había otros viajeros, y todos compartían té y chocolate.",
+      en: "Sofía wanted to keep going, but Mateo had doubts. They argued for a few minutes and finally decided to wait in the shelter. It was a good decision: an hour later, it was raining so hard you couldn't see anything. In the shelter there were other travelers, and everyone was sharing tea and chocolate." },
+    { es: "A la mañana siguiente, la tormenta había pasado. Salieron temprano y llegaron al mirador justo cuando salía el sol. Las tres torres de granito estaban rosadas por la luz. —Valió la pena esperar —dijo Sofía, y por primera vez en todo el viaje, Mateo estuvo de acuerdo con ella.",
+      en: "The next morning, the storm had passed. They left early and reached the viewpoint just as the sun was rising. The three granite towers were pink in the light. \"It was worth waiting,\" said Sofía, and for the first time on the whole trip, Mateo agreed with her." }
+  ],
+  targets: [
+    { es: "la caminata", en: "hike, walk", match: ["caminata"] },
+    { es: "despejado", en: "clear (sky)", match: ["despejado"] },
+    { es: "el viento", en: "wind", match: ["viento"] },
+    { es: "advertir", en: "to warn", match: ["advirtió"] },
+    { es: "acercarse", en: "to approach, to get closer", match: ["acercaba"] },
+    { es: "peligroso", en: "dangerous", match: ["peligroso"] },
+    { es: "la duda", en: "doubt", match: ["dudas"] },
+    { es: "discutir", en: "to argue", match: ["discutieron"] },
+    { es: "el refugio", en: "shelter, mountain hut", match: ["refugio"] },
+    { es: "valer la pena", en: "to be worth it", match: ["valió", "pena"] },
+    { es: "estar de acuerdo", en: "to agree", match: ["acuerdo"] }
+  ],
+  questions: [
+    { q: "¿Qué pasó el segundo día?", options: ["Hizo mucho calor", "Empezó un viento muy fuerte", "Se perdieron en el bosque"], answer: 1 },
+    { q: "¿Dónde esperaron mientras pasaba la tormenta?", options: ["En una carpa", "En el refugio", "En el auto"], answer: 1 },
+    { q: "¿Cómo estaban las torres al final?", options: ["Rosadas por la luz", "Cubiertas de nieve", "Escondidas por la niebla"], answer: 0 }
+  ]
+},
+{
+  id: "s6", level: 2, title: "El mole de la abuela", titleEn: "Grandma's mole",
+  paragraphs: [
+    { es: "Todos los domingos, cuando Diego era niño, su familia comía en la casa de su abuela en Oaxaca. Ella preparaba mole negro, un plato que tardaba casi todo el día en cocinarse. Diego se sentaba en la cocina y la miraba mezclar chiles, chocolate y especias.",
+      en: "Every Sunday, when Diego was a child, his family ate at his grandmother's house in Oaxaca. She made black mole, a dish that took almost the whole day to cook. Diego would sit in the kitchen and watch her mix chiles, chocolate and spices." },
+    { es: "La abuela nunca usaba recetas escritas. —La receta está aquí —decía, y se tocaba el corazón. Diego le hacía preguntas, pero ella solo se reía y le daba una cuchara para probar la salsa.",
+      en: "Grandma never used written recipes. \"The recipe is here,\" she would say, touching her heart. Diego would ask her questions, but she just laughed and gave him a spoon to taste the sauce." },
+    { es: "Hace dos años la abuela se enfermó y ya no podía cocinar. Diego se dio cuenta de que nadie en la familia sabía hacer el mole. Entonces decidió aprender. Pasó muchas tardes con ella, anotando cada paso en un cuaderno mientras ella le explicaba con paciencia.",
+      en: "Two years ago Grandma got sick and couldn't cook anymore. Diego realized that nobody in the family knew how to make the mole. So he decided to learn. He spent many afternoons with her, writing down each step in a notebook while she explained it to him patiently." },
+    { es: "El domingo pasado, Diego preparó el mole por primera vez para toda la familia. Estaba nervioso, pero cuando su abuela lo probó, cerró los ojos y sonrió. —Te ha quedado igual que el mío —le dijo—. Ahora la receta también está en tu corazón.",
+      en: "Last Sunday, Diego made the mole for the whole family for the first time. He was nervous, but when his grandmother tasted it, she closed her eyes and smiled. \"It came out just like mine,\" she told him. \"Now the recipe is in your heart too.\"" }
+  ],
+  targets: [
+    { es: "preparar", en: "to prepare, to make", match: ["preparaba", "preparó"] },
+    { es: "el plato", en: "dish, plate", match: ["plato"] },
+    { es: "mezclar", en: "to mix", match: ["mezclar"] },
+    { es: "la receta", en: "recipe", match: ["receta", "recetas"] },
+    { es: "la cuchara", en: "spoon", match: ["cuchara"] },
+    { es: "enfermarse", en: "to get sick", match: ["enfermó"] },
+    { es: "anotar", en: "to write down, to note", match: ["anotando"] },
+    { es: "el paso", en: "step", match: ["paso"] },
+    { es: "explicar", en: "to explain", match: ["explicaba"] },
+    { es: "la paciencia", en: "patience", match: ["paciencia"] },
+    { es: "quedar (bien/igual)", en: "to turn out (a result)", match: ["quedado"] }
+  ],
+  questions: [
+    { q: "¿Dónde comía la familia de Diego los domingos?", options: ["En un restaurante", "En la casa de la abuela", "En la casa de Diego"], answer: 1 },
+    { q: "¿Por qué Diego decidió aprender a hacer mole?", options: ["Porque quería abrir un restaurante", "Porque nadie más sabía hacerlo", "Porque su madre se lo pidió"], answer: 1 },
+    { q: "¿Qué hizo la abuela cuando probó el mole de Diego?", options: ["Dijo que estaba muy salado", "Cerró los ojos y sonrió", "No dijo nada"], answer: 1 }
+  ]
+},
+{
+  id: "s7", level: 3, title: "La tortuga de San Cristóbal", titleEn: "The tortoise of San Cristóbal",
+  paragraphs: [
+    { es: "Cuando Inés llegó a la isla San Cristóbal para trabajar como voluntaria, no se imaginaba que aquella experiencia le cambiaría la vida. La organización le había pedido que se encargara de contar las tortugas de una zona remota, una tarea que parecía sencilla pero que exigía una paciencia enorme.",
+      en: "When Inés arrived on San Cristóbal island to work as a volunteer, she didn't imagine that the experience would change her life. The organization had asked her to take charge of counting the tortoises in a remote area, a task that seemed simple but required enormous patience." },
+    { es: "Cada mañana, antes de que el sol calentara demasiado, recorría senderos llenos de piedras volcánicas. Era imprescindible que registrara cada tortuga con precisión: su tamaño, su ubicación y cualquier herida que tuviera. Al principio le costaba distinguirlas, pero poco a poco aprendió a reconocer a cada una.",
+      en: "Every morning, before the sun got too hot, she walked along trails full of volcanic rocks. It was essential that she record each tortoise precisely: its size, its location and any injury it had. At first she found it hard to tell them apart, but little by little she learned to recognize each one." },
+    { es: "Un día encontró una tortuga joven atrapada en una red de pesca. Aunque las normas exigían que avisara a los guardaparques sin intervenir, Inés temía que el animal no sobreviviera hasta que llegaran. Dudó unos segundos y, con mucho cuidado, cortó la red.",
+      en: "One day she found a young tortoise trapped in a fishing net. Although the rules required her to notify the park rangers without intervening, Inés was afraid the animal wouldn't survive until they arrived. She hesitated for a few seconds and, very carefully, cut the net." },
+    { es: "Más tarde, el coordinador le explicó que había actuado bien, pero le pidió que la próxima vez lo llamara antes. —Si todos actuáramos sin avisar, sería imposible proteger la isla —le dijo. Inés lo entendió. Hoy trabaja en conservación marina y suele decir que aquella tortuga le enseñó más que cualquier libro.",
+      en: "Later, the coordinator told her she had acted well, but asked her to call him first next time. \"If we all acted without notifying anyone, it would be impossible to protect the island,\" he told her. Inés understood. Today she works in marine conservation and often says that tortoise taught her more than any book." }
+  ],
+  targets: [
+    { es: "imaginarse", en: "to imagine", match: ["imaginaba"] },
+    { es: "encargarse de", en: "to take charge of, to be in charge of", match: ["encargara"] },
+    { es: "exigir", en: "to require, to demand", match: ["exigía", "exigían"] },
+    { es: "sencillo", en: "simple, easy", match: ["sencilla"] },
+    { es: "imprescindible", en: "essential, indispensable", match: ["imprescindible"] },
+    { es: "distinguir", en: "to tell apart, to distinguish", match: ["distinguirlas"] },
+    { es: "atrapado", en: "trapped", match: ["atrapada"] },
+    { es: "avisar", en: "to notify, to let know", match: ["avisara", "avisar"] },
+    { es: "temer", en: "to fear", match: ["temía"] },
+    { es: "sobrevivir", en: "to survive", match: ["sobreviviera"] },
+    { es: "proteger", en: "to protect", match: ["proteger"] },
+    { es: "soler", en: "to usually (do)", match: ["suele"] }
+  ],
+  questions: [
+    { q: "¿Cuál era la tarea de Inés en la isla?", options: ["Limpiar las playas", "Contar las tortugas", "Guiar a los turistas"], answer: 1 },
+    { q: "¿Qué decían las normas que debía hacer?", options: ["Avisar a los guardaparques sin intervenir", "Cortar la red inmediatamente", "Llevar la tortuga al centro"], answer: 0 },
+    { q: "¿Qué le pidió el coordinador?", options: ["Que se fuera de la isla", "Que lo llamara antes la próxima vez", "Que escribiera un libro"], answer: 1 }
+  ]
+},
+{
+  id: "s8", level: 3, title: "La entrevista", titleEn: "The interview",
+  paragraphs: [
+    { es: "Federico llevaba seis meses buscando trabajo cuando por fin lo llamaron de una empresa de tecnología en Montevideo. Le dijeron que la entrevista sería al día siguiente y que tendría que presentar un proyecto propio. Esa noche apenas durmió.",
+      en: "Federico had been looking for work for six months when a tech company in Montevideo finally called him. They told him the interview would be the next day and that he would have to present a project of his own. That night he barely slept." },
+    { es: "Por la mañana se puso su mejor camisa y salió con tiempo de sobra. Sin embargo, el ómnibus se descompuso a mitad de camino. Federico miró el reloj con angustia: si no conseguía un taxi enseguida, llegaría tarde. Ojalá hubiera salido aún más temprano, pensó.",
+      en: "In the morning he put on his best shirt and left with plenty of time to spare. However, the bus broke down halfway there. Federico looked at his watch anxiously: if he didn't get a taxi right away, he would be late. If only I had left even earlier, he thought." },
+    { es: "Llegó con diez minutos de retraso, sudando y sin aliento. Esperaba que lo rechazaran de inmediato, pero la entrevistadora le sonrió. —No se preocupe, a todos nos ha pasado alguna vez —le dijo—. Cuénteme sobre su proyecto.",
+      en: "He arrived ten minutes late, sweating and out of breath. He expected them to reject him immediately, but the interviewer smiled at him. \"Don't worry, it has happened to all of us at some point,\" she said. \"Tell me about your project.\"" },
+    { es: "Federico respiró hondo y explicó su idea: una aplicación que ayudara a pequeños agricultores a vender sus productos sin intermediarios. A medida que hablaba, se fue tranquilizando. Una semana después recibió la noticia: el puesto era suyo. Lo que más había valorado la empresa, le contaron, era que no se hubiera rendido a pesar de los problemas.",
+      en: "Federico took a deep breath and explained his idea: an app that would help small farmers sell their products without middlemen. As he talked, he gradually calmed down. A week later he got the news: the job was his. What the company had valued most, they told him, was that he hadn't given up despite the problems." }
+  ],
+  targets: [
+    { es: "apenas", en: "barely, hardly", match: ["apenas"] },
+    { es: "de sobra", en: "to spare, more than enough", match: ["sobra"] },
+    { es: "descomponerse", en: "to break down (machine)", match: ["descompuso"] },
+    { es: "conseguir", en: "to get, to obtain", match: ["conseguía"] },
+    { es: "enseguida", en: "right away", match: ["enseguida"] },
+    { es: "el retraso", en: "delay", match: ["retraso"] },
+    { es: "rechazar", en: "to reject", match: ["rechazaran"] },
+    { es: "preocuparse", en: "to worry", match: ["preocupe"] },
+    { es: "respirar hondo", en: "to take a deep breath", match: ["respiró", "hondo"] },
+    { es: "a medida que", en: "as (gradually, while)", match: ["medida"] },
+    { es: "el puesto", en: "position, job", match: ["puesto"] },
+    { es: "rendirse", en: "to give up", match: ["rendido"] },
+    { es: "a pesar de", en: "despite", match: ["pesar"] }
+  ],
+  questions: [
+    { q: "¿Qué tenía que presentar Federico en la entrevista?", options: ["Su título universitario", "Un proyecto propio", "Cartas de recomendación"], answer: 1 },
+    { q: "¿Por qué llegó tarde?", options: ["Se quedó dormido", "El ómnibus se descompuso", "Se equivocó de dirección"], answer: 1 },
+    { q: "¿Qué valoró más la empresa?", options: ["Que fuera puntual", "Que no se hubiera rendido", "Que tuviera mucha experiencia"], answer: 1 }
+  ]
+},
+{
+  id: "s9", level: 3, title: "Entre dos ciudades", titleEn: "Between two cities",
+  paragraphs: [
+    { es: "Después de vivir ocho años en Madrid, Gabriela regresó a Lima convencida de que todo seguiría igual. Sin embargo, desde el primer día notó que algo había cambiado, aunque no sabía si había cambiado la ciudad o había cambiado ella.",
+      en: "After living in Madrid for eight years, Gabriela returned to Lima convinced that everything would be the same. However, from the first day she noticed that something had changed, although she didn't know whether the city had changed or she had." },
+    { es: "Sus amigos de la universidad se habían casado, algunos tenían hijos y otros se habían ido al extranjero. Las calles de su barrio estaban llenas de edificios nuevos. Incluso su manera de hablar le parecía extraña: sin darse cuenta, a veces decía «vale» en lugar de «ya», y su familia se burlaba de ella cariñosamente.",
+      en: "Her university friends had gotten married, some had children and others had gone abroad. The streets of her neighborhood were full of new buildings. Even her way of speaking seemed strange to her: without realizing it, she sometimes said \"vale\" instead of \"ya\", and her family teased her affectionately." },
+    { es: "Durante los primeros meses, se sentía como una extranjera en su propio país. Echaba de menos los paseos por el Retiro y los cafés tranquilos, pero cuando hablaba con sus amigas españolas, les decía que extrañaba el ceviche y el ruido de Lima. Era como si no perteneciera a ningún lugar.",
+      en: "During the first months, she felt like a foreigner in her own country. She missed the walks in the Retiro park and the quiet cafés, but when she talked to her Spanish friends, she told them she missed ceviche and the noise of Lima. It was as if she didn't belong anywhere." },
+    { es: "Con el tiempo, Gabriela comprendió que no tenía que elegir. Si alguien le preguntara hoy de dónde es, probablemente respondería que es de las dos ciudades. Ha aprendido que el hogar no es un lugar fijo, sino algo que uno construye, poco a poco, con las personas que quiere.",
+      en: "Over time, Gabriela understood that she didn't have to choose. If someone asked her today where she's from, she would probably answer that she's from both cities. She has learned that home isn't a fixed place, but something you build, little by little, with the people you love." }
+  ],
+  targets: [
+    { es: "regresar", en: "to return, to go back", match: ["regresó"] },
+    { es: "convencido", en: "convinced", match: ["convencida"] },
+    { es: "notar", en: "to notice", match: ["notó"] },
+    { es: "el extranjero", en: "abroad / foreigner", match: ["extranjero", "extranjera"] },
+    { es: "el barrio", en: "neighborhood", match: ["barrio"] },
+    { es: "burlarse de", en: "to make fun of, to tease", match: ["burlaba"] },
+    { es: "echar de menos", en: "to miss (someone/something)", match: ["echaba", "menos"] },
+    { es: "pertenecer", en: "to belong", match: ["perteneciera"] },
+    { es: "comprender", en: "to understand, to realize", match: ["comprendió"] },
+    { es: "el hogar", en: "home", match: ["hogar"] },
+    { es: "construir", en: "to build", match: ["construye"] },
+    { es: "fijo", en: "fixed", match: ["fijo"] }
+  ],
+  questions: [
+    { q: "¿Qué pensaba Gabriela antes de regresar a Lima?", options: ["Que todo seguiría igual", "Que no le gustaría la ciudad", "Que no tendría amigos"], answer: 0 },
+    { q: "¿Por qué se burlaba su familia de ella?", options: ["Por su ropa", "Por su manera de hablar", "Porque no sabía cocinar"], answer: 1 },
+    { q: "¿Qué comprendió Gabriela al final?", options: ["Que debía volver a Madrid", "Que el hogar no es un lugar fijo", "Que prefería Lima"], answer: 1 }
+  ]
+}
+,{
+  id: "s10", level: 1, region: "AR", title: "Un asado en Buenos Aires", titleEn: "An asado in Buenos Aires",
+  paragraphs: [
+    { es: "Martín vive en Buenos Aires y labura en un café de Palermo. El sábado, su amigo Nico lo llama por teléfono. —Che, Martín, ¿qué hacés? Mañana hacemos un asado en mi casa. ¿Venís? —¡Dale! —dice Martín—. ¿Qué llevo?",
+      en: "Martín lives in Buenos Aires and works at a café in Palermo. On Saturday, his friend Nico calls him on the phone. \"Hey, Martín, what are you up to? Tomorrow we're having an asado at my place. Are you coming?\" \"Sure!\" says Martín. \"What should I bring?\"" },
+    { es: "—Traé unas birras y pan, nada más. Va a venir la prima de Lucas, que es re copada. Martín se ríe. Al día siguiente, toma el bondi hasta la casa de Nico. El viaje es largo, pero Martín está de buena onda y escucha música todo el camino.",
+      en: "\"Bring some beers and bread, that's all. Lucas's cousin is coming, and she's really cool.\" Martín laughs. The next day, he takes the bus to Nico's house. The trip is long, but Martín is in a good mood and listens to music the whole way." },
+    { es: "En la casa de Nico hay mucha gente. El olor de la carne en la parrilla es increíble. Nico le presenta a Sofi, la prima de Lucas. —¿Vos sos el del café? —le pregunta ella—. Me encanta ese lugar. —Sí, ahí laburo todos los días —dice Martín.",
+      en: "At Nico's house there are lots of people. The smell of the meat on the grill is incredible. Nico introduces him to Sofi, Lucas's cousin. \"Are you the guy from the café?\" she asks him. \"I love that place.\" \"Yes, I work there every day,\" says Martín." },
+    { es: "Comen, toman y hablan hasta la noche. Cuando Martín se va, Sofi le dice: —Che, el lunes paso por el café, ¿dale? —Dale, te espero —responde él. En el bondi de vuelta, Martín sonríe todo el viaje. Fue un día re lindo.",
+      en: "They eat, drink and talk until night. When Martín leaves, Sofi tells him: \"Hey, I'll stop by the café on Monday, okay?\" \"Sure, I'll be waiting for you,\" he answers. On the bus back, Martín smiles the whole ride. It was a really nice day." }
+  ],
+  targets: [
+    { es: "laburar", en: "to work (Argentina)", match: ["labura", "laburo"] },
+    { es: "che", en: "hey (Argentina)", match: ["che"] },
+    { es: "¿qué hacés?", en: "what are you up to? (vos form)", match: ["hacés"] },
+    { es: "¡dale!", en: "sure! OK!", match: ["dale"] },
+    { es: "la birra", en: "beer (Argentina)", match: ["birras"] },
+    { es: "re", en: "really, very (Argentina)", match: ["re"] },
+    { es: "copado", en: "cool (Argentina)", match: ["copada"] },
+    { es: "el bondi", en: "bus (Argentina)", match: ["bondi"] },
+    { es: "buena onda", en: "good vibes, good mood", match: ["onda"] },
+    { es: "vos sos", en: "you are (voseo of tú eres)", match: ["sos"] },
+    { es: "traer", en: "to bring (traé = bring! vos)", match: ["traé"] },
+    { es: "la parrilla", en: "grill", match: ["parrilla"] }
+  ],
+  questions: [
+    { q: "¿Dónde labura Martín?", options: ["En un café de Palermo", "En un banco", "En una parrilla"], answer: 0 },
+    { q: "¿Qué tiene que llevar Martín al asado?", options: ["Carne y vino", "Birras y pan", "Nada"], answer: 1 },
+    { q: "¿Qué va a hacer Sofi el lunes?", options: ["Pasar por el café", "Ir a la playa", "Llamar a Nico"], answer: 0 }
+  ]
+},
+{
+  id: "s11", level: 1, region: "CO", title: "Parceros en Medellín", titleEn: "Buddies in Medellín",
+  paragraphs: [
+    { es: "Daniela llega a Medellín para estudiar español. El primer día, conoce a Julián, un vecino muy amable. —¡Hola, parce! ¿Qué más? —le dice él. Daniela no entiende nada. Julián se ríe y le explica: —«¿Qué más?» es como decir «¿cómo estás?».",
+      en: "Daniela arrives in Medellín to study Spanish. On the first day, she meets Julián, a very friendly neighbor. \"Hi, buddy! What's up?\" he says. Daniela doesn't understand a thing. Julián laughs and explains: \"'¿Qué más?' is like saying 'how are you?'.\"" },
+    { es: "Julián la invita a tomar un tinto en una tienda de la esquina. Daniela piensa que un tinto es vino, pero es un café negro pequeño. —¿Me regala dos tintos, por favor? —pide Julián. Daniela aprende que en Colombia «regalar» también sirve para pedir algo con cortesía.",
+      en: "Julián invites her for a tinto at a little shop on the corner. Daniela thinks a tinto is wine, but it's a small black coffee. \"Could I have two tintos, please?\" Julián asks. Daniela learns that in Colombia \"regalar\" is also used to ask for something politely." },
+    { es: "El viernes, Julián le dice: —Esta noche hay rumba en el centro. ¿Vamos? —¡De una! —responde Daniela, que ya aprendió la expresión. La fiesta es muy bacana: bailan salsa y reguetón hasta las tres de la mañana.",
+      en: "On Friday, Julián tells her: \"Tonight there's a party downtown. Shall we go?\" \"Absolutely!\" answers Daniela, who has already learned the expression. The party is really awesome: they dance salsa and reggaeton until three in the morning." },
+    { es: "El sábado, Daniela se despierta con un guayabo terrible. Le escribe a Julián: —Qué pena, pero hoy no puedo ir a caminar. Él le contesta: —Paila, parce. Tome mucha agua y descanse. ¡Mañana vamos!",
+      en: "On Saturday, Daniela wakes up with a terrible hangover. She texts Julián: \"Sorry, but I can't go for a walk today.\" He replies: \"Too bad, buddy. Drink lots of water and rest. We'll go tomorrow!\"" }
+  ],
+  targets: [
+    { es: "parce / parcero", en: "buddy (Colombia)", match: ["parce"] },
+    { es: "¿qué más?", en: "what's up? (Colombia)", match: ["más"] },
+    { es: "el tinto", en: "small black coffee (Colombia)", match: ["tinto", "tintos"] },
+    { es: "regalar (para pedir)", en: "could I have… (polite request, Colombia)", match: ["regala"] },
+    { es: "la esquina", en: "corner", match: ["esquina"] },
+    { es: "rumbear / la rumba", en: "to party / party (Colombia)", match: ["rumba"] },
+    { es: "¡de una!", en: "sure! absolutely! (Colombia)", match: ["una"] },
+    { es: "bacano", en: "cool, awesome (Colombia)", match: ["bacana"] },
+    { es: "el guayabo", en: "hangover (Colombia)", match: ["guayabo"] },
+    { es: "¡qué pena!", en: "sorry! how embarrassing! (Colombia)", match: ["pena"] },
+    { es: "paila", en: "too bad (Colombia)", match: ["paila"] },
+    { es: "contestar", en: "to answer, to reply", match: ["contesta"] }
+  ],
+  questions: [
+    { q: "¿Qué es un tinto en Colombia?", options: ["Un vino tinto", "Un café negro pequeño", "Un jugo"], answer: 1 },
+    { q: "¿Qué significa «¡De una!»?", options: ["¡Claro, vamos!", "No, gracias", "Tal vez mañana"], answer: 0 },
+    { q: "¿Por qué Daniela no puede caminar el sábado?", options: ["Porque llueve", "Porque tiene guayabo", "Porque trabaja"], answer: 1 }
+  ]
+}
+];
+
+// Spanish surface form (lowercase) -> English gloss. "lemma" shown when useful: "gloss | lemma"
+const GLOSS = {
+"a":"to, at","abrir":"to open","abuela":"grandmother","acercaba":"was approaching | acercarse","acompañarla":"to go with her | acompañar","actuado":"acted | actuar","actuáramos":"(if) we acted | actuar","acuerdo":"agreement (de acuerdo = agreed)","acuesta":"lies down, goes to bed | acostarse","advirtió":"warned | advertir","adónde":"where to?","agradable":"pleasant","agricultores":"farmers","agua":"water","ahora":"now","aire":"air","aires":"airs (Buenos Aires)","aislada":"isolated (f.) | aislado","al":"to the / at the (a + el)","algo":"something","alguien":"someone","alguna":"some, any (alguna vez = ever)","algunos":"some","aliento":"breath (sin aliento = out of breath)","allí":"there","almorzar":"to have lunch","alta":"high, tall (f.)","amable":"kind, friendly","amigas":"friends (f.)","amigos":"friends","andrés":"Andrés (name)","angustia":"anxiety, distress","animal":"animal","anotando":"writing down | anotar","antes":"before","apartamento":"apartment","apenas":"barely, hardly","aplicación":"app, application","aprender":"to learn","aprendido":"learned | aprender","aprendió":"learned | aprender","aquella":"that (over there, f.)","aquí":"here","argentino":"Argentinian","asiento":"seat","así":"so, like this (así que = so)","atrapada":"trapped (f.) | atrapado","aunque":"although","auto":"car","avisar":"to notify, to warn","avisara":"(that) she notify | avisar","ayudara":"(that) would help | ayudar","año":"year","años":"years","aún":"even, still","baja":"goes down / gets off | bajar(se)","bajo":"I get off | bajarse","bajó":"got off | bajarse","balcón":"balcony","barrio":"neighborhood","bien":"well, good","blanca":"white (f.)","bogotá":"Bogotá (city)","bolivianos":"bolivianos (Bolivian currency)","bolsa":"bag","bosque":"forest","brasil":"Brazil","brazo":"arm","brillaban":"were shining | brillar","buena":"good (f.)","buenos":"good (Buenos Aires)","burlaba":"made fun of, teased | burlarse","bus":"bus","busca":"looks for | buscar","buscando":"looking for | buscar","cada":"each, every","café":"coffee, café","cafés":"cafés","calentara":"(before the sun) got hot | calentar","calles":"streets","calor":"heat (hace calor = it's hot)","cama":"bed","cambiado":"changed | cambiar","cambiará":"will change | cambiar","cambiaría":"would change | cambiar","camila":"Camila (name)","camina":"walks | caminar","caminata":"hike, walk","camino":"path, trail, way (a mitad de camino = halfway)","camisa":"shirt","cansada":"tired (f.) | cansado","cansado":"tired","cansados":"tired (pl.) | cansado","cariñosamente":"affectionately","carne":"meat","carpa":"tent","cartas":"letters","casa":"house, home","casado":"married | casarse","casi":"almost","catorce":"fourteen","cayó":"fell, dropped (se le cayó = he dropped it) | caerse","cebollas":"onions","celular":"cell phone","centro":"center","cerca":"near, close","cerró":"closed | cerrar","ceviche":"ceviche (raw fish dish)","chica":"girl","chile":"Chile","chilena":"Chilean (f.)","chiles":"chili peppers","chirimoya":"cherimoya (fruit)","chocolate":"chocolate","chofer":"driver","cielo":"sky","cinco":"five","circuito":"circuit, route","ciudad":"city","ciudades":"cities","clima":"weather, climate","cocina":"kitchen / cooks | cocinar","cocinar":"to cook","cocinarse":"to cook (itself), to be cooked","colores":"colors","como":"like, as","comparte":"shares | compartir","compartes":"you share | compartir","compartían":"were sharing | compartir","compañeros":"coworkers, classmates","compra":"buys | comprar","comprar":"to buy","comprendió":"understood, realized | comprender","comía":"ate, used to eat | comer","con":"with","conoce":"knows (is familiar with) | conocer","conoció":"met | conocer","conseguía":"(if he didn't) get | conseguir","conservación":"conservation","construye":"builds | construir","contacto":"contact","contar":"to count / to tell","contaron":"they told | contar","contenta":"happy, pleased (f.)","convencida":"convinced (f.) | convencido","coordinador":"coordinator","corazón":"heart","cortar":"to cut","cortó":"cut | cortar","costaba":"was hard for (le costaba = she found it hard) | costar","cristóbal":"Cristóbal (San Cristóbal island)","cuaderno":"notebook","cualquier":"any","cuando":"when","cuarenta":"forty","cuatro":"four","cubiertas":"covered (f. pl.)","cuchara":"spoon","cuenta":"account (darse cuenta = to realize)","cuestan":"cost | costar","cuidado":"care (tener cuidado = be careful)","cusco":"Cusco (city in Peru)","cuál":"which? what?","cuántas":"how many? (f.)","cuánto":"how much?","cuénteme":"tell me (formal) | contar","cómo":"how?","córdoba":"Córdoba (city)","da":"gives | dar","daba":"gave, used to give | dar","darse":"to (realize: darse cuenta)","de":"of, from","debajo":"under, underneath","debía":"should, had to | deber","decidido":"decided | decidir","decidieron":"they decided | decidir","decidió":"decided | decidir","decir":"to say","decisión":"decision","decía":"said, used to say | decir","decían":"said (they) | decir","deja":"leaves (puts down) | dejar","del":"of the (de + el)","demasiado":"too, too much","dentro":"inside (por dentro = on the inside)","desayuno":"breakfast","descansar":"to rest","descompuso":"broke down | descomponerse","descubierto":"discovered | descubrir","desde":"from, since","despacio":"slowly","despejado":"clear (sky)","despierta":"wakes up | despertarse","después":"after, later, then","desventajas":"disadvantages","dice":"says | decir","dicen":"say (they) | decir","diego":"Diego (name)","diez":"ten","diferente":"different","dijeron":"they told | decir","dijo":"said | decir","dio":"gave (se dio cuenta = realized) | dar","dirección":"address, direction","discutieron":"they argued | discutir","diseñadora":"designer (f.)","distinguirlas":"to tell them apart | distinguir","domingo":"Sunday","domingos":"Sundays","dormido":"asleep (quedarse dormido = oversleep)","dormir":"to sleep","dos":"two","dudas":"doubts | duda","dudó":"hesitated | dudar","duerme":"sleeps | dormir","duermen":"sleep (they) | dormir","dulce":"sweet","dura":"lasts | durar","durante":"during, for","durmió":"slept | dormir","día":"day","dónde":"where?","echaba":"(echaba de menos = she missed) | echar","ecuador":"Ecuador","edificios":"buildings","el":"the","elegir":"to choose","elige":"chooses | elegir","ella":"she, her","embargo":"(sin embargo = however)","empezó":"started | empezar","empresa":"company","en":"in, on, at","encanta":"(le encanta = she loves it) | encantar","encargara":"(that she) take charge | encargarse","encontró":"found | encontrar","encuentra":"finds | encontrar","enferma":"sick (f.)","enfermó":"got sick | enfermarse","enorme":"enormous","enseguida":"right away","enseñó":"taught | enseñar","entendió":"understood | entender","entonces":"then, so","entra":"comes in | entrar","entrevista":"interview","entrevistadora":"interviewer (f.)","equivocó":"got it wrong (se equivocó de = went to the wrong) | equivocarse","era":"was | ser","es":"is | ser","esa":"that (f.)","escaleras":"stairs","escondidas":"hidden (f. pl.)","escribiera":"(that he) write | escribir","escritas":"written (f. pl.)","eso":"that (por eso = that's why)","españolas":"Spanish (f. pl.)","especias":"spices","espejos":"mirrors","esperaba":"expected, was waiting | esperar","esperar":"to wait","esperaron":"they waited | esperar","esta":"this (f.)","estaba":"was | estar","estaban":"were | estar","estación":"station","estar":"to be","este":"this","estuvo":"was (estuvo de acuerdo = agreed) | estar","está":"is | estar","exigía":"required, demanded | exigir","exigían":"required (they) | exigir","experiencia":"experience","explicaba":"was explaining | explicar","explicó":"explained | explicar","extranjera":"foreigner (f.) | extranjero","extranjero":"abroad (al extranjero) / foreigner","extraña":"strange (f.)","extrañaba":"missed | extrañar","familia":"family","federico":"Federico (name)","feliz":"happy","fijo":"fixed","fin":"end (por fin = finally)","final":"end (al final = in the end)","finalmente":"finally","fruta":"fruit","frutas":"fruits","frío":"cold (hace frío = it's cold)","fue":"was / went | ser, ir","fuera":"outside (por fuera) / (that he) were | ser","fuerte":"strong","fuerza":"strength, force","gabriela":"Gabriela (name)","galletas":"cookies","gastó":"spent | gastar","gente":"people","gracias":"thanks","grande":"big","granito":"granite","gratis":"free (no cost)","gris":"gray","guardaparque":"park ranger","guardaparques":"park rangers","guiar":"to guide","gusta":"(le gusta = he likes) | gustar","gustaría":"(no le gustaría = she wouldn't like) | gustar","ha":"has | haber","habitación":"room (bedroom)","habla":"talks | hablar","hablaba":"was talking | hablar","hablar":"to talk, to speak","había":"had / there was | haber","habían":"had (they) | haber","hace":"ago (hace un año) / makes, does | hacer","hacer":"to do, to make","hacerlo":"to do it, to make it | hacer","hacía":"was (weather) / made | hacer","hambre":"hunger (tener hambre = to be hungry)","han":"have (they) | haber","hasta":"until, up to","hay":"there is, there are","herida":"injury, wound","hermana":"sister","hija":"daughter","hijos":"children, sons","hizo":"did, made (hizo calor = it was hot) | hacer","hogar":"home","hondo":"deep (respirar hondo = deep breath)","hora":"hour","horas":"hours","hostal":"hostel","hoy":"today","hubiera":"had (ojalá hubiera = if only I had) | haber","huevos":"eggs","idea":"idea","ido":"gone | ir","igual":"the same, equal","imaginaba":"imagined | imaginarse","imposible":"impossible","imprescindible":"essential","incluso":"even","increíble":"incredible","inmediatamente":"immediately","inmediato":"(de inmediato = immediately)","intermediarios":"middlemen","intervenir":"to intervene","inés":"Inés (name)","ir":"to go","irá":"will go | ir","isla":"island","joven":"young","justo":"just, exactly","kilo":"kilo","kilos":"kilos","la":"the (f.) / it, her","lado":"side (al lado de = next to)","lagos":"lakes","las":"the (f. pl.) / them","le":"(to) him, her","les":"(to) them","libro":"book","lima":"Lima (city)","limpiar":"to clean","llama":"(se llama = is called) | llamarse","llamara":"(that he) call | llamar","llamaron":"they called | llamar","llave":"key","llega":"arrives | llegar","llegan":"arrive (they) | llegar","llegaran":"(until they) arrived | llegar","llegaron":"they arrived | llegar","llegaría":"would arrive | llegar","llegó":"arrived | llegar","llenas":"full (f. pl.) | lleno","lleno":"full","llenos":"full (pl.) | lleno","llevaba":"had been (llevaba seis meses = for six months) | llevar","llevar":"to take, to carry","llovía":"was raining | llover","lluvia":"rain","lo":"it, him","los":"the (pl.) / them","lucía":"Lucía (name)","lugar":"place","luz":"light","machu":"Machu (Picchu)","madre":"mother","madrid":"Madrid","manera":"way, manner","marina":"marine","mateo":"Mateo (name)","mayor":"older, elderly","mañana":"morning / tomorrow","me":"me, myself","medellín":"Medellín (city)","medianoche":"midnight","medida":"(a medida que = as, while)","mejor":"better, best","mendoza":"Mendoza (city)","menos":"less (echar de menos = to miss)","mercado":"market","mes":"month","mesa":"table","meses":"months","mexicana":"Mexican (f.)","mezclar":"to mix","mi":"my","mientras":"while","minutos":"minutes","miraba":"watched | mirar","mirador":"viewpoint","miró":"looked at | mirar","misma":"herself (sí misma), same","mitad":"half, middle","mochila":"backpack","mole":"mole (Mexican sauce)","montañas":"mountains","montevideo":"Montevideo (city)","mucha":"a lot of (f.)","muchas":"many (f.)","mucho":"a lot, much","mudarse":"to move (house)","muestra":"shows | mostrar","mundo":"world","muy":"very","más":"more, most","mío":"mine","nada":"nothing","nadie":"nobody","necesita":"needs | necesitar","negro":"black","nervioso":"nervous","niebla":"fog","nieve":"snow","ningún":"no, not any","niño":"boy, child","no":"no, not","noche":"night","normas":"rules","nos":"us","noticia":"news","notó":"noticed | notar","nuevos":"new (pl.)","nunca":"never","o":"or","oaxaca":"Oaxaca (Mexico)","ocho":"eight","oficina":"office","ofrece":"offers | ofrecer","ojalá":"I wish, if only","ojos":"eyes","olores":"smells","organización":"organization","oscuro":"dark","otras":"other (f. pl.)","otros":"others, other","paciencia":"patience","paine":"Paine (Torres del Paine)","paisaje":"landscape, scenery","pan":"bread","papas":"potatoes","para":"for, to, in order to","parecía":"seemed | parecer","pasaba":"was passing | pasar","pasado":"last (el domingo pasado) / happened | pasar","pasaje":"ticket","pasará":"will happen | pasar","paseos":"walks, strolls","paso":"step","pasó":"spent / happened | pasar","patagonia":"Patagonia","país":"country","pedido":"asked | pedir","peligroso":"dangerous","pena":"(valer la pena = to be worth it)","pensaba":"thought | pensar","pensó":"thought | pensar","pequeña":"small (f.)","pequeño":"small","pequeños":"small (pl.)","perdieron":"(se perdieron = they got lost) | perderse","perfecto":"perfect","permitió":"allowed | permitir","pero":"but","persona":"person","personas":"people","perteneciera":"(as if she) belonged | pertenecer","pesa":"weighs (pesa mucho = is heavy) | pesar","pesar":"(a pesar de = despite) / to weigh","pesca":"fishing","picchu":"Picchu (Machu Picchu)","pidió":"asked (for) | pedir","piedras":"stones, rocks","piso":"floor","planeado":"planned | planear","plato":"dish, plate","playas":"beaches","poco":"little (poco a poco = little by little)","podía":"could | poder","pone":"(se pone = gets, becomes) | ponerse","por":"for, through, by","porque":"because","postre":"dessert","precisión":"precision","prefería":"preferred | preferir","pregunta":"asks | preguntar","preguntara":"(if someone) asked | preguntar","preguntas":"questions","preocupe":"(no se preocupe = don't worry) | preocuparse","preparaba":"made, used to prepare | preparar","preparó":"prepared, made | preparar","presentar":"to present","primer":"first","primera":"first (f.)","primero":"first","primeros":"first (pl.)","principio":"beginning (al principio = at first)","probablemente":"probably","probar":"to taste, to try","problema":"problem","problemas":"problems","probó":"tasted | probar","productos":"products","programador":"programmer","pronto":"soon","propio":"own","proteger":"to protect","proyecto":"project","proyectos":"projects","prueba":"tries, tastes | probar","pruébela":"try it (formal) | probar","próxima":"next (f.)","próximo":"next","puesto":"position, job","puntual":"punctual","puso":"put on | ponerse","que":"that, which, who","quedado":"turned out (te ha quedado = it came out) | quedar","quedó":"(se quedó dormido = overslept) | quedarse","quería":"wanted | querer","querían":"wanted (they) | querer","quiere":"wants / loves | querer","quién":"who?","qué":"what?","rara":"strange, rare (f.)","recepción":"reception","receta":"recipe","recetas":"recipes","rechazaran":"(that they) reject him | rechazar","recibió":"received | recibir","recomendación":"recommendation","reconocer":"to recognize","recorrer":"to travel through, to walk","recorría":"walked along | recorrer","red":"net","refugio":"shelter, mountain hut","registrara":"(that she) record | registrar","regresar":"to return","regresó":"returned | regresar","reloj":"watch, clock","remota":"remote (f.)","remotos":"remote (pl.)","rendido":"given up (se hubiera rendido) | rendirse","respiró":"breathed (respiró hondo = took a deep breath) | respirar","respondería":"would answer | responder","restaurante":"restaurant","retiro":"El Retiro (park in Madrid)","retraso":"delay (de retraso = late)","reía":"laughed | reírse","reúnen":"(se reúnen = they meet) | reunirse","roja":"red (f.)","ropa":"clothes","rosadas":"pink (f. pl.)","ruido":"noise","rutina":"routine","ríe":"(se ríe = laughs) | reírse","sabía":"knew | saber","salada":"salty (f.)","salado":"salty","sale":"leaves, departs | salir","salido":"left | salir","salieron":"they left | salir","salió":"left, went out | salir","salsa":"sauce","salía":"was rising (sun) / leaving | salir","san":"Saint (San Cristóbal)","se":"himself, herself (reflexive)","seguir":"to continue, to keep going","seguiría":"would remain, would continue | seguir","segundo":"second","segundos":"seconds","seis":"six","semana":"week","sencilla":"simple (f.) | sencillo","senderos":"trails, paths","sentaba":"(se sentaba = would sit) | sentarse","sentía":"felt | sentirse","sería":"would be | ser","señor":"man, sir","señora":"lady, madam","señoras":"ladies","señorita":"miss, young lady","si":"if","siempre":"always","sienta":"(se sienta = sits down) | sentarse","siguen":"(if you) continue | seguir","siguiente":"next, following","sin":"without (sin embargo = however)","sino":"but (rather)","sobra":"(de sobra = to spare)","sobre":"about, on","sobreviviera":"(that it) would survive | sobrevivir","sofía":"Sofía (name)","sol":"sun","sola":"alone (f.)","solo":"only, just","sombrero":"hat","sonrió":"smiled | sonreír","sopa":"soup","soplar":"to blow","su":"his, her, your, their","suave":"soft","subir":"to go up, to climb","sudando":"sweating | sudar","suele":"usually (does) | soler","sus":"his, her, their (pl.)","suyo":"his, hers, theirs","sábado":"Saturday","sí":"yes / herself (sí misma)","tamaño":"size","también":"also, too","tanto":"so much","tardaba":"took (time) | tardar","tarde":"late / afternoon","tardes":"afternoons","tardó":"took (time) | tardar","tarea":"task","taxi":"taxi","te":"you, to you","tecnología":"technology","temprano":"early","temía":"feared | temer","tendría":"would have to | tener","tengan":"(tengan cuidado = be careful, plural) | tener","tenía":"had | tener","tenían":"had (they) | tener","tercer":"third","tiempo":"time / weather","tiene":"has (tiene que = has to) | tener","toca":"touches | tocar","tocaba":"touched | tocar","toda":"all, whole (f.)","todavía":"still, even","todo":"everything, all","todos":"everyone, all, every","tomates":"tomatoes","tomás":"Tomás (name)","tormenta":"storm","torres":"towers","tortuga":"tortoise, turtle","tortugas":"tortoises","trabaja":"works | trabajar","trabajaba":"worked, used to work | trabajar","trabajadores":"workers","trabajar":"to work","trabajo":"work, job","trabajó":"worked | trabajar","traductor":"translator","tranquilizando":"calming down (se fue tranquilizando) | tranquilizarse","tranquilo":"calm, peaceful","tranquilos":"quiet, calm (pl.)","tres":"three","tu":"your","turistas":"tourists","tuviera":"(that) it had | tener","té":"tea","título":"degree, title","ubicación":"location","un":"a, an","una":"a, an (f.) / one","unas":"some (f.)","universidad":"university","universitario":"university (adj.)","uno":"one, you (generic)","unos":"some, a few","usaba":"used | usar","usted":"you (formal)","va":"goes | ir","vale":"OK (Spain) | valer","valentina":"Valentina (name)","valió":"(valió la pena = it was worth it) | valer","valorado":"valued | valorar","valoró":"valued | valorar","vas":"you go (vas a = you're going to) | ir","ve":"sees | ver","veces":"times (a veces = sometimes)","veinte":"twenty","vendedor":"seller","venden":"sell (they) | vender","vender":"to sell","ventana":"window","ver":"to see","verde":"green","vez":"time (esta vez = this time)","veía":"saw | ver","viajar":"to travel","viajará":"will travel | viajar","viaje":"trip","viajeros":"travelers","vida":"life","viento":"wind","viernes":"Friday","visitar":"to visit","vista":"view","vivir":"to live","vivía":"lived | vivir","volcánicas":"volcanic (f. pl.)","voluntaria":"volunteer (f.)","volver":"to return","volverá":"will return | volver","voy":"I go (voy a = I'm going to) | ir","vuelve":"returns, comes back | volver","w":"W (trail name)","y":"and","ya":"already / (Peru) OK","zona":"area, zone","ácida":"sour (f.)","él":"he, him","ómnibus":"bus (Uruguay)"
+};
+
+// Placement test bank. band: 1=A2, 2=B1, 3=B2. Vocab: word in *asterisks*, choose English meaning.
+// Reading: short passage + question in Spanish.
+const PLACEMENT = [
+// ---- band 1 (A2)
+{ band:1, s:"Tengo mucha *hambre*, ¿comemos algo?", opts:["hunger","sleep","cold","fear"], a:0, w:"el hambre" },
+{ band:1, s:"Mi hermano *trabaja* en un banco.", opts:["lives","works","walks","waits"], a:1, w:"trabajar" },
+{ band:1, s:"La tienda está *cerrada* los domingos.", opts:["open","full","closed","empty"], a:2, w:"cerrado" },
+{ band:1, s:"¿Me *prestas* tu bolígrafo?", opts:["sell","show","lend","give back"], a:2, w:"prestar" },
+{ band:1, s:"Ayer *llovió* todo el día.", opts:["it snowed","it rained","it was windy","it was sunny"], a:1, w:"llover" },
+{ band:1, s:"El museo queda *lejos* del centro.", opts:["near","inside","far","behind"], a:2, w:"lejos" },
+{ band:1, s:"Necesito *cambiar* dinero antes del viaje.", opts:["to save","to change","to spend","to find"], a:1, w:"cambiar" },
+{ band:1, s:"Ella *siempre* llega tarde.", opts:["never","sometimes","always","already"], a:2, w:"siempre" },
+{ band:1, s:"Voy a *alquilar* una bici para el fin de semana.", opts:["to rent","to fix","to buy","to ride"], a:0, w:"alquilar" },
+{ band:1, s:"No *entiendo* lo que dices.", opts:["hear","understand","remember","believe"], a:1, w:"entender" },
+{ band:1, r:true, p:"Hola, soy Marta. Vivo en Quito con mi perro, Toby. Trabajo en un hotel por las mañanas y por las tardes estudio inglés.", q:"¿Qué hace Marta por las tardes?", opts:["Trabaja en un hotel","Estudia inglés","Pasea al perro"], a:1 },
+{ band:1, r:true, p:"El tren a Cuenca sale a las 9:15, pero hoy tiene un retraso de media hora.", q:"¿A qué hora va a salir el tren hoy?", opts:["A las 9:15","A las 9:45","A las 10:15"], a:1 },
+// ---- band 2 (B1)
+{ band:2, s:"Se me *olvidó* traer las llaves.", opts:["I lost","I forgot","I broke","I hid"], a:1, w:"olvidar" },
+{ band:2, s:"Hay que *ahorrar* para el viaje.", opts:["to save (money)","to plan","to book","to pay"], a:0, w:"ahorrar" },
+{ band:2, s:"Mi jefe es muy *exigente*.", opts:["generous","demanding","lazy","funny"], a:1, w:"exigente" },
+{ band:2, s:"*Mientras* cocinaba, escuchaba la radio.", opts:["After","Before","While","Because"], a:2, w:"mientras" },
+{ band:2, s:"La reunión fue *aburrida*.", opts:["boring","long","useful","tense"], a:0, w:"aburrido" },
+{ band:2, s:"No pude *dormirme* por el ruido.", opts:["to wake up","to fall asleep","to concentrate","to relax"], a:1, w:"dormirse" },
+{ band:2, s:"Me *di cuenta* de que había perdido el pasaporte.", opts:["I realized","I remembered","I worried","I accepted"], a:0, w:"darse cuenta" },
+{ band:2, s:"Es *peligroso* nadar aquí.", opts:["forbidden","difficult","dangerous","cold"], a:2, w:"peligroso" },
+{ band:2, s:"Tuvimos que *quedarnos* en el aeropuerto toda la noche.", opts:["to wait in line","to stay","to sleep","to complain"], a:1, w:"quedarse" },
+{ band:2, s:"*Sin embargo*, decidió seguir adelante.", opts:["Therefore","However","Finally","Meanwhile"], a:1, w:"sin embargo" },
+{ band:2, r:true, p:"Cuando era pequeño, Pablo pasaba los veranos en el campo con sus abuelos. Le encantaba ayudar con los animales, aunque odiaba levantarse temprano.", q:"¿Qué no le gustaba a Pablo?", opts:["Los animales","Levantarse temprano","Sus abuelos"], a:1 },
+{ band:2, r:true, p:"Hemos cambiado el horario de la biblioteca. A partir del lunes, abriremos a las diez y cerraremos a las ocho, excepto los viernes, que cerraremos a las seis.", q:"¿A qué hora cierra la biblioteca los viernes?", opts:["A las seis","A las ocho","A las diez"], a:0 },
+// ---- band 3 (B2)
+{ band:3, s:"Es *imprescindible* llevar el pasaporte.", opts:["optional","recommended","essential","forbidden"], a:2, w:"imprescindible" },
+{ band:3, s:"No quiero que te *rindas* ahora.", opts:["get angry","give up","leave","complain"], a:1, w:"rendirse" },
+{ band:3, s:"*Apenas* tuvimos tiempo para comer.", opts:["Finally","Barely","Always","Almost never"], a:1, w:"apenas" },
+{ band:3, s:"La empresa *rechazó* la propuesta.", opts:["accepted","reviewed","rejected","improved"], a:2, w:"rechazar" },
+{ band:3, s:"*Echo de menos* a mi familia.", opts:["I worry about","I miss","I call","I visit"], a:1, w:"echar de menos" },
+{ band:3, s:"*A pesar de* la lluvia, salimos a correr.", opts:["Because of","Instead of","Despite","Before"], a:2, w:"a pesar de" },
+{ band:3, s:"El coche se *descompuso* en la carretera.", opts:["crashed","broke down","got lost","sped up"], a:1, w:"descomponerse" },
+{ band:3, s:"Si lo hubiera sabido, te habría *avisado*.", opts:["helped","warned / let know","waited for","forgiven"], a:1, w:"avisar" },
+{ band:3, s:"Ella *suele* desayunar en la oficina.", opts:["usually","never","wants to","refuses to"], a:0, w:"soler" },
+{ band:3, s:"Me molesta que la gente se *burle* de los demás.", opts:["complains","lies to","makes fun of","forgets about"], a:2, w:"burlarse" },
+{ band:3, r:true, p:"Aunque el gobierno había prometido que el puente estaría listo en marzo, las obras se retrasaron por falta de materiales. Los vecinos, cansados de esperar, exigen que se fije una fecha definitiva.", q:"¿Qué piden los vecinos?", opts:["Que se cancelen las obras","Una fecha final para terminar el puente","Más materiales para sus casas"], a:1 },
+{ band:3, r:true, p:"De haber sabido lo difícil que sería adaptarse, quizá Lucas no se habría mudado tan rápido. Aun así, no se arrepiente: dice que lo que aprendió compensa todo lo que sufrió.", q:"¿Cómo se siente Lucas sobre su decisión?", opts:["Se arrepiente mucho","No se arrepiente","Quiere volver ya"], a:1 }
+];
+
+// Additional glosses: regional stories + slang examples (Latin American usage)
+const GLOSS2 = {
+"acabaron":"ran out, sold out (se acabaron) | acabarse","ahorita":"right now / in a bit","ahí":"there","amigo":"friend","aprende":"learns | aprender","asado":"asado (Argentine barbecue)","azules":"blue (pl.)","bacana":"cool, awesome (f., Colombia) | bacano","bacano":"cool, awesome (Colombia)","bailan":"they dance | bailar","bajón":"bummer (¡qué bajón! = what a bummer, Argentina)","banco":"bank","berraco":"tough, hard / amazing (Colombia)","birra":"beer (Argentina)","birras":"beers (Argentina) | birra","boludo":"dude (Argentina, friendly; insult if angry)","bondi":"bus (Argentina)","camellar":"to work hard (Colombia)","caminar":"to walk","canceló":"was canceled (se canceló) | cancelar","carro":"car (Latin America)","chamuyando":"sweet-talking, making stuff up (Argentina) | chamuyar","che":"hey (Argentina)","chimba":"(¡qué chimba! = how awesome, Colombia)","chévere":"cool, great","cine":"movies, cinema","claro":"of course / clear","colombia":"Colombia","comen":"they eat | comer","comiendo":"eating | comer","concierto":"concert","contesta":"answers, replies | contestar","copada":"cool (f., Argentina) | copado","copado":"cool (Argentina)","cortesía":"politeness, courtesy","creas":"(no le creas = don't believe him) | creer","cuadras":"(city) blocks | cuadra","cuarto":"room, bedroom","cuánta":"how much? (f.)","dale":"OK, sure, come on","dame":"give me | dar","daniela":"Daniela (name)","demoró":"took long (se demoró) | demorarse","descanse":"rest (usted command) | descansar","días":"days","entiende":"understands | entender","entradas":"tickets (event)","escribe":"writes, texts | escribir","escucha":"listens to | escuchar","ese":"that","español":"Spanish","espero":"I wait (te espero = I'll be waiting for you) | esperar","esquina":"corner","estadio":"stadium","estoy":"I am | estar","estás":"you are | estar","estudiar":"to study","examen":"exam","explica":"explains | explicar","expresión":"expression","favor":"favor (por favor = please)","fiaca":"laziness (Argentina)","fiesta":"party","foto":"photo","fútbol":"soccer","guayabo":"hangover (Colombia)","guita":"money (Argentina)","hablan":"they talk | hablar","hacemos":"we do, we make | hacer","hacés":"you do (vos) (¿qué hacés? = what are you up to?) | hacer","hola":"hi, hello","invita":"invites | invitar","juega":"plays | jugar","jugo":"juice (Latin America)","juli":"Juli (name)","julián":"Julián (name)","labura":"works (Argentina) | laburar","laburo":"I work / work, job (Argentina) | laburar","largo":"long","lindo":"nice, lovely, pretty","llamar":"to call","llegar":"to arrive","llegué":"I arrived | llegar","llevo":"(should) I bring | llevar","llueve":"it rains | llover","lucas":"Lucas (name)","lunes":"Monday","manejar":"to drive (Latin America)","mango":"mango / peso (sin un mango = broke, Argentina)","martín":"Martín (name)","mañanas":"mornings","mona":"blond (f., Colombia)","morfar":"to eat (Argentina, informal)","música":"music","necesitas":"you need | necesitar","nico":"Nico (name)","ojo":"eye (¡ojo! = watch out!)","olor":"smell","once":"eleven","onda":"vibe (buena onda = good vibes; ¿qué onda? = what's up?)","orden":"order (a la orden = at your service)","paila":"too bad (Colombia)","palermo":"Palermo (neighborhood in Buenos Aires)","parce":"buddy (Colombia)","parque":"park","parrilla":"grill","partido":"game, match","pasar":"to stop by / to pass","pasás":"you pass (vos) | pasar","pedir":"to ask for, to order","película":"movie","pibe":"guy, kid (Argentina)","pide":"asks for, orders | pedir","piensa":"thinks | pensar","plata":"money (Latin America)","playa":"beach","posta":"for real (Argentina)","presenta":"introduces | presentar","previa":"pre-party (Argentina)","prima":"cousin (f.)","puede":"can | poder","puedo":"I can | poder","quedo":"I stay (me quedo) | quedarse","quilombo":"mess, chaos (Argentina)","re":"really, very (Argentina)","recién":"just (now)","regala":"(¿me regala…? = could I have…?, Colombia) | regalar","regalar":"to give (as a gift) / to ask for politely (Colombia)","regalas":"(¿me regalas…? = could I have…?) | regalar","reguetón":"reggaeton","responde":"answers | responder","rumba":"party (Colombia)","rumbear":"to party (Colombia)","rápido":"fast","sal":"salt","salir":"to go out","significa":"means | significar","sirve":"is used, serves (sirve para = is used for) | servir","sofi":"Sofi (name)","son":"are (they) | ser","sonríe":"smiles | sonreír","sos":"you are (vos) | ser","tal":"(tal vez = maybe)","teléfono":"phone","tengo":"I have | tener","terrible":"terrible","tienda":"small shop, store","tinto":"small black coffee (Colombia)","tintos":"small black coffees (Colombia) | tinto","todas":"all, every (f. pl.)","toma":"takes / drinks | tomar","tomamos":"(shall) we have/drink | tomar","toman":"they drink | tomar","tomar":"to drink / to take","tome":"drink (usted command) | tomar","tomemos":"let's take | tomar","tomo":"I have/drink | tomar","tomé":"I took | tomar","traé":"bring! (vos command) | traer","tus":"your (pl.)","vaina":"thing, stuff (Colombia)","vamos":"we go / let's go | ir","vaso":"glass","vecino":"neighbor","venir":"to come","venís":"are you coming? (vos) | venir","vino":"wine","vive":"lives | vivir","vos":"you (Argentina, Medellín; = tú)","vuelta":"return (de vuelta = on the way back)","vuelva":"come back (usted command) | volver"
+};
+
+// Latin American slang & regional vocabulary. region: AR, CO, LA (Latin America in general)
+const REGIONS = { AR: { flag: "🇦🇷", he: "ארגנטינה" }, CO: { flag: "🇨🇴", he: "קולומביה" }, LA: { flag: "🌎", he: "אמריקה הלטינית" } };
+const JERGA = [
+  // ---- Argentina
+  { es: "che", en: "hey (to get someone's attention)", region: "AR", ex: "Che, ¿me pasás la sal?", exEn: "Hey, can you pass me the salt?" },
+  { es: "laburar / el laburo", en: "to work / job", region: "AR", ex: "Hoy tengo mucho laburo, no puedo salir.", exEn: "I have a lot of work today, I can't go out.", match: ["laburo", "laburar", "labura"] },
+  { es: "re", en: "really, very (before an adjective)", region: "AR", ex: "La película estuvo re buena.", exEn: "The movie was really good." },
+  { es: "copado", en: "cool, great", region: "AR", ex: "Tu amigo es muy copado.", exEn: "Your friend is really cool." },
+  { es: "el bondi", en: "bus", region: "AR", ex: "Tomé el bondi para ir al centro.", exEn: "I took the bus to go downtown." },
+  { es: "la birra", en: "beer", region: "AR", ex: "¿Tomamos una birra después del laburo?", exEn: "Shall we have a beer after work?" },
+  { es: "el quilombo", en: "mess, chaos", region: "AR", ex: "Mi cuarto es un quilombo.", exEn: "My room is a mess." },
+  { es: "la guita", en: "money", region: "AR", ex: "No tengo guita para el viaje.", exEn: "I don't have money for the trip." },
+  { es: "el pibe / la piba", en: "guy, kid / girl", region: "AR", ex: "Ese pibe juega muy bien al fútbol.", exEn: "That guy plays soccer really well.", match: ["pibe", "piba"] },
+  { es: "¿posta?", en: "for real? seriously?", region: "AR", ex: "¿Posta que te vas a vivir a Colombia?", exEn: "For real you're moving to Colombia?", match: ["posta"] },
+  { es: "la fiaca", en: "laziness (not feeling like doing anything)", region: "AR", ex: "Hoy tengo fiaca, me quedo en casa.", exEn: "I feel lazy today, I'm staying home." },
+  { es: "¡dale!", en: "OK! sure! come on!", region: "AR", ex: "¿Vamos al cine esta noche? ¡Dale!", exEn: "Shall we go to the movies tonight? Sure!", match: ["dale"] },
+  { es: "chamuyar", en: "to sweet-talk, to make stuff up", region: "AR", ex: "No le creas, está chamuyando.", exEn: "Don't believe him, he's making it up.", match: ["chamuyando", "chamuyar"] },
+  { es: "morfar", en: "to eat (informal)", region: "AR", ex: "¿Vamos a morfar algo? Tengo hambre.", exEn: "Shall we go eat something? I'm hungry." },
+  { es: "¡qué bajón!", en: "what a bummer!", region: "AR", ex: "Se canceló el partido. ¡Qué bajón!", exEn: "The game was canceled. What a bummer!", match: ["bajón"] },
+  { es: "la previa", en: "pre-party (drinks before going out)", region: "AR", ex: "Hacemos la previa en mi casa a las once.", exEn: "We're doing the pre-party at my place at eleven." },
+  { es: "boludo", en: "dude (between friends; an insult if said angrily)", region: "AR", ex: "¿Qué hacés, boludo? Tanto tiempo.", exEn: "What's up, dude? Long time no see." },
+  { es: "estar sin un mango", en: "to be broke (mango = peso)", region: "AR", ex: "Estoy sin un mango hasta fin de mes.", exEn: "I'm broke until the end of the month.", match: ["mango"] },
+  // ---- Colombia
+  { es: "parce / parcero", en: "buddy, mate", region: "CO", ex: "¿Bien o qué, parce? ¿Vamos al estadio?", exEn: "All good, buddy? Shall we go to the stadium?", match: ["parce", "parcero"] },
+  { es: "¿qué más?", en: "what's up? how are you?", region: "CO", ex: "Hola, Juli, ¿qué más? ¿Todo bien?", exEn: "Hi, Juli, what's up? All good?", match: ["más"] },
+  { es: "bacano", en: "cool, awesome", region: "CO", ex: "Ese concierto estuvo muy bacano.", exEn: "That concert was really awesome.", match: ["bacano", "bacana"] },
+  { es: "el tinto", en: "small black coffee", region: "CO", ex: "Me tomo un tinto todas las mañanas.", exEn: "I have a small black coffee every morning." },
+  { es: "¡de una!", en: "sure! absolutely! let's go!", region: "CO", ex: "¿Vamos a la playa el sábado? ¡De una!", exEn: "Shall we go to the beach on Saturday? Absolutely!", match: ["una"] },
+  { es: "el guayabo", en: "hangover", region: "CO", ex: "Después de la fiesta tenía un guayabo terrible.", exEn: "After the party I had a terrible hangover." },
+  { es: "rumbear / la rumba", en: "to party / party", region: "CO", ex: "Este fin de semana vamos a rumbear en el centro.", exEn: "This weekend we're going to party downtown.", match: ["rumbear", "rumba"] },
+  { es: "camellar / el camello", en: "to work hard / job", region: "CO", ex: "Tengo que camellar todo el fin de semana.", exEn: "I have to work all weekend.", match: ["camellar", "camello"] },
+  { es: "¡qué pena!", en: "I'm sorry! how embarrassing!", region: "CO", ex: "¡Qué pena llegar tarde! El bus se demoró.", exEn: "Sorry for being late! The bus took forever.", match: ["pena"] },
+  { es: "paila", en: "too bad, bad luck", region: "CO", ex: "Se acabaron las entradas. Paila.", exEn: "The tickets sold out. Too bad." },
+  { es: "regalar (para pedir)", en: "could I have… (polite request)", region: "CO", ex: "¿Me regalas un vaso de agua, por favor?", exEn: "Could I have a glass of water, please?", match: ["regalas", "regala", "regálame"] },
+  { es: "¡qué chimba!", en: "how awesome! (informal, Medellín)", region: "CO", ex: "¡Qué chimba de vista! Tomemos una foto.", exEn: "What an awesome view! Let's take a photo.", match: ["chimba"] },
+  { es: "berraco", en: "tough, hard / amazing (or angry)", region: "CO", ex: "Ese examen estuvo berraco.", exEn: "That exam was really tough." },
+  { es: "la vaina", en: "thing, stuff", region: "CO", ex: "¿Qué es esa vaina que estás comiendo?", exEn: "What's that thing you're eating?" },
+  { es: "mono / mona", en: "blond", region: "CO", ex: "Mi hermana es mona y tiene ojos azules.", exEn: "My sister is blond and has blue eyes.", match: ["mono", "mona"] },
+  { es: "a la orden", en: "at your service / you're welcome (shops)", region: "CO", ex: "Gracias por todo. A la orden, vuelva pronto.", exEn: "Thanks for everything. You're welcome, come back soon.", match: ["orden"] },
+  // ---- Latin America (vs. Spain)
+  { es: "el carro", en: "car (Spain: el coche)", region: "LA", ex: "Vamos en mi carro, es más rápido.", exEn: "Let's go in my car, it's faster." },
+  { es: "el jugo", en: "juice (Spain: el zumo)", region: "LA", ex: "Un jugo de mango, por favor.", exEn: "A mango juice, please." },
+  { es: "manejar", en: "to drive (Spain: conducir)", region: "LA", ex: "No me gusta manejar de noche.", exEn: "I don't like driving at night." },
+  { es: "la plata", en: "money", region: "LA", ex: "¿Cuánta plata necesitas para el viaje?", exEn: "How much money do you need for the trip?" },
+  { es: "chévere", en: "cool, great", region: "LA", ex: "Tu ciudad es muy chévere.", exEn: "Your city is really cool." },
+  { es: "¿qué onda?", en: "what's up?", region: "LA", ex: "¿Qué onda? ¿Todo bien?", exEn: "What's up? All good?", match: ["onda"] },
+  { es: "buena onda", en: "nice, good vibes (person or place)", region: "LA", ex: "Tus amigos son muy buena onda.", exEn: "Your friends are really nice.", match: ["onda"] },
+  { es: "ahorita", en: "right now / in a little bit", region: "LA", ex: "Ahorita voy, dame cinco minutos.", exEn: "I'm coming in a bit, give me five minutes." },
+  { es: "la cuadra", en: "(city) block", region: "LA", ex: "El banco está a dos cuadras de aquí.", exEn: "The bank is two blocks from here." },
+  { es: "recién", en: "just (now)", region: "LA", ex: "Recién llegué a casa, ¿qué pasó?", exEn: "I just got home, what happened?" },
+  { es: "demorarse", en: "to take long (Spain: tardar)", region: "LA", ex: "El bus se demoró una hora.", exEn: "The bus took an hour." , match: ["demoró", "demorarse"] },
+  { es: "¡ojo!", en: "watch out! careful!", region: "LA", ex: "¡Ojo con el celular en el bus!", exEn: "Watch out with your phone on the bus!", match: ["ojo"] },
+  { es: "lindo", en: "nice, pretty, lovely", region: "LA", ex: "¡Qué lindo día para ir al parque!", exEn: "What a lovely day to go to the park!" }
+];
+
+// Verb conjugation module (Latin American: no vosotros).
+const PERSONS = [
+  { k: 0, es: ["yo"], he: "אני" },
+  { k: 1, es: ["tú"], he: "אתה/את" },
+  { k: 2, es: ["él", "ella", "usted"], he: "הוא/היא/אתה (רשמי)" },
+  { k: 3, es: ["nosotros"], he: "אנחנו" },
+  { k: 4, es: ["ellos", "ellas", "ustedes"], he: "הם/הן/אתם" }
+];
+const TENSES = {
+  presente: { en: "I speak / I do", es: "Presente", he: "הווה", lvl: 1, marker: "Todos los días,", ex: "Hablo español todos los días.",
+    use: "פעולה שקורית עכשיו, הרגל, או עובדה קבועה. בספרדית גם לעתיד קרוב: «Salgo mañana».",
+    form: "-ar: -o, -as, -a, -amos, -an · -er: -o, -es, -e, -emos, -en · -ir: -o, -es, -e, -imos, -en", markers: "todos los días, siempre, normalmente, ahora" },
+  preterito: { en: "I spoke (finished, at a specific time)", es: "Pretérito (indefinido)", he: "עבר מושלם", lvl: 1, marker: "Ayer,", ex: "Ayer comí en un restaurante.",
+    use: "פעולה שהתחילה והסתיימה בעבר, בנקודת זמן מוגדרת. «מה קרה?»",
+    form: "-ar: -é, -aste, -ó, -amos, -aron · -er/-ir: -í, -iste, -ió, -imos, -ieron", markers: "ayer, anoche, el año pasado, una vez, en 2020" },
+  imperfecto: { en: "I used to speak / I was speaking", es: "Imperfecto", he: "עבר מתמשך", lvl: 2, marker: "Cuando era joven,", mid: "siempre", ex: "Cuando era niño, vivía en el campo.",
+    use: "רקע, תיאור או הרגל בעבר: «הייתי נוהג…», «היה…». לא מתי זה נגמר אלא איך זה היה.",
+    form: "-ar: -aba, -abas, -aba, -ábamos, -aban · -er/-ir: -ía, -ías, -ía, -íamos, -ían", markers: "siempre, cada día, de niño, mientras, antes" },
+  perfecto: { en: "I have spoken", es: "Pretérito perfecto", he: "עבר שקשור להווה", lvl: 2, marker: "Esta semana,", ex: "Este año he aprendido mucho.",
+    use: "פעולה בעבר שעדיין קשורה להיום (היום, השבוע, אי פעם). haber + participio.",
+    form: "he, has, ha, hemos, han + -ado / -ido", markers: "hoy, esta semana, este año, ya, todavía no, alguna vez" },
+  gerundio: { en: "I am speaking (right now)", es: "Estar + gerundio", he: "קורה עכשיו", lvl: 1, marker: "Ahora mismo,", ex: "Ahora mismo estoy hablando con mi amigo.",
+    use: "רק למה שקורה ממש ברגע הזה. estar (estoy, estás, está…) + הפועל עם ‎-ando/‎-iendo. כמו ב־Language Transfer: לא משתמשים בזה לעתיד («Salgo mañana», לא «estoy saliendo mañana»).",
+    form: "estoy, estás, está, estamos, están + gerundio · -ar → -ando (hablando) · -er/-ir → -iendo (comiendo, viviendo) · ir → yendo · decir → diciendo · dormir → durmiendo", markers: "ahora, ahora mismo, en este momento" },
+  pluscuamperfecto: { en: "I had spoken (before something else in the past)", es: "Pluscuamperfecto", he: "עבר שלפני העבר", lvl: 2, marker: "Cuando llegaste,", mid: "ya", ex: "Cuando llegué, la fiesta ya había empezado.",
+    use: "משהו שכבר קרה לפני רגע אחר בעבר: «כשהגעתי, הם כבר אכלו». haber בעבר + participio.",
+    form: "había, habías, había, habíamos, habían + -ado / -ido", markers: "ya, todavía no, antes, cuando llegué" },
+  ira: { en: "I'm going to speak", es: "Ir a + infinitivo", he: "עתיד קרוב", lvl: 1, marker: "Mañana,", ex: "Mañana voy a correr en el parque.",
+    use: "הדרך הכי נפוצה ביומיום לדבר על תוכניות: voy a + שם פועל. מאוד נפוץ בכל אמריקה הלטינית.",
+    form: "voy, vas, va, vamos, van + a + infinitivo", markers: "mañana, esta noche, el fin de semana, pronto" },
+  futuro: { en: "I will speak", es: "Futuro", he: "עתיד", lvl: 2, marker: "El año que viene,", ex: "El mes que viene viajaré a Ecuador.",
+    use: "מה יקרה בעתיד, תחזית או הבטחה. ביום־יום משתמשים הרבה גם ב־ir a + שם פועל.",
+    form: "infinitivo + -é, -ás, -á, -emos, -án", markers: "mañana, el año que viene, pronto, algún día" },
+  condicional: { en: "I would speak", es: "Condicional", he: "תנאי (הייתי…)", lvl: 3, marker: "Con más tiempo,", ex: "Con más dinero, viajaría por todo el mundo.",
+    use: "«הייתי עושה…»: מצב היפותטי, בקשה מנומסת, או עצה («yo que tú, iría»).",
+    form: "infinitivo + -ía, -ías, -ía, -íamos, -ían", markers: "si tuviera…, con más…, me gustaría, yo que tú" },
+  subjuntivo: { en: "(that) I speak — after quiero que, ojalá…", es: "Presente de subjuntivo", he: "סוביונקטיב (הווה)", lvl: 3, marker: "Es importante que", ex: "Quiero que vengas a la fiesta.",
+    use: "אחרי רצון, רגש, ספק או המלצה כלפי מישהו אחר: quiero que, ojalá, es importante que, cuando (לעתיד).",
+    form: "raíz de «yo» (tengo → teng-) · -ar → -e, -es, -e, -emos, -en · -er/-ir → -a, -as, -a, -amos, -an", markers: "quiero que, ojalá, espero que, es importante que, para que" }
+};
+const TENSE_ORDER = ["presente", "gerundio", "preterito", "imperfecto", "perfecto", "pluscuamperfecto", "ira", "futuro", "condicional", "subjuntivo"];
+const DEFAULT_CJ = ["presente", "gerundio", "preterito", "perfecto", "ira", "futuro"];
+const EXTRA_TENSES = {};
+const VERBS = [
+  { inf: "hablar", en: "to speak", c: "con mis amigos" },
+  { inf: "trabajar", en: "to work", c: "en una oficina" },
+  { inf: "comer", en: "to eat", c: "en casa" },
+  { inf: "aprender", en: "to learn", c: "algo nuevo" },
+  { inf: "vivir", en: "to live", c: "en Lima" },
+  { inf: "escribir", en: "to write", c: "un mensaje", part: "escrito" },
+  { inf: "correr", en: "to run", c: "en el parque" },
+  { inf: "caminar", en: "to walk", c: "por la ciudad" },
+  { inf: "bailar", en: "to dance", c: "salsa" },
+  { inf: "tomar", en: "to drink, to take", c: "un tinto" },
+  { inf: "manejar", en: "to drive", c: "el carro" },
+  { inf: "llegar", en: "to arrive", c: "a tiempo", irr: true,
+    preterito: ["llegué", "llegaste", "llegó", "llegamos", "llegaron"], subjuntivo: ["llegue", "llegues", "llegue", "lleguemos", "lleguen"] },
+  { inf: "ser", noGer: true, en: "to be (essence)", c: "muy feliz", irr: true,
+    presente: ["soy", "eres", "es", "somos", "son"], preterito: ["fui", "fuiste", "fue", "fuimos", "fueron"], imperfecto: ["era", "eras", "era", "éramos", "eran"], subjuntivo: ["sea", "seas", "sea", "seamos", "sean"] },
+  { inf: "estar", noGer: true, en: "to be (state/place)", c: "en casa", irr: true,
+    presente: ["estoy", "estás", "está", "estamos", "están"], preterito: ["estuve", "estuviste", "estuvo", "estuvimos", "estuvieron"], subjuntivo: ["esté", "estés", "esté", "estemos", "estén"] },
+  { inf: "ir", en: "to go", c: "al mercado", irr: true, ger: "yendo",
+    presente: ["voy", "vas", "va", "vamos", "van"], preterito: ["fui", "fuiste", "fue", "fuimos", "fueron"], imperfecto: ["iba", "ibas", "iba", "íbamos", "iban"], subjuntivo: ["vaya", "vayas", "vaya", "vayamos", "vayan"] },
+  { inf: "tener", noGer: true, en: "to have", c: "mucho trabajo", irr: true, fut: "tendr",
+    presente: ["tengo", "tienes", "tiene", "tenemos", "tienen"], preterito: ["tuve", "tuviste", "tuvo", "tuvimos", "tuvieron"] },
+  { inf: "hacer", en: "to do, to make", c: "la tarea", irr: true, fut: "har", part: "hecho",
+    presente: ["hago", "haces", "hace", "hacemos", "hacen"], preterito: ["hice", "hiciste", "hizo", "hicimos", "hicieron"] },
+  { inf: "poder", noGer: true, en: "can, to be able", c: "salir temprano", irr: true, fut: "podr", ger: "pudiendo",
+    presente: ["puedo", "puedes", "puede", "podemos", "pueden"], preterito: ["pude", "pudiste", "pudo", "pudimos", "pudieron"], subjuntivo: ["pueda", "puedas", "pueda", "podamos", "puedan"] },
+  { inf: "querer", noGer: true, en: "to want", c: "un café", irr: true, fut: "querr",
+    presente: ["quiero", "quieres", "quiere", "queremos", "quieren"], preterito: ["quise", "quisiste", "quiso", "quisimos", "quisieron"], subjuntivo: ["quiera", "quieras", "quiera", "queramos", "quieran"] },
+  { inf: "decir", en: "to say, to tell", c: "la verdad", irr: true, fut: "dir", part: "dicho", ger: "diciendo",
+    presente: ["digo", "dices", "dice", "decimos", "dicen"], preterito: ["dije", "dijiste", "dijo", "dijimos", "dijeron"] },
+  { inf: "venir", en: "to come", c: "a la fiesta", irr: true, fut: "vendr", ger: "viniendo",
+    presente: ["vengo", "vienes", "viene", "venimos", "vienen"], preterito: ["vine", "viniste", "vino", "vinimos", "vinieron"] },
+  { inf: "saber", noGer: true, en: "to know (facts)", c: "la respuesta", irr: true, fut: "sabr",
+    presente: ["sé", "sabes", "sabe", "sabemos", "saben"], preterito: ["supe", "supiste", "supo", "supimos", "supieron"], subjuntivo: ["sepa", "sepas", "sepa", "sepamos", "sepan"] },
+  { inf: "poner", en: "to put", c: "la mesa", irr: true, fut: "pondr", part: "puesto",
+    presente: ["pongo", "pones", "pone", "ponemos", "ponen"], preterito: ["puse", "pusiste", "puso", "pusimos", "pusieron"] },
+  { inf: "salir", en: "to go out, to leave", c: "con Ana", irr: true, fut: "saldr",
+    presente: ["salgo", "sales", "sale", "salimos", "salen"] },
+  { inf: "dar", en: "to give", c: "un regalo", irr: true,
+    presente: ["doy", "das", "da", "damos", "dan"], preterito: ["di", "diste", "dio", "dimos", "dieron"], subjuntivo: ["dé", "des", "dé", "demos", "den"] },
+  { inf: "ver", en: "to see, to watch", c: "una película", irr: true, part: "visto",
+    presente: ["veo", "ves", "ve", "vemos", "ven"], preterito: ["vi", "viste", "vio", "vimos", "vieron"], imperfecto: ["veía", "veías", "veía", "veíamos", "veían"] },
+  { inf: "volver", en: "to return", c: "a casa", irr: true, part: "vuelto",
+    presente: ["vuelvo", "vuelves", "vuelve", "volvemos", "vuelven"], subjuntivo: ["vuelva", "vuelvas", "vuelva", "volvamos", "vuelvan"] },
+  { inf: "dormir", en: "to sleep", c: "ocho horas", irr: true, ger: "durmiendo",
+    presente: ["duermo", "duermes", "duerme", "dormimos", "duermen"], preterito: ["dormí", "dormiste", "durmió", "dormimos", "durmieron"], subjuntivo: ["duerma", "duermas", "duerma", "durmamos", "duerman"] },
+  { inf: "pensar", en: "to think", c: "en el viaje", irr: true,
+    presente: ["pienso", "piensas", "piensa", "pensamos", "piensan"], subjuntivo: ["piense", "pienses", "piense", "pensemos", "piensen"] }
+];
+const END = {
+  presente: { ar: ["o", "as", "a", "amos", "an"], er: ["o", "es", "e", "emos", "en"], ir: ["o", "es", "e", "imos", "en"] },
+  preterito: { ar: ["é", "aste", "ó", "amos", "aron"], er: ["í", "iste", "ió", "imos", "ieron"], ir: ["í", "iste", "ió", "imos", "ieron"] },
+  imperfecto: { ar: ["aba", "abas", "aba", "ábamos", "aban"], er: ["ía", "ías", "ía", "íamos", "ían"], ir: ["ía", "ías", "ía", "íamos", "ían"] },
+  futuro: ["é", "ás", "á", "emos", "án"],
+  condicional: ["ía", "ías", "ía", "íamos", "ían"]
+};
+const HABER = ["he", "has", "ha", "hemos", "han"];
+const vClass = v => v.inf.slice(-2) === "ír" ? "ir" : v.inf.slice(-2);
+const vStem = v => v.inf.slice(0, -2);
+function participle(v) { return v.part || vStem(v) + (vClass(v) === "ar" ? "ado" : "ido"); }
+function gerund(v) { return v.ger || vStem(v) + (vClass(v) === "ar" ? "ando" : "iendo"); }
+function conjugate(v, t) {
+  if (v[t]) return v[t].slice();
+  const cl = vClass(v), st = vStem(v);
+  if (t === "presente" || t === "preterito" || t === "imperfecto") return END[t][cl].map(e => st + e);
+  if (t === "futuro") return END.futuro.map(e => (v.fut || v.inf) + e);
+  if (t === "condicional") return END.condicional.map(e => (v.fut || v.inf) + e);
+  if (t === "perfecto") return HABER.map(h => h + " " + participle(v));
+  if (t === "pluscuamperfecto") return ["había", "habías", "había", "habíamos", "habían"].map(h => h + " " + participle(v));
+  if (t === "gerundio") return ["estoy", "estás", "está", "estamos", "están"].map(h => h + " " + gerund(v));
+  if (t === "ira") return ["voy", "vas", "va", "vamos", "van"].map(h => h + " a " + v.inf);
+  if (t === "subjuntivo") {
+    const yo = conjugate(v, "presente")[0];
+    const base = yo.endsWith("o") ? yo.slice(0, -1) : st;
+    const e = cl === "ar" ? ["e", "es", "e", "emos", "en"] : ["a", "as", "a", "amos", "an"];
+    return e.map(x => base + x);
+  }
+  return [];
+}
+
+// Voseo (Argentina, Uruguay, Medellín…). Present: drop -r, stress the ending (hablás, comés, vivís).
+// Other tenses use the tú form (in Argentina: subjuntivo "que vos hables" is the standard spoken form).
+const VOS = { k: 5, es: ["vos"], he: "אתה/את (ארגנטינה, מדג׳ין)" };
+const VOS_IRR = { ser: "sos", ir: "vas", dar: "das", ver: "ves" };
+function vosForm(v, t) {
+  const tu = conjugate(v, t)[1];
+  if (t === "presente") {
+    if (VOS_IRR[v.inf]) return VOS_IRR[v.inf];
+    const cl = vClass(v); return vStem(v) + (cl === "ar" ? "ás" : cl === "er" ? "és" : "ís");
+  }
+  return tu;
+}
+function allForms(v, t, vos) { const f = conjugate(v, t); if (vos) f.push(vosForm(v, t)); return f; }
+function allPersons(vos) { return vos ? PERSONS.concat([VOS]) : PERSONS; }
+
+"use strict";
+/* ============ constants ============ */
+const MIN = 60e3, HOUR = 36e5, DAY = 864e5;
+const LV = {
+  1: { es: "Inicial", he: "מתחיל", cefr: "A2", icon: "🌱", desc: "הווה, estar + gerundio, ‏ir a, עבר פשוט. סיפורים קצרים." },
+  2: { es: "Intermedio", he: "בינוני", cefr: "B1", icon: "🌿", desc: "+ imperfecto, ‏perfecto, עתיד. סיפורים באורך בינוני." },
+  3: { es: "Avanzado", he: "מתקדם", cefr: "B2", icon: "🌳", desc: "+ subjuntivo, ‏condicional, משפטים מורכבים." }
+};
+const LETTERS = "A-Za-zÁÉÍÓÚÜÑáéíóúüñ";
+const SPLIT_WORDS = new RegExp("([" + LETTERS + "]+)");
+const IS_WORD = new RegExp("^[" + LETTERS + "]+$");
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const slug = s => String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\([^)]*\)/g, "").replace(/^(el|la|los|las)\s+/, "").trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const todayStr = (t = Date.now()) => { const d = new Date(t); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+const endOfDay = (t = Date.now()) => { const d = new Date(t); d.setHours(23, 59, 59, 999); return d.getTime(); };
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+/* ============ state ============ */
+function defaultState() {
+  return {
+    v: 1, updated: 0, level: 1,
+    placement: { done: false },
+    cards: {}, known: {}, read: {}, aiGloss: {}, lookups: {},
+    settings: { newPerDay: 8, autoplay: true, reverseMature: false, highlight: true, rate: 0.85 },
+    day: { date: todayStr(), newDone: 0, revDone: 0 },
+    streak: { last: null, count: 0 },
+    days: {}, conj: {},
+    genIds: []
+  };
+}
+function normalize(s) {
+  const d = defaultState();
+  if (!s || typeof s !== "object") return d;
+  const o = Object.assign(d, s);
+  o.settings = Object.assign(defaultState().settings, s.settings || {});
+  for (const k of ["cards", "known", "read", "aiGloss", "lookups", "days", "conj"]) if (!o[k] || typeof o[k] !== "object") o[k] = {};
+  if (!Array.isArray(o.genIds)) o.genIds = [];
+  if (o.streak && o.streak.last && !o.days[o.streak.last]) o.days[o.streak.last] = true;
+  return o;
+}
+let S = defaultState();
+let GEN = {}; // generated stories by id
+const Store = { db: null, col: null, sample: null, ttsCap: null, status: "local" };
+
+function lsGet(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
+function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } }
+
+let saveTimer = null, writing = false, pendingWrite = false;
+function save() {
+  S.updated = Date.now();
+  lsSet("cyt_state", S);
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(flush, 1500);
+}
+async function flush() {
+  clearTimeout(saveTimer);
+  if (!Store.col) return;
+  if (writing) { pendingWrite = true; return; }
+  writing = true;
+  try { await Store.col.doc("state").set(JSON.parse(JSON.stringify(S))); Store.status = "cloud"; }
+  catch (e) { console.warn("save failed", e); Store.status = "local"; }
+  writing = false;
+  if (pendingWrite) { pendingWrite = false; flush(); }
+}
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flush(); });
+
+function rolloverDay() {
+  const t = todayStr();
+  if (S.day.date !== t) S.day = { date: t, newDone: 0, revDone: 0 };
+}
+function bumpStreak() { S.days[todayStr()] = true; } // counts distinct practice days only
+const practiceDays = () => Object.keys(S.days).length;
+
+/* ============ cloud init ============ */
+function withTimeout(p, ms) { return Promise.race([p, new Promise(r => setTimeout(() => r(null), ms))]); }
+async function initCloud() {
+  if (!window.claude || typeof window.claude.use !== "function") return;
+  // optional capabilities in parallel
+  claude.use("sample").then(s => { Store.sample = s; if (s) rerenderSoft(); }).catch(() => { });
+  claude.use("tts").then(t => { Store.ttsCap = t; }).catch(() => { });
+  try {
+    const [db, user] = await withTimeout(Promise.all([claude.use("db"), claude.use("user")]), 10000) || [];
+    if (!db || !user) return;
+    const uid = await user.id();
+    if (!uid) return;
+    Store.db = db;
+    Store.col = db.collection("data/users/" + uid);
+    const snap = await withTimeout(Store.col.get(), 10000);
+    if (!snap) return;
+    let remote = null;
+    for (const d of snap.docs) {
+      if (!d.exists) continue;
+      if (d.id === "state") remote = d.data();
+      else if (d.id.startsWith("story_")) { const st = d.data(); if (st && st.id) GEN[st.id] = JSON.parse(JSON.stringify(st)); }
+    }
+    if (remote && (remote.updated || 0) >= (S.updated || 0)) {
+      S = normalize(JSON.parse(JSON.stringify(remote)));
+      lsSet("cyt_state", S);
+    } else if (S.updated) {
+      flush(); // local is newer, push it
+    }
+    // push generated stories that exist only locally
+    for (const id of Object.keys(GEN)) if (!snap.docs.some(d => d.id === "story_" + id)) Store.col.doc("story_" + id).set(GEN[id]).catch(() => { });
+    lsSet("cyt_gen", GEN);
+    Store.status = "cloud";
+    buildDefs();
+    if (VIEW === "welcome" && S.placement.done) go("home"); else rerenderSoft();
+  } catch (e) { console.warn("cloud init", e); }
+}
+
+/* ============ stories & card definitions ============ */
+function allStories() {
+  const gen = Object.values(GEN).sort((a, b) => (a.created || 0) - (b.created || 0));
+  return STORIES.concat(gen);
+}
+function storyById(id) { return STORIES.find(s => s.id === id) || GEN[id]; }
+function splitSentences(text) {
+  const m = text.match(/[^.!?…]+[.!?…]+[»"”]?\s*|[^.!?…]+$/g);
+  return (m || [text]).map(s => s.trim()).filter(Boolean);
+}
+function tokensLower(text) { return text.split(SPLIT_WORDS).filter(t => IS_WORD.test(t)).map(t => t.toLowerCase()); }
+
+for (const k in GLOSS2) if (!(k in GLOSS)) GLOSS[k] = GLOSS2[k];
+let DEFS = {}, STORY_FORM = {}, GLOBAL_FORM = {}, JERGA_IDS = [];
+// fragments of multi-word expressions — never map them globally
+const AMBIG = new Set(["una", "más", "pena", "orden", "ojo", "cuenta", "dio", "menos", "pesar", "hondo", "medida", "sobra", "embargo", "acuerdo", "bajo", "baja", "onda", "re", "mango", "mono", "mona"]);
+function buildDefs() {
+  DEFS = {}; STORY_FORM = {}; GLOBAL_FORM = {};
+  for (const st of allStories()) {
+    STORY_FORM[st.id] = {};
+    const sents = [];
+    st.paragraphs.forEach((p, pi) => splitSentences(p.es).forEach(s => sents.push({ s, pi })));
+    for (const t of st.targets || []) {
+      const id = "c_" + slug(t.es);
+      const match = (t.match || []).map(x => String(x).toLowerCase());
+      let found = sents.find(x => tokensLower(x.s).some(w => match.includes(w)));
+      if (!DEFS[id]) DEFS[id] = { id, es: t.es, en: t.en, storyId: st.id, level: st.level, sentence: found ? found.s : "", pi: found ? found.pi : 0, match, region: st.region || null };
+      for (const f of match) { STORY_FORM[st.id][f] = id; if (!GLOBAL_FORM[f] && !AMBIG.has(f)) GLOBAL_FORM[f] = id; }
+    }
+  }
+  JERGA_IDS = [];
+  for (const j of JERGA) {
+    const id = "c_" + slug(j.es.split(" / ")[0]);
+    const match = (j.match || tokensLower(j.es)).map(x => x.toLowerCase());
+    if (!DEFS[id]) DEFS[id] = { id, es: j.es, en: j.en, storyId: null, level: 1, sentence: j.ex, sentEn: j.exEn, slang: true, region: j.region, match };
+    else { DEFS[id].region = DEFS[id].region || j.region; DEFS[id].ex2 = j.ex; DEFS[id].ex2En = j.exEn; }
+    JERGA_IDS.push(id);
+    for (const f of match) if (!GLOBAL_FORM[f] && !AMBIG.has(f)) GLOBAL_FORM[f] = id;
+  }
+}
+function getDef(id) { return DEFS[id] || (S.cards[id] && S.cards[id].def) || null; }
+function cardStatus(id) {
+  if (S.known[id]) return "known";
+  const c = S.cards[id];
+  if (!c || c.st === "new") return "new";
+  if (c.st === "learning" || (c.s || 0) < 7) return "learning";
+  return "stable";
+}
+function isNewCard(id) { return !S.known[id] && (!S.cards[id] || S.cards[id].st === "new"); }
+function nextStory() {
+  const lst = allStories().filter(s => s.level === S.level && !S.read[s.id]);
+  if (lst.length) return lst[0];
+  return allStories().find(s => !S.read[s.id] && s.level <= S.level) || null;
+}
+function newQueue(limitStoryId) {
+  const out = [], seen = new Set();
+  const push = id => { if (id && !seen.has(id) && getDef(id) && isNewCard(id)) { seen.add(id); out.push(id); } };
+  if (limitStoryId) { Object.values(STORY_FORM[limitStoryId] || {}).forEach(push); return out; }
+  // 1. words the user added from stories
+  Object.keys(S.cards).filter(id => S.cards[id].st === "new").sort((a, b) => (S.cards[a].added || 0) - (S.cards[b].added || 0)).forEach(push);
+  // 2+3. words from stories already read, then the next story — interleaved with slang (2:1)
+  const storyIds = [];
+  for (const st of allStories()) if (S.read[st.id]) storyIds.push(...Object.values(STORY_FORM[st.id]));
+  const nx = nextStory(); if (nx) storyIds.push(...Object.values(STORY_FORM[nx.id]));
+  const sl = JERGA_IDS.filter(isNewCard);
+  let a = 0, b = 0;
+  const su = [...new Set(storyIds)].filter(id => !seen.has(id) && isNewCard(id));
+  while (a < su.length || b < sl.length) { if (a < su.length) push(su[a++]); if (a < su.length) push(su[a++]); if (b < sl.length) push(sl[b++]); }
+  // 4. everything else at or below level
+  for (const st of allStories()) if (st.level <= S.level) Object.values(STORY_FORM[st.id]).forEach(push);
+  return out;
+}
+function dueList(storyId) {
+  const now = Date.now(), eod = endOfDay(now);
+  return Object.keys(S.cards).filter(id => {
+    const c = S.cards[id];
+    if (!c || c.st === "new" || S.known[id] || !getDef(id)) return false;
+    if (storyId && getDef(id).storyId !== storyId) return false;
+    return c.st === "learning" ? c.due <= now + 20 * MIN : c.due <= eod;
+  }).sort((a, b) => S.cards[a].due - S.cards[b].due);
+}
+function newRemaining() { rolloverDay(); return Math.max(0, S.settings.newPerDay - S.day.newDone); }
+
+/* ============ FSRS-4.5 ============ */
+const W = [0.4872, 1.4003, 3.7145, 13.8206, 5.1618, 1.2298, 0.8975, 0.031, 1.6474, 0.1367, 1.0461, 2.1072, 0.0793, 0.3246, 1.587, 0.2272, 2.8755];
+const FCT = 19 / 81, DECAY = -0.5;
+const clampD = d => Math.min(10, Math.max(1, d));
+const retr = (t, s) => Math.pow(1 + FCT * t / s, DECAY);
+const initD = g => clampD(W[4] - W[5] * (g - 3));
+const nextD = (d, g) => clampD(W[7] * initD(3) + (1 - W[7]) * (d - W[6] * (g - 3)));
+const sRecall = (d, s, r, g) => s * (Math.exp(W[8]) * (11 - d) * Math.pow(s, -W[9]) * (Math.exp(W[10] * (1 - r)) - 1) * (g === 2 ? W[15] : 1) * (g === 4 ? W[16] : 1) + 1);
+const sForget = (d, s, r) => Math.min(s, W[11] * Math.pow(d, -W[12]) * (Math.pow(s + 1, W[13]) - 1) * Math.exp(W[14] * (1 - r)));
+function schedule(c, g, now = Date.now()) {
+  const fresh = !c || c.st === "new" || !c.s;
+  const n = Object.assign({ reps: 0, lapses: 0 }, c || {});
+  if (fresh) { n.s = W[g - 1]; n.d = initD(g); }
+  else {
+    const t = Math.max(0, (now - (c.last || now)) / DAY);
+    const r = retr(t, c.s);
+    n.d = nextD(c.d, g);
+    n.s = g === 1 ? sForget(c.d, c.s, r) : sRecall(c.d, c.s, r, g);
+  }
+  n.reps = (n.reps || 0) + 1;
+  if (g === 1 && !fresh) n.lapses = (n.lapses || 0) + 1;
+  n.last = now;
+  if (g === 1) { n.st = "learning"; n.due = now + 10 * MIN; n.ivl = 0; }
+  else {
+    let ivl = Math.max(1, Math.round(n.s));
+    if (g === 2) ivl = Math.max(1, Math.min(ivl, fresh ? 1 : ivl));
+    if (g === 4) ivl = Math.max(ivl, fresh ? 4 : ivl);
+    ivl = Math.min(365, ivl);
+    n.st = "review"; n.ivl = ivl; n.due = now + ivl * DAY - 3 * HOUR;
+  }
+  return n;
+}
+function fmtIvl(c) {
+  if (c.st === "learning") return "10 דק׳";
+  const d = c.ivl;
+  if (d < 30) return d + " י׳";
+  if (d < 365) return Math.round(d / 30) + " ח׳";
+  return "שנה";
+}
+
+/* ============ speech ============ */
+const TTS = { voice: null, synth: "speechSynthesis" in window ? window.speechSynthesis : null, run: 0 };
+function pickVoice() {
+  if (!TTS.synth) return;
+  const vs = TTS.synth.getVoices().filter(v => /^es([-_]|$)/i.test(v.lang));
+  const pref = ["es-AR", "es-CO", "es-US", "es-419", "es-MX", "es-CL", "es-PE", "es-ES"];
+  let best = null;
+  for (const p of pref) { best = vs.find(v => v.lang.replace("_", "-").toLowerCase() === p.toLowerCase()); if (best) break; }
+  TTS.voice = best || vs[0] || null;
+}
+if (TTS.synth) { pickVoice(); TTS.synth.onvoiceschanged = pickVoice; }
+function voiceLabel() {
+  if (TTS.voice) return TTS.voice.name + " (" + TTS.voice.lang + ")";
+  if (Store.ttsCap) return "קול Claude";
+  if (TTS.synth) return "קול ברירת המחדל של המכשיר";
+  return "אין הקראה זמינה";
+}
+function clean(text) { return text.replace(/[—«»]/g, " ").replace(/\s+/g, " ").trim(); }
+function speak(text, rate) {
+  rate = rate || 1;
+  text = clean(text);
+  if (TTS.synth && (TTS.voice || !Store.ttsCap)) {
+    return new Promise(res => {
+      try {
+        TTS.synth.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        if (TTS.voice) { u.voice = TTS.voice; u.lang = TTS.voice.lang; } else u.lang = "es-MX";
+        u.rate = rate;
+        let done = false; const fin = () => { if (!done) { done = true; res(); } };
+        u.onend = fin; u.onerror = fin;
+        TTS.synth.speak(u);
+        setTimeout(fin, 3000 + text.length * 180 / rate); // safety on buggy engines
+      } catch (e) { res(); }
+    });
+  }
+  if (Store.ttsCap) return Store.ttsCap.speak(text, { language: "es", rate: Math.min(1.5, Math.max(0.7, rate)) }).catch(() => { });
+  toast("לא נמצא קול ספרדי במכשיר");
+  return Promise.resolve();
+}
+function stopSpeak() {
+  TTS.run++;
+  try { TTS.synth && TTS.synth.cancel(); } catch (e) { }
+  try { Store.ttsCap && Store.ttsCap.stop && Store.ttsCap.stop(); } catch (e) { }
+}
+
+/* ============ gloss lookup ============ */
+function lookup(word, story) {
+  const w = word.toLowerCase();
+  const raw = (story && story.gloss && story.gloss[w]) || GLOSS[w] || S.aiGloss[w] || null;
+  if (!raw) return null;
+  const [gloss, lemma] = String(raw).split("|").map(x => x && x.trim());
+  return { gloss, lemma: lemma || null };
+}
+
+/* ============ AI (sample) ============ */
+async function askJSON(prompt, tier) {
+  const s = Store.sample;
+  if (!s) throw new Error("no sample");
+  if (typeof s.json === "function") {
+    try { const v = await s.json(prompt, { modelTier: tier || "default" }); if (v && typeof v === "object") return v; } catch (e) { if (e && (e.code === "not_granted" || e.code === "rate_limited")) throw e; }
+  }
+  const r = await s(prompt, { modelTier: tier || "default" });
+  const t = (r && r.text) || "";
+  const a = t.indexOf("{"), b = t.lastIndexOf("}");
+  if (a < 0 || b < a) throw new Error("bad json");
+  return JSON.parse(t.slice(a, b + 1));
+}
+
+/* ============ UI shell ============ */
+let VIEW = "home";
+const main = () => $("#main");
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.classList.add("on");
+  clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove("on"), 2200);
+}
+function setNav(v) {
+  document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.v === v));
+}
+function go(v, arg) {
+  stopSpeak(); closeSheet();
+  if (VIEW === "reader") Reader.stop();
+  VIEW = v; setNav(v === "reader" ? "stories" : v === "session" ? "cards" : v === "conj" ? "verbs" : v);
+  $("#hdr-level").textContent = LV[S.level].icon + " " + LV[S.level].es;
+  document.body.classList.toggle("immersive", v === "session" || v === "placement" || v === "conj");
+  const m = main(); m.scrollTop = 0; window.scrollTo(0, 0);
+  ({ home: renderHome, cards: renderCards, stories: renderStories, progress: renderProgress, reader: renderReader, session: renderSession, placement: renderPlacement, welcome: renderWelcome, verbs: renderVerbs, conj: renderConj })[v](arg);
+}
+function rerenderSoft() { if (["home", "cards", "stories", "progress", "verbs"].includes(VIEW)) go(VIEW); }
+
+/* ============ welcome ============ */
+function renderWelcome() {
+  main().innerHTML = `
+  <section class="hero">
+    <div class="hero-badge" dir="ltr">¡Hola, Dror!</div>
+    <h1>Cuentos y Tarjetas</h1>
+    <p>סיפורים קצרים בספרדית שבונים אוצר מילים, וכרטיסיות שדואגות שהמילים יישארו.</p>
+    <ul class="how">
+      <li><b>📖 קוראים</b> סיפור ברמה שלך, מקישים על מילה ורואים תרגום.</li>
+      <li><b>🃏 מתרגלים</b> את המילים מהסיפור בכרטיסיות חכמות (FSRS).</li>
+      <li><b>🔁 פוגשים אותן שוב</b> בסיפורים הבאים, וכך הן נקלטות.</li>
+    </ul>
+    <button class="btn primary big" id="w-test">מבחן רמה קצר (3–4 דק׳)</button>
+    <button class="btn ghost" id="w-skip">דלג — התחל ברמת Inicial</button>
+  </section>`;
+  $("#w-test").onclick = () => go("placement");
+  $("#w-skip").onclick = () => { S.placement = { done: true, skipped: true, date: Date.now() }; S.level = 1; save(); go("home"); };
+}
+
+/* ============ home ============ */
+function levelReady() {
+  if (S.level >= 3) return false;
+  const ids = Object.values(DEFS).filter(d => d.level === S.level).map(d => d.id);
+  if (!ids.length) return false;
+  const stable = ids.filter(id => S.known[id] || (S.cards[id] && S.cards[id].st === "review" && S.cards[id].s >= 7)).length;
+  const reads = allStories().filter(s => s.level === S.level && S.read[s.id]);
+  if (!reads.length) return false;
+  const avg = reads.reduce((a, s) => a + S.read[s.id].score, 0) / reads.length;
+  return stable / ids.length >= 0.7 && avg >= 0.8;
+}
+function renderHome() {
+  rolloverDay();
+  const due = dueList().length, nw = Math.min(newRemaining(), newQueue().length);
+  const nx = nextStory();
+  const name = LV[S.level];
+  main().innerHTML = `
+  <section class="today">
+    <div class="today-top">
+      <div><div class="eyebrow">היום${S.days[todayStr()] ? " · תרגלת ✓" : ""}</div><div class="today-title">${due + nw ? "יש לך עבודה מתוקה" : "הכול נקי להיום ✨"}</div></div>
+      <div class="streak" title="ימי תרגול">📅 ${practiceDays()} <small>ימי תרגול</small></div>
+    </div>
+    <div class="stats3">
+      <div><b>${due}</b><span>לחזרה</span></div>
+      <div><b>${nw}</b><span>מילים חדשות</span></div>
+      <div><b>${S.day.revDone}</b><span>תרגלת היום</span></div>
+    </div>
+    <button class="btn primary big" id="h-practice">🃏 ${due + nw ? "תרגול כרטיסיות" : "להמשיך לתרגל"}</button>
+    <button class="btn ghost" id="h-verbs">⏱️ תרגול זמנים ונטיות</button>
+  </section>
+  ${levelReady() ? `<section class="banner"><b>נראה שאתה מוכן לעלות רמה 🎉</b><p>שלטת ברוב המילים של ${name.es} והבנת את הסיפורים היטב.</p><button class="btn primary" id="h-up">עבור ל־${LV[S.level + 1].es}</button></section>` : ""}
+  ${nx ? `<section class="next-story" id="h-story">
+    <div class="eyebrow">הסיפור הבא שלך</div>
+    <div class="ns-row"><div><div class="ns-title es" dir="ltr">${esc(nx.title)}</div><div class="muted">${esc(nx.titleEn)} · ${LV[nx.level].icon} ${LV[nx.level].es}</div></div><div class="ns-go">📖</div></div>
+    <div class="muted small">${(nx.targets || []).length} מילים חדשות מחכות בפנים</div>
+  </section>` : `<section class="next-story"><div class="eyebrow">סיימת את כל הסיפורים ברמה</div><p>צור סיפור חדש עם Claude במסך הסיפורים.</p></section>`}
+  <section class="tip"><b>טיפ:</b> קרא את הסיפור קודם, ורק אחר כך תרגל את המילים שלו — מפגש בהקשר ואז שליפה מהזיכרון זה השילוב שהכי מחזיק.</section>`;
+  $("#h-practice").onclick = () => due + nw ? go("cards") : startSession("extra");
+  $("#h-verbs").onclick = () => go("verbs");
+  if ($("#h-story")) $("#h-story").onclick = () => go("reader", nx.id);
+  if ($("#h-up")) $("#h-up").onclick = () => { S.level++; save(); toast("עברת ל־" + LV[S.level].es); go("home"); };
+}
+
+/* ============ cards hub ============ */
+let MODE = "mixed";
+function renderCards() {
+  rolloverDay();
+  const due = dueList().length, nq = newQueue().length, nr = newRemaining();
+  const counts = { new: 0, learning: 0, stable: 0, known: 0 };
+  for (const id of Object.keys(DEFS).concat(Object.keys(S.cards).filter(i => !DEFS[i]))) counts[cardStatus(id)]++;
+  main().innerHTML = `
+  <h2 class="h">כרטיסיות</h2>
+  <section class="modes">
+    ${[["mixed", "🔀", "חדשות + ישנות", "מעורב, כמו באנקי"], ["review", "🔁", "רק ישנות", "חזרות שהגיע זמנן, ואם אין, חזרה חופשית"], ["new", "✨", "רק חדשות", "10 מילים חדשות בכל סבב, בלי הגבלה"], ["free", "🧠", "חזרה חופשית", "כל מה שלמדת, החלשות קודם, כמה שבא לך"], ["jerga", "🌎", "סלנג לטיני", "🇦🇷 ארגנטינה · 🇨🇴 קולומביה · ביטויים של אמריקה הלטינית"]].map(([k, ic, t, d]) => `
+      <button class="mode ${MODE === k ? "on" : ""}" data-m="${k}"><span class="mi">${ic}</span><span><b>${t}</b><small>${d}</small></span></button>`).join("")}
+  </section>
+  <section class="card-sum">
+    <div><b>${due}</b><span>לחזרה עכשיו</span></div>
+    <div><b>${S.day.newDone}/${S.settings.newPerDay}</b><span>יעד מילים חדשות היום</span></div>
+  </section>
+  <button class="btn primary big" id="c-start">התחל תרגול</button>
+
+  <h3 class="h3">המילים שלך</h3>
+  <div class="bars">
+    ${bar("ידועות", counts.known, "known")}${bar("יציבות (7+ ימים)", counts.stable, "stable")}${bar("בלמידה", counts.learning, "learning")}${bar("חדשות", counts.new, "new")}
+  </div>
+  <button class="btn ghost" id="c-list">הצג את כל המילים</button>
+  <div id="wordlist"></div>`;
+  document.querySelectorAll(".mode").forEach(b => b.onclick = () => { MODE = b.dataset.m; renderCards(); });
+  $("#c-start").onclick = () => startSession(MODE);
+  $("#c-list").onclick = () => {
+    const ids = Object.keys(DEFS).concat(Object.keys(S.cards).filter(i => !DEFS[i]));
+    const lab = { new: "חדשה", learning: "בלמידה", stable: "יציבה", known: "ידועה" };
+    $("#wordlist").innerHTML = `<div class="wl">${ids.map(id => { const d = getDef(id); const st = cardStatus(id); return `<div class="wl-row"><span class="es" dir="ltr">${d.region && REGIONS[d.region] ? REGIONS[d.region].flag + " " : ""}${esc(d.es)}</span><span class="muted" dir="ltr">${esc(d.en)}</span><span class="tag ${st}">${lab[st]}</span></div>`; }).join("")}</div>`;
+    $("#c-list").remove();
+  };
+}
+function bar(label, n, cls) {
+  const total = Math.max(1, Object.keys(DEFS).length + Object.keys(S.cards).filter(i => !DEFS[i]).length);
+  return `<div class="bar"><span>${label}</span><div class="track"><div class="fill ${cls}" style="width:${Math.round(n / total * 100)}%"></div></div><b>${n}</b></div>`;
+}
+
+/* ============ session ============ */
+let SES = null;
+function startSession(mode, storyId) {
+  rolloverDay();
+  const due = dueList(storyId);
+  let news = newQueue(storyId);
+  const learned = () => Object.keys(S.cards).filter(id => S.cards[id].st !== "new" && !S.known[id] && getDef(id))
+    .sort((a, b) => weakness(b) - weakness(a)).slice(0, 25);
+  if (!storyId) {
+    if (mode === "new") news = news.slice(0, 10);
+    else if (mode === "extra") news = news.slice(0, 5);
+    else news = news.slice(0, newRemaining() || (due.length ? 0 : 5));
+  }
+  let q = [];
+  if (storyId) q = due.concat(news);
+  else if (mode === "review") q = due.length ? due : learned();
+  else if (mode === "new") q = news;
+  else if (mode === "free") q = learned();
+  else if (mode === "jerga") { const js = new Set(JERGA_IDS); q = dueList().filter(id => js.has(id)).concat(JERGA_IDS.filter(isNewCard).slice(0, 10)); if (!q.length) q = learned().filter(id => js.has(id)); }
+  else if (mode === "extra") { q = due.concat(news); if (q.length < 10) q = q.concat(learned().filter(id => !q.includes(id))).slice(0, Math.max(q.length, 20)); }
+  else { // interleave: one new after every 3 reviews
+    let i = 0, j = 0;
+    while (i < due.length || j < news.length) {
+      for (let k = 0; k < 3 && i < due.length; k++) q.push(due[i++]);
+      if (j < news.length) q.push(news[j++]);
+    }
+  }
+  if (!q.length && mode !== "free" && mode !== "jerga") { q = learned(); if (!q.length) q = newQueue().slice(0, 10); }
+  if (!q.length) { toast("עוד אין כרטיסיות — קרא סיפור כדי להתחיל"); return; }
+  SES = { q: q.slice(0, 120), i: 0, flipped: false, done: 0, again: 0, total: Math.min(q.length, 120), reverse: false, storyId, mode };
+  go("session");
+}
+function renderSession() {
+  if (!SES) return go("cards");
+  if (SES.i >= SES.q.length) return renderSessionEnd();
+  const id = SES.q[SES.i], d = getDef(id), c = S.cards[id];
+  const fresh = isNewCard(id);
+  SES.reverse = !fresh && S.settings.reverseMature && c && c.s >= 21 && Math.random() < 0.35;
+  SES.flipped = false;
+  const st = storyById(d.storyId);
+  const ctx = cardContext(d, st);
+  const forms = d.match || [String(d.es).toLowerCase()];
+  const sentHtml = ctx.es ? tappable(ctx.es, forms) : "";
+  main().innerHTML = `
+  <div class="ses-top">
+    <button class="icon" id="s-x" aria-label="סגור">✕</button>
+    <div class="prog"><div style="width:${Math.round(SES.i / SES.q.length * 100)}%"></div></div>
+    <span class="muted small">${SES.i + 1}/${SES.q.length}</span>
+  </div>
+  <div class="flash ${fresh ? "is-new" : ""}" id="flash">
+    ${fresh ? `<div class="newtag">מילה חדשה</div>` : ""}
+    ${d.region && REGIONS[d.region] ? `<div class="regtag">${REGIONS[d.region].flag} ${REGIONS[d.region].he}</div>` : ""}
+    <div class="front">
+      ${SES.reverse ? `<div class="f-word en" dir="ltr">${esc(d.en)}</div><div class="muted small">איך אומרים בספרדית?</div>`
+      : `<div class="f-word es" dir="ltr">${esc(d.es)}</div><button class="icon spk" id="s-say" aria-label="הקרא">🔊</button>`}
+    </div>
+    <div class="back" hidden>
+      <div class="divider"></div>
+      ${SES.reverse ? `<div class="b-word es" dir="ltr">${esc(d.es)} <button class="icon spk inline" id="s-say2">🔊</button></div>` : `<div class="b-word en" dir="ltr">${esc(d.en)}</div>`}
+      ${sentHtml ? `<div class="ctx-wrap"><div class="ctx es" dir="ltr" id="ctx-es">${sentHtml}</div><div class="ctx en-ctx" dir="ltr" id="ctx-en" hidden>${esc(ctx.en)}</div>
+        <div class="ctx-tools">${ctx.en ? `<button class="pill" id="s-lang">🔄 English</button>` : ""}<button class="pill" id="s-sent">🔊 הקרא</button><span class="muted small">הקש על מילה לתרגום</span></div></div>` : ""}
+      ${d.ex2 ? `<div class="ex2 es" dir="ltr">${esc(d.ex2)}<div class="muted small">${esc(d.ex2En)}</div></div>` : ""}
+      ${st ? `<div class="muted small">מתוך: <span class="es" dir="ltr">${esc(st.title)}</span></div>` : d.slang ? `<div class="muted small">מחפיסת הסלנג 🌎</div>` : ""}
+    </div>
+  </div>
+  <div class="ses-actions" id="acts">
+    <button class="btn primary big" id="s-flip">הצג תשובה</button>
+    ${fresh ? `<button class="btn ghost" id="s-known">כבר מכיר את המילה — דלג</button>` : ""}
+  </div>`;
+  $("#s-x").onclick = () => { SES = null; go("cards"); };
+  const sayWord = () => speak(d.es.replace(/\(.*?\)/g, ""), 0.9);
+  if ($("#s-say")) $("#s-say").onclick = e => { e.stopPropagation(); sayWord(); };
+  if (!SES.reverse && S.settings.autoplay) setTimeout(sayWord, 150);
+  $("#s-flip").onclick = flip;
+  $("#flash").onclick = () => { if (!SES.flipped) flip(); };
+  if ($("#s-known")) $("#s-known").onclick = () => { S.known[id] = true; delete S.cards[id]; save(); SES.i++; renderSession(); };
+  function flip() {
+    SES.flipped = true;
+    $(".back").hidden = false;
+    if ($("#s-say2")) $("#s-say2").onclick = e => { e.stopPropagation(); sayWord(); };
+    if ($("#s-sent")) $("#s-sent").onclick = e => { e.stopPropagation(); speak(ctx.es, S.settings.rate); };
+    if ($("#s-lang")) $("#s-lang").onclick = e => { e.stopPropagation(); const en = $("#ctx-en"), sp = $("#ctx-es"); const toEn = en.hidden; en.hidden = !toEn; sp.hidden = toEn; e.target.textContent = toEn ? "🔄 Español" : "🔄 English"; };
+    if ($("#ctx-es")) $("#ctx-es").onclick = e => { e.stopPropagation(); const w = e.target.closest(".w"); if (!w) return; document.querySelectorAll(".w.sel").forEach(x => x.classList.remove("sel")); w.classList.add("sel"); openWordSheet(w.dataset.w, st || { id: "_", paragraphs: [], gloss: {} }, ctx.es, -1, "card"); };
+    if (SES.reverse && S.settings.autoplay) sayWord();
+    const now = Date.now();
+    const opts = [[1, "Otra vez", "שוב"], [2, "Difícil", "קשה"], [3, "Bien", "טוב"], [4, "Fácil", "קל"]];
+    $("#acts").innerHTML = `<div class="grades">${opts.map(([g, es, he]) => `<button class="grade g${g}" data-g="${g}"><b class="es">${es}</b><small>${he} · ${fmtIvl(schedule(c && c.st !== "new" ? c : null, g, now))}</small></button>`).join("")}</div>`;
+    document.querySelectorAll(".grade").forEach(b => b.onclick = () => grade(+b.dataset.g));
+  }
+  function grade(g) {
+    const before = S.cards[id];
+    const wasNew = isNewCard(id);
+    const def = before && before.def;
+    const n = schedule(before && before.st !== "new" ? before : null, g);
+    if (def) n.def = def;
+    if (before && before.added) n.added = before.added;
+    S.cards[id] = n;
+    rolloverDay();
+    if (wasNew) S.day.newDone++;
+    S.day.revDone++; SES.done++;
+    bumpStreak();
+    if (g === 1) { SES.again++; SES.q.splice(Math.min(SES.q.length, SES.i + 4), 0, id); }
+    save();
+    SES.i++; renderSession();
+  }
+}
+function weakness(id) {
+  const c = S.cards[id]; if (!c || !c.s) return 1;
+  const t = Math.max(0, (Date.now() - (c.last || Date.now())) / DAY);
+  return 1 - retr(t, c.s) + (c.lapses || 0) * 0.05 + (c.st === "learning" ? 0.5 : 0);
+}
+function splitEn(t) { return (t.match(/[^.!?]+[.!?]+["”]?\s*|[^.!?]+$/g) || [t]).map(s => s.trim()).filter(Boolean); }
+function cardContext(d, st) {
+  if (d.slang) return { es: d.sentence || "", en: d.sentEn || "" };
+  if (!st || !st.paragraphs || !st.paragraphs[d.pi || 0]) return { es: d.sentence || "", en: "" };
+  const p = st.paragraphs[d.pi || 0];
+  const es = splitSentences(p.es), en = splitEn(p.en);
+  let i = es.findIndex(x => x === d.sentence);
+  if (i < 0) return { es: d.sentence || es[0], en: d.sentence ? "" : en[0] || "" };
+  const j = i + 1 < es.length ? i + 1 : Math.max(0, i - 1);
+  const a = Math.min(i, j), b = Math.max(i, j);
+  const esTxt = (a === b ? [es[i]] : [es[a], es[b]]).join(" ");
+  const enTxt = es.length === en.length ? (a === b ? [en[i]] : [en[a], en[b]]).join(" ") : p.en;
+  return { es: esTxt, en: enTxt };
+}
+function tappable(text, forms) {
+  return text.split(SPLIT_WORDS).map(t => IS_WORD.test(t) ? `<span class="w${forms.includes(t.toLowerCase()) ? " hit" : ""}" data-w="${esc(t)}">${esc(t)}</span>` : esc(t)).join("");
+}
+function highlightIn(sentence, forms) {
+  return sentence.split(SPLIT_WORDS).map(t => IS_WORD.test(t) && forms.includes(t.toLowerCase()) ? `<mark>${esc(t)}</mark>` : esc(t)).join("");
+}
+function renderSessionEnd() {
+  const s = SES; SES = null;
+  flush();
+  main().innerHTML = `<section class="done">
+    <div class="done-emoji">🎉</div>
+    <h2 dir="ltr">¡Muy bien!</h2>
+    <p>תרגלת ${s.done} כרטיסיות${s.again ? `, ${s.again} חזרו לסבב נוסף` : ""}.</p>
+    <button class="btn primary big" id="d-more">🔁 להמשיך לתרגל</button>
+    <button class="btn ghost" id="d-new">✨ עוד 10 מילים חדשות</button>
+    <button class="btn ghost" id="d-home">חזרה לבית</button>
+    ${nextStory() ? `<button class="btn ghost" id="d-story">📖 לסיפור הבא</button>` : ""}
+  </section>`;
+  $("#d-home").onclick = () => go("home");
+  $("#d-more").onclick = () => startSession("extra");
+  $("#d-new").onclick = () => startSession("new");
+  if ($("#d-story")) $("#d-story").onclick = () => go("reader", nextStory().id);
+}
+
+/* ============ stories library ============ */
+function renderStories() {
+  const byLevel = { 1: [], 2: [], 3: [] };
+  allStories().forEach(s => (byLevel[s.level] || byLevel[1]).push(s));
+  main().innerHTML = `
+  <h2 class="h">סיפורים</h2>
+  <section class="gen">
+    <div class="gen-head"><b>✨ סיפור חדש בשבילך</b><span class="muted small">Claude כותב סיפור ברמה ${LV[S.level].es} שמשלב מילים שאתה לומד עכשיו</span></div>
+    ${Store.sample ? `<div class="gen-row"><input id="g-topic" placeholder="נושא (לא חובה): פרו, עבודה, כדורגל…" maxlength="80"><button class="btn primary" id="g-go">צור</button></div><div id="g-status" class="muted small"></div>`
+      : `<div class="muted small">זמין כשהאפליקציה פתוחה דרך Claude (בממשק המלא).</div>`}
+  </section>
+  ${[S.level, ...[1, 2, 3].filter(l => l !== S.level)].map(l => `
+    <h3 class="h3">${LV[l].icon} ${LV[l].es} <span class="muted small">· ${LV[l].he} · ${LV[l].cefr}</span></h3>
+    <div class="slist">${byLevel[l].map(s => storyRow(s)).join("") || `<div class="muted small">אין עדיין סיפורים</div>`}</div>`).join("")}`;
+  document.querySelectorAll(".srow").forEach(b => b.onclick = () => go("reader", b.dataset.id));
+  if ($("#g-go")) $("#g-go").onclick = generateStory;
+}
+function storyRow(s) {
+  const r = S.read[s.id];
+  const ids = [...new Set(Object.values(STORY_FORM[s.id] || {}))];
+  const learnt = ids.filter(id => ["stable", "known"].includes(cardStatus(id))).length;
+  return `<button class="srow ${r ? "read" : ""}" data-id="${s.id}">
+    <div class="sr-main"><div class="sr-title es" dir="ltr">${s.region && REGIONS[s.region] ? REGIONS[s.region].flag + " " : ""}${esc(s.title)}${s.generated ? ' <span class="ai">AI</span>' : ""}</div><div class="muted small" dir="ltr">${esc(s.titleEn || "")}</div></div>
+    <div class="sr-side">${r ? `<span class="score">✓ ${Math.round(r.score * 100)}%</span>` : `<span class="muted small">${ids.length} מילים</span>`}<span class="muted small">${learnt}/${ids.length} נקלטו</span></div>
+  </button>`;
+}
+async function generateStory() {
+  const btn = $("#g-go"), status = $("#g-status");
+  const topic = ($("#g-topic").value || "").trim();
+  const learning = Object.keys(S.cards).filter(id => ["learning"].includes(cardStatus(id)) || (S.cards[id].st === "review" && S.cards[id].s < 21)).map(getDef).filter(Boolean);
+  const pick = shuffle(learning).slice(0, 8).map(d => d.es);
+  const avoid = Object.values(DEFS).map(d => d.es).slice(0, 120);
+  const spec = { 1: "CEFR A2: present tense, estar+gerund, ir a + infinitive, simple preterite. Short sentences. 140-170 words.", 2: "CEFR B1: add imperfect, present perfect, future, commands. 180-230 words.", 3: "CEFR B2: add subjunctive, conditional, complex sentences. 230-290 words." }[S.level];
+  const prompt = `You write a graded reading story for a Spanish learner (Hebrew native speaker who reads English glosses). Use natural, colloquial Latin American Spanish, preferably set in Argentina (with voseo: vos sos, tenés, querés) or Colombia, and include 1-2 common local slang words (e.g. che, re, copado, laburo, bondi, parce, bacano, chévere, ¡de una!), glossed like any other word.
+Level: ${spec} Exactly 4 paragraphs. About 97% of the words must be easy for this level.
+${pick.length ? `The learner is currently studying these words. Use EACH of them naturally at least once (any inflection): ${pick.join(", ")}.` : ""}
+Introduce exactly 6 NEW useful words for this level and repeat each one at least twice in the story. Do not choose any of these as new words: ${avoid.join(", ")}.
+Topic: ${topic || "everyday life or travel in Latin America, with a small surprise or problem that gets solved"}.
+Return ONLY a JSON object, no markdown:
+{"title":"Spanish title","titleEn":"English title","paragraphs":[{"es":"paragraph","en":"natural English translation"}],"targets":[{"es":"dictionary form (nouns with el/la)","en":"short English meaning","match":["each exact lowercase form of this word as it appears in the paragraphs"]}],"gloss":{"<every distinct lowercase word in the paragraphs AND questions>":"short English meaning in context; for conjugated verbs add ' | infinitive'"},"questions":[{"q":"comprehension question in Spanish","options":["a","b","c"],"answer":0}]}
+targets must contain only the 6 new words. Write 3 questions. The gloss object must cover every single word form, including articles, names and small words.`;
+  btn.disabled = true; status.textContent = "Claude כותב לך סיפור… (בערך דקה)";
+  try {
+    const j = await askJSON(prompt, "default");
+    if (!j || !Array.isArray(j.paragraphs) || !j.paragraphs.length) throw new Error("empty");
+    const id = "g" + Date.now();
+    const gloss = {};
+    for (const [k, v] of Object.entries(j.gloss || {})) gloss[String(k).toLowerCase()] = String(v);
+    const st = {
+      id, level: S.level, generated: true, created: Date.now(),
+      title: String(j.title || "Cuento nuevo"), titleEn: String(j.titleEn || ""),
+      paragraphs: j.paragraphs.filter(p => p && p.es).map(p => ({ es: String(p.es), en: String(p.en || "") })),
+      targets: (j.targets || []).filter(t => t && t.es).map(t => ({ es: String(t.es), en: String(t.en || ""), match: (t.match || []).map(x => String(x).toLowerCase()) })),
+      gloss,
+      questions: (j.questions || []).filter(q => q && q.q && Array.isArray(q.options)).map(q => ({ q: String(q.q), options: q.options.map(String), answer: Math.max(0, Math.min(q.options.length - 1, +q.answer || 0)) }))
+    };
+    GEN[id] = st;
+    S.genIds.push(id);
+    lsSet("cyt_gen", GEN);
+    if (Store.col) Store.col.doc("story_" + id).set(st).catch(e => console.warn(e));
+    save(); buildDefs();
+    toast("הסיפור מוכן!");
+    go("reader", id);
+  } catch (e) {
+    console.warn(e);
+    btn.disabled = false;
+    status.textContent = e && e.code === "not_granted" ? "צריך לאשר ל־Claude גישה כדי ליצור סיפורים." : e && e.code === "rate_limited" ? "יותר מדי בקשות, נסה שוב בעוד דקה." : "משהו השתבש ביצירה. נסה שוב.";
+  }
+}
+
+/* ============ reader ============ */
+const Reader = {
+  story: null, sents: [], playing: false, cur: -1,
+  stop() { this.playing = false; stopSpeak(); this.mark(-1); this.updBtn(); },
+  mark(i) {
+    document.querySelectorAll(".sent.cur").forEach(e => e.classList.remove("cur"));
+    this.cur = i;
+    if (i >= 0) { const el = document.querySelector(`.sent[data-i="${i}"]`); if (el) { el.classList.add("cur"); const r = el.getBoundingClientRect(); if (r.top < 70 || r.bottom > innerHeight - 150) el.scrollIntoView({ block: "center", behavior: "smooth" }); } }
+  },
+  updBtn() { const b = $("#p-play"); if (b) b.innerHTML = this.playing ? "⏸" : "▶"; },
+  async play(from) {
+    stopSpeak();
+    const run = ++TTS.run;
+    this.playing = true; this.updBtn();
+    for (let i = from; i < this.sents.length; i++) {
+      if (!this.playing || run !== TTS.run) return;
+      this.mark(i);
+      await speak(this.sents[i], S.settings.rate);
+      if (run !== TTS.run) return;
+    }
+    this.playing = false; this.mark(-1); this.updBtn();
+  }
+};
+function renderReader(id) {
+  const st = storyById(id);
+  if (!st) return go("stories");
+  Reader.story = st; Reader.sents = []; Reader.playing = false; Reader.cur = -1;
+  const hl = S.settings.highlight;
+  const formMap = STORY_FORM[st.id] || {};
+  let si = 0;
+  const parasHtml = st.paragraphs.map((p, pi) => {
+    const sh = splitSentences(p.es).map(s => {
+      Reader.sents.push(s);
+      const inner = s.split(SPLIT_WORDS).map(t => {
+        if (!IS_WORD.test(t)) return esc(t);
+        const w = t.toLowerCase();
+        const cid = formMap[w] || null;
+        let cls = "w";
+        if (hl && cid) { const stt = cardStatus(cid); cls += stt === "new" ? " tgt" : stt === "learning" ? " lrn" : ""; }
+        else if (hl && GLOBAL_FORM[w] && cardStatus(GLOBAL_FORM[w]) === "learning") cls += " lrn";
+        return `<span class="${cls}" data-w="${esc(t)}" data-s="${si}">${esc(t)}</span>`;
+      }).join("");
+      return `<span class="sent" data-i="${si++}">${inner}</span>`;
+    }).join(" ");
+    return `<div class="para"><p class="es" dir="ltr" lang="es">${sh}</p><button class="tr-btn" data-p="${pi}">EN</button><div class="tr" id="tr-${pi}" dir="ltr" hidden>${esc(p.en)}</div></div>`;
+  }).join("");
+  const r = S.read[st.id];
+  main().innerHTML = `
+  <div class="r-head">
+    <button class="icon" id="r-back" aria-label="חזרה">→</button>
+    <div><div class="eyebrow">${LV[st.level].icon} ${LV[st.level].es}${st.region && REGIONS[st.region] ? " · " + REGIONS[st.region].flag + " " + REGIONS[st.region].he : ""}${st.generated ? " · AI" : ""}</div><h2 class="r-title es" dir="ltr">${esc(st.title)}</h2><div class="muted small" dir="ltr">${esc(st.titleEn || "")}</div></div>
+  </div>
+  ${hl ? `<div class="legend"><span><i class="lg tgt"></i>מילה חדשה בסיפור</span><span><i class="lg lrn"></i>מילה בלמידה</span><span class="muted">הקש על כל מילה לתרגום</span></div>` : ""}
+  <article class="story">${parasHtml}</article>
+  <section class="quiz" id="quiz">
+    <h3 class="h3"><bdi class="es">¿Entendiste?</bdi> <span class="muted small">שאלות הבנה</span></h3>
+    ${st.questions.map((q, qi) => `<div class="q" data-q="${qi}"><div class="q-t es" dir="ltr">${qi + 1}. ${esc(q.q)}</div>${q.options.map((o, oi) => `<button class="opt es" dir="ltr" data-o="${oi}">${esc(o)}</button>`).join("")}</div>`).join("")}
+    <div id="q-res">${r ? `<div class="muted small">ציון קודם: ${Math.round(r.score * 100)}%</div>` : ""}</div>
+  </section>
+  <div class="player">
+    <button class="icon big" id="p-play" aria-label="נגן">▶</button>
+    <div class="rates">${[0.7, 0.85, 1].map(x => `<button class="rate ${S.settings.rate === x ? "on" : ""}" data-r="${x}">${x}×</button>`).join("")}</div>
+    <button class="icon" id="p-restart" aria-label="מההתחלה">⏮</button>
+  </div>`;
+  $("#r-back").onclick = () => go("stories");
+  document.querySelectorAll(".tr-btn").forEach(b => b.onclick = () => { const t = $("#tr-" + b.dataset.p); t.hidden = !t.hidden; b.classList.toggle("on", !t.hidden); });
+  $(".story").onclick = e => {
+    const w = e.target.closest(".w"); if (!w) return;
+    document.querySelectorAll(".w.sel").forEach(x => x.classList.remove("sel"));
+    w.classList.add("sel");
+    openWordSheet(w.dataset.w, st, Reader.sents[+w.dataset.s], +w.dataset.s);
+  };
+  $("#p-play").onclick = () => { if (Reader.playing) Reader.stop(); else Reader.play(Reader.cur >= 0 ? Reader.cur : 0); };
+  $("#p-restart").onclick = () => Reader.play(0);
+  document.querySelectorAll(".rate").forEach(b => b.onclick = () => { S.settings.rate = +b.dataset.r; save(); document.querySelectorAll(".rate").forEach(x => x.classList.toggle("on", x === b)); if (Reader.playing) Reader.play(Math.max(0, Reader.cur)); });
+  // quiz
+  const answers = {};
+  document.querySelectorAll(".q").forEach(qe => {
+    const qi = +qe.dataset.q, q = st.questions[qi];
+    qe.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+      if (qi in answers) return;
+      const oi = +b.dataset.o; answers[qi] = oi === q.answer;
+      qe.querySelectorAll(".opt").forEach((x, k) => { x.disabled = true; if (k === q.answer) x.classList.add("right"); });
+      if (oi !== q.answer) b.classList.add("wrong");
+      if (Object.keys(answers).length === st.questions.length) finishStory(st, answers);
+    });
+  });
+}
+function finishStory(st, answers) {
+  const n = st.questions.length, c = Object.values(answers).filter(Boolean).length;
+  const score = n ? c / n : 1;
+  const prev = S.read[st.id];
+  S.read[st.id] = { score: prev ? Math.max(prev.score, score) : score, date: Date.now() };
+  bumpStreak(); save();
+  const newIds = newQueue(st.id), dueIds = dueList(st.id);
+  $("#q-res").innerHTML = `<div class="res">
+    <div class="res-score">${c}/${n}</div>
+    <div>${score === 1 ? '<bdi class="es">¡Perfecto!</bdi> הבנת הכול.' : score >= 0.67 ? '<bdi class="es">¡Bien!</bdi> הבנה טובה.' : "כדאי לקרוא שוב עם ההקראה 🎧"}</div>
+    ${newIds.length + dueIds.length ? `<button class="btn primary big" id="q-practice">🃏 תרגל את ${newIds.length + dueIds.length} מילות הסיפור עכשיו</button>` : `<div class="muted small">כל מילות הסיפור כבר בתרגול שלך.</div>`}
+    ${nextStory() ? `<button class="btn ghost" id="q-next">לסיפור הבא ←</button>` : ""}
+  </div>`;
+  if ($("#q-practice")) $("#q-practice").onclick = () => startSession("mixed", st.id);
+  if ($("#q-next")) $("#q-next").onclick = () => go("reader", nextStory().id);
+}
+
+/* ============ word sheet ============ */
+function closeSheet() { $("#sheet").classList.remove("on"); $("#scrim").classList.remove("on"); document.querySelectorAll(".w.sel").forEach(x => x.classList.remove("sel")); }
+function openWordSheet(word, st, sentence, si, mode) {
+  const w = word.toLowerCase();
+  S.lookups[w] = (S.lookups[w] || 0) + 1;
+  const g = lookup(w, st);
+  const cid = (STORY_FORM[st.id] || {})[w] || GLOBAL_FORM[w] || ("u_" + slug(w));
+  const sameCard = mode === "card" && SES && SES.q[SES.i] === cid;
+  const def = getDef(cid);
+  const inDeck = !!(S.cards[cid] || S.known[cid]);
+  const lab = { new: "ממתינה לתרגול", learning: "בלמידה", stable: "יציבה", known: "ידועה" };
+  const sh = $("#sheet");
+  sh.innerHTML = `
+    <div class="grip"></div>
+    <div class="ws-top">
+      <div><div class="ws-word es" dir="ltr">${esc(word)}</div>${g && g.lemma ? `<div class="muted small es" dir="ltr">${esc(g.lemma)}</div>` : def && def.es.toLowerCase() !== w ? `<div class="muted small es" dir="ltr">${esc(def.es)}</div>` : ""}</div>
+      <button class="icon spk" id="ws-say" aria-label="הקרא">🔊</button>
+    </div>
+    <div class="ws-gloss" dir="ltr" id="ws-gloss">${g ? esc(g.gloss) : def ? esc(def.en) : `<span class="muted">אין תרגום שמור למילה הזו</span>`}</div>
+    ${!g && !def ? `<div class="ws-ai">${Store.sample ? `<button class="btn ghost small" id="ws-ai">✨ תרגם עם Claude לפי ההקשר</button>` : ""}<a class="btn ghost small" target="_blank" rel="noopener" href="https://translate.google.com/?sl=es&tl=en&op=translate&text=${encodeURIComponent(sentence || word)}">Google Translate ↗</a></div>` : ""}
+    <div class="ws-acts">
+      ${sameCard ? `<div class="indeck">זו המילה של הכרטיסייה</div>` : inDeck ? `<div class="indeck">✓ בכרטיסיות · ${lab[cardStatus(cid)]}</div>` : `<button class="btn primary" id="ws-add">➕ הוסף לכרטיסיות</button>`}
+      <button class="btn ghost" id="ws-sent">▶ הקרא את המשפט</button>
+    </div>`;
+  sh.classList.add("on"); $("#scrim").classList.add("on");
+  $("#ws-say").onclick = () => speak(word, 0.85);
+  $("#ws-sent").onclick = () => { if (mode === "card") speak(sentence, S.settings.rate); else { closeSheet(); Reader.play(si); } };
+  if ($("#ws-add")) $("#ws-add").onclick = () => {
+    if (DEFS[cid]) S.cards[cid] = { st: "new", added: Date.now() };
+    else {
+      const gl = lookup(w, st) || { gloss: "?" };
+      S.cards[cid] = { st: "new", added: Date.now(), def: { id: cid, es: word.toLowerCase(), en: gl.gloss + (gl.lemma ? " (" + gl.lemma + ")" : ""), storyId: st.id, level: st.level || S.level, sentence: sentence || "", pi: si >= 0 ? paraOfSentence(st, si) : 0, match: [w] } };
+    }
+    save(); toast("נוסף לכרטיסיות ✓");
+    openWordSheet(word, st, sentence, si, mode);
+    refreshWordMarks();
+  };
+  if ($("#ws-ai")) $("#ws-ai").onclick = async () => {
+    const b = $("#ws-ai"); b.disabled = true; b.textContent = "מתרגם…";
+    try {
+      const j = await askJSON(`Spanish word "${word}" in this sentence: "${sentence}". Return ONLY JSON: {"gloss":"short English meaning in this context","lemma":"dictionary form"}`, "quick");
+      S.aiGloss[w] = String(j.gloss || "?") + (j.lemma ? " | " + j.lemma : "");
+      save(); openWordSheet(word, st, sentence, si, mode);
+    } catch (e) { b.textContent = "לא הצליח, נסה שוב"; b.disabled = false; }
+  };
+}
+function paraOfSentence(st, si) { let k = 0; for (let pi = 0; pi < st.paragraphs.length; pi++) { k += splitSentences(st.paragraphs[pi].es).length; if (si < k) return pi; } return 0; }
+function refreshWordMarks() {
+  if (VIEW !== "reader" || !S.settings.highlight) return;
+  const fm = STORY_FORM[Reader.story.id] || {};
+  document.querySelectorAll(".story .w").forEach(el => {
+    const w = el.dataset.w.toLowerCase(); const cid = fm[w] || GLOBAL_FORM[w] || (S.cards["u_" + slug(w)] ? "u_" + slug(w) : null);
+    el.classList.remove("tgt", "lrn");
+    if (!cid) return;
+    const st = cardStatus(cid);
+    if (fm[w] && st === "new") el.classList.add("tgt"); else if (st === "learning" || (S.cards[cid] && S.cards[cid].st === "new")) el.classList.add("lrn");
+  });
+}
+
+/* ============ placement ============ */
+let PT = null;
+function renderPlacement() {
+  if (!PT) PT = { band: 2, streak: 0, asked: new Set(), res: { 1: { c: 0, n: 0 }, 2: { c: 0, n: 0 }, 3: { c: 0, n: 0 } }, n: 0, max: 15, item: null, knownW: [] };
+  if (PT.n >= PT.max) return finishPlacement();
+  const pool = PLACEMENT.map((x, i) => ({ x, i })).filter(o => o.x.band === PT.band && !PT.asked.has(o.i));
+  const pool2 = pool.length ? pool : PLACEMENT.map((x, i) => ({ x, i })).filter(o => !PT.asked.has(o.i));
+  if (!pool2.length) return finishPlacement();
+  const wantReading = PT.n % 4 === 3;
+  const pick = pool2.find(o => !!o.x.r === wantReading) || pool2[Math.floor(Math.random() * pool2.length)];
+  PT.item = pick; PT.asked.add(pick.i);
+  const it = pick.x;
+  const sentence = it.r ? "" : esc(it.s).replace(/\*(.+?)\*/, '<mark>$1</mark>');
+  main().innerHTML = `
+  <div class="ses-top"><button class="icon" id="pt-x">✕</button><div class="prog"><div style="width:${Math.round(PT.n / PT.max * 100)}%"></div></div><span class="muted small">${PT.n + 1}/${PT.max}</span></div>
+  <section class="pt">
+    <div class="eyebrow es" dir="ltr">${it.r ? "Lee el texto y responde." : "¿Qué significa la palabra destacada?"}</div>
+    ${it.r ? `<div class="pt-pass es" dir="ltr">${esc(it.p)}</div><div class="pt-q es" dir="ltr">${esc(it.q)}</div>` : `<div class="pt-s es" dir="ltr">${sentence}</div>`}
+    <div class="pt-opts">${it.opts.map((o, k) => `<button class="opt ${it.r ? "es" : ""}" dir="ltr" data-k="${k}">${esc(o)}</button>`).join("")}
+    <button class="opt nose" data-k="-1">No sé · לא יודע</button></div>
+  </section>`;
+  $("#pt-x").onclick = () => { PT = null; go(S.placement.done ? "progress" : "welcome"); };
+  document.querySelectorAll(".pt-opts .opt").forEach(b => b.onclick = () => {
+    const ok = +b.dataset.k === it.a;
+    const r = PT.res[it.band]; r.n++; if (ok) r.c++;
+    if (ok && it.w) PT.knownW.push(it.w);
+    if (ok) { PT.streak++; if (PT.streak >= 2 && PT.band < 3) { PT.band++; PT.streak = 0; } }
+    else { PT.streak = 0; if (PT.band > 1) PT.band--; }
+    PT.n++;
+    renderPlacement();
+  });
+}
+function finishPlacement() {
+  const res = PT.res;
+  let lvl = 1;
+  for (const b of [3, 2]) { const r = res[b]; if (r.n >= 2 && r.c / r.n >= 0.7) { lvl = b; break; } }
+  if (lvl === 1 && res[2].n >= 3 && res[2].c / res[2].n >= 0.6 && res[1].n && res[1].c / res[1].n >= 0.8) lvl = 2;
+  S.level = lvl;
+  S.placement = { done: true, date: Date.now(), res };
+  for (const w of PT.knownW) { const id = "c_" + slug(w); if (DEFS[id] && DEFS[id].level < lvl) S.known[id] = true; }
+  save(); PT = null;
+  const L = LV[lvl];
+  main().innerHTML = `<section class="done">
+    <div class="done-emoji">${L.icon}</div>
+    <div class="eyebrow">הרמה שלך</div>
+    <h2 class="es" dir="ltr">${L.es} · ${L.cefr}</h2>
+    <p>${L.desc}</p>
+    <div class="pt-res">${[1, 2, 3].map(b => `<div><span>${LV[b].es}</span><b>${res[b].n ? Math.round(res[b].c / res[b].n * 100) + "%" : "—"}</b></div>`).join("")}</div>
+    <p class="muted small">אפשר לשנות רמה ידנית או לעשות את המבחן שוב במסך "התקדמות". האפליקציה תציע לך לעלות רמה כשתהיה מוכן.</p>
+    <button class="btn primary big" id="pt-go">יאללה, לסיפור הראשון 📖</button>
+  </section>`;
+  $("#pt-go").onclick = () => { const nx = nextStory(); nx ? go("reader", nx.id) : go("home"); };
+}
+
+/* ============ progress & settings ============ */
+function renderProgress() {
+  const counts = { new: 0, learning: 0, stable: 0, known: 0 };
+  for (const id of Object.keys(DEFS).concat(Object.keys(S.cards).filter(i => !DEFS[i]))) counts[cardStatus(id)]++;
+  const reads = Object.values(S.read);
+  const avg = reads.length ? Math.round(reads.reduce((a, r) => a + r.score, 0) / reads.length * 100) : null;
+  const L = LV[S.level];
+  const st = S.settings;
+  main().innerHTML = `
+  <h2 class="h">התקדמות</h2>
+  <section class="lvl-card">
+    <div class="lvl-icon">${L.icon}</div>
+    <div><div class="eyebrow">רמה נוכחית</div><div class="lvl-name es" dir="ltr">${L.es} · ${L.cefr}</div><div class="muted small">${L.desc}</div></div>
+  </section>
+  <div class="seg">${[1, 2, 3].map(l => `<button class="${S.level === l ? "on" : ""}" data-l="${l}">${LV[l].icon} ${LV[l].es}</button>`).join("")}</div>
+  <button class="btn ghost" id="pg-test">🧪 מבחן רמה מחדש</button>
+  <section class="grid4">
+    <div><b>${counts.stable + counts.known}</b><span>מילים שנקלטו</span></div>
+    <div><b>${counts.learning}</b><span>בלמידה</span></div>
+    <div><b>${reads.length}</b><span>סיפורים שנקראו</span></div>
+    <div><b>${avg === null ? "—" : avg + "%"}</b><span>ממוצע הבנה</span></div>
+  </section>
+  <h3 class="h3">הגדרות</h3>
+  <section class="settings">
+    <div class="set"><span>מילים חדשות ביום</span><div class="stepper"><button id="np-m">−</button><b>${st.newPerDay}</b><button id="np-p">+</button></div></div>
+    ${toggle("autoplay", "הקראה אוטומטית בכרטיסיות", st.autoplay)}
+    ${toggle("highlight", "סימון מילים חדשות/בלמידה בסיפור", st.highlight)}
+    ${toggle("reverseMature", "לפעמים להפוך כרטיס בשל (אנגלית ← ספרדית)", st.reverseMature)}
+    <div class="set"><span>קול הקראה</span><span class="muted small" dir="ltr">${esc(voiceLabel())}</span></div>
+    <div class="set"><button class="btn ghost small" id="pg-voice">🔊 בדיקת קול</button></div>
+  </section>
+  <h3 class="h3">גיבוי</h3>
+  <section class="settings">
+    <div class="set"><span>שמירה</span><span class="muted small">${Store.status === "cloud" ? "☁️ בחשבון Claude + בטלפון" : "📱 בטלפון בלבד"}</span></div>
+    <div class="set"><button class="btn ghost small" id="pg-copy">העתק גיבוי</button><button class="btn ghost small" id="pg-restore">שחזר מגיבוי</button></div>
+    <textarea id="pg-ta" hidden placeholder="הדבק כאן את הגיבוי ולחץ שוב על שחזר" dir="ltr"></textarea>
+  </section>
+  <p class="muted small center">Cuentos y Tarjetas · אלגוריתם FSRS-4.5 · ${allStories().length} סיפורים · ${Object.keys(DEFS).length} מילות יעד</p>`;
+  document.querySelectorAll(".seg button").forEach(b => b.onclick = () => { S.level = +b.dataset.l; save(); go("progress"); });
+  $("#pg-test").onclick = () => { PT = null; go("placement"); };
+  $("#np-m").onclick = () => { st.newPerDay = Math.max(3, st.newPerDay - 1); save(); renderProgress(); };
+  $("#np-p").onclick = () => { st.newPerDay = Math.min(20, st.newPerDay + 1); save(); renderProgress(); };
+  document.querySelectorAll(".tgl").forEach(b => b.onclick = () => { st[b.dataset.k] = !st[b.dataset.k]; save(); renderProgress(); });
+  $("#pg-voice").onclick = () => speak("Hola Dror, ¿cómo estás? Vamos a leer un cuento.", st.rate);
+  $("#pg-copy").onclick = async () => {
+    const data = JSON.stringify({ state: S, gen: GEN });
+    try { await navigator.clipboard.writeText(data); toast("הגיבוי הועתק"); }
+    catch (e) { const ta = $("#pg-ta"); ta.hidden = false; ta.value = data; ta.select(); toast("העתק את הטקסט ידנית"); }
+  };
+  $("#pg-restore").onclick = () => {
+    const ta = $("#pg-ta");
+    if (ta.hidden || !ta.value.trim()) { ta.hidden = false; ta.value = ""; ta.focus(); return; }
+    try {
+      const j = JSON.parse(ta.value);
+      S = normalize(j.state || j); GEN = j.gen || GEN;
+      lsSet("cyt_gen", GEN);
+      if (Store.col) for (const id of Object.keys(GEN)) Store.col.doc("story_" + id).set(GEN[id]).catch(() => { });
+      buildDefs(); save(); toast("שוחזר ✓"); go("home");
+    } catch (e) { toast("הגיבוי לא תקין"); }
+  };
+}
+function toggle(k, label, on) { return `<div class="set"><span>${label}</span><button class="tgl ${on ? "on" : ""}" data-k="${k}" role="switch" aria-checked="${on}"><i></i></button></div>`; }
+
+/* ============ boot ============ */
+function boot() {
+  S = normalize(lsGet("cyt_state"));
+  GEN = lsGet("cyt_gen") || {};
+  buildDefs(); rolloverDay();
+  document.querySelectorAll("#nav button").forEach(b => b.onclick = () => go(b.dataset.v));
+  $("#scrim").onclick = closeSheet;
+  go(S.placement.done ? "home" : "welcome");
+  initCloud();
+}
+document.addEventListener("DOMContentLoaded", boot);
+
+/* ============ verbs: study + drill ============ */
+let VSEL = { tense: "presente", verb: "tener" };
+let CJ_SET = null; // selected tenses for drill
+function tenseInfo(k) { return TENSES[k] || EXTRA_TENSES[k]; }
+function tenseStat(k) { const r = S.conj[k]; return r && r.n ? Math.round(r.c / r.n * 100) : null; }
+const useVos = () => S.voseo !== false;
+function formsFor(v, k) { return allForms(v, k, useVos()); }
+const short = k => ({ preterito: "Pretérito", perfecto: "Perfecto", gerundio: "Estar + -ando", ira: "Ir a + infinitivo", pluscuamperfecto: "Pluscuamperfecto", subjuntivo: "Subjuntivo" }[k] || TENSES[k].es);
+function renderVerbs() {
+  if (!CJ_SET) CJ_SET = new Set((S.conjSet && S.conjSet.length ? S.conjSet : DEFAULT_CJ).filter(k => TENSES[k]));
+  const all = TENSE_ORDER;
+  const t = tenseInfo(VSEL.tense);
+  const v = VERBS.find(x => x.inf === VSEL.verb) || VERBS[0];
+  const forms = formsFor(v, VSEL.tense);
+  main().innerHTML = `
+  <h2 class="h">זמנים ונטיות</h2>
+  <section class="cj-drill">
+    <div class="eyebrow">תרגול נטיות — בחר זמנים</div>
+    <div class="chips">${TENSE_ORDER.map(k => { const st = tenseStat(k); return `<button class="chip ${CJ_SET.has(k) ? "on" : ""}" data-k="${k}"><span class="es" dir="ltr">${short(k)}</span>${st !== null ? `<small>${st}%</small>` : ""}</button>`; }).join("")}</div>
+    <div class="seg two"><button class="${(S.conjVerbs || "all") === "all" ? "on" : ""}" data-vs="all">כל הפעלים</button><button class="${S.conjVerbs === "irr" ? "on" : ""}" data-vs="irr">רק לא־סדירים</button><button class="${S.conjVerbs === "reg" ? "on" : ""}" data-vs="reg">רק סדירים</button></div>
+    <button class="vos-tgl" id="vos-tgl"><span class="tgl ${useVos() ? "on" : ""}"><i></i></span><span>🇦🇷 לכלול <b class="es">vos</b> (vos tenés, vos sos) — ארגנטינה ומדג׳ין</span></button>
+    <button class="btn primary big" id="cj-start">⏱️ התחל תרגול (15 שאלות)</button>
+  </section>
+  <h3 class="h3">למידה: איך בונים כל זמן</h3>
+  <div class="tabs">${all.map(k => `<button class="tab ${VSEL.tense === k ? "on" : ""}" data-t="${k}"><span class="es" dir="ltr">${short(k)}</span><small>${tenseInfo(k).he}</small></button>`).join("")}</div>
+  <section class="tense-card">
+    <div class="tc-head"><div><div class="tc-name es" dir="ltr">${t.es}</div><div class="muted small">${t.he} · <span dir="ltr">${esc(t.en)}</span></div></div>${tenseStat(VSEL.tense) !== null ? `<div class="score">${tenseStat(VSEL.tense)}%</div>` : ""}</div>
+    <p><b>מתי:</b> ${t.use}</p>
+    ${t.form ? `<p><b>איך בונים:</b></p><div class="tc-form es" dir="ltr">${t.form.split(" · ").map(x => `<div>${esc(x)}</div>`).join("")}</div>` : ""}
+    ${t.markers ? `<p><b>מילות זמן:</b> <span class="es" dir="ltr">${t.markers}</span></p>` : ""}
+    <div class="tc-ex es" dir="ltr">${esc(t.ex)} <button class="icon spk inline" id="tc-ex">🔊</button></div>
+  </section>
+  <div class="verb-pick">${VERBS.map(x => `<button class="vchip ${x.inf === v.inf ? "on" : ""} ${x.irr ? "irr" : ""}" data-v="${x.inf}">${x.inf}</button>`).join("")}</div>
+  <section class="conj-table">
+    <div class="ct-head"><span class="es" dir="ltr"><b>${v.inf}</b> · ${esc(v.en)}</span>${v.irr ? `<span class="tag learning">לא סדיר</span>` : `<span class="tag stable">סדיר</span>`}</div>
+    ${allPersons(useVos()).map((p, i) => { const f = VSEL.tense === "gerundio" && v.inf === "estar" ? "—" : forms[i]; return `<button class="ct-row ${p.k === 5 ? "vos" : ""}" data-say="${esc(p.es[0] + " " + f)}"><span class="ct-p es" dir="ltr">${p.es.join(" / ")}</span><span class="ct-f es" dir="ltr">${esc(f)}</span><span class="ct-he">${p.he}</span></button>`; }).join("")}
+    <div class="muted small">הקש על שורה כדי לשמוע. אין vosotros — כמו בכל אמריקה הלטינית.${useVos() ? " ב־vos רק ההווה שונה (hablás, tenés, sos); בשאר הזמנים משתמשים בצורה של tú." : ""}</div>
+  </section>`;
+  document.querySelectorAll(".chip").forEach(b => b.onclick = () => { const k = b.dataset.k; CJ_SET.has(k) ? CJ_SET.delete(k) : CJ_SET.add(k); if (!CJ_SET.size) CJ_SET.add(k); S.conjSet = [...CJ_SET]; save(); renderVerbs(); });
+  $("#vos-tgl").onclick = () => { S.voseo = !useVos(); save(); renderVerbs(); };
+  document.querySelectorAll("[data-vs]").forEach(b => b.onclick = () => { S.conjVerbs = b.dataset.vs; save(); renderVerbs(); });
+  document.querySelectorAll(".tab").forEach(b => b.onclick = () => { VSEL.tense = b.dataset.t; renderVerbs(); });
+  document.querySelectorAll(".vchip").forEach(b => b.onclick = () => { VSEL.verb = b.dataset.v; renderVerbs(); });
+  document.querySelectorAll(".ct-row").forEach(b => b.onclick = () => speak(b.dataset.say, 0.85));
+  $("#tc-ex").onclick = () => speak(t.ex, S.settings.rate);
+  $("#cj-start").onclick = () => startConj();
+}
+
+let CJ = null;
+function pickVerbs() {
+  const m = S.conjVerbs || "all";
+  return VERBS.filter(v => m === "all" || (m === "irr" ? v.irr : !v.irr));
+}
+function makeQuestion(tenses, verbs) {
+  const t = tenses[Math.floor(Math.random() * tenses.length)];
+  const vpool = t === "gerundio" ? verbs.filter(x => !x.noGer) : verbs;
+  const v = (vpool.length ? vpool : verbs)[Math.floor(Math.random() * (vpool.length || verbs.length))];
+  const vos = useVos();
+  const persons = allPersons(vos);
+  const pi = vos && Math.random() < 0.22 ? 5 : Math.floor(Math.random() * 5);
+  const pron = persons[pi].es[Math.floor(Math.random() * persons[pi].es.length)];
+  const forms = allForms(v, t, vos);
+  const ans = forms[pi];
+  const pool = new Set();
+  forms.forEach((f, i) => { if (i !== pi) pool.add(f); });
+  const others = TENSE_ORDER.filter(x => x !== t).map(x => allForms(v, x, vos)[pi]);
+  const distract = shuffle([...pool].filter(f => f !== ans)).slice(0, 2).concat(shuffle(others.filter(f => f !== ans && !pool.has(f))).slice(0, 1));
+  while (distract.length < 3) { const f = shuffle(others.concat([...pool]))[0]; if (f !== ans && !distract.includes(f)) distract.push(f); else break; }
+  const marker = TENSES[t].marker;
+  return { t, v, pi, pron, ans, opts: shuffle([ans, ...distract.slice(0, 3)]), before: `${marker} ${pron}${TENSES[t].mid ? " " + TENSES[t].mid : ""}`, after: v.c };
+}
+function startConj() {
+  const tenses = [...CJ_SET];
+  const verbs = pickVerbs();
+  const q = []; for (let i = 0; i < 15; i++) q.push(makeQuestion(tenses, verbs));
+  CJ = { q, i: 0, c: 0, wrong: 0, tenses };
+  go("conj");
+}
+function renderConj() {
+  if (!CJ) return go("verbs");
+  if (CJ.i >= CJ.q.length) return renderConjEnd();
+  const q = CJ.q[CJ.i];
+  const T = TENSES[q.t];
+  main().innerHTML = `
+  <div class="ses-top"><button class="icon" id="cj-x">✕</button><div class="prog"><div style="width:${Math.round(CJ.i / CJ.q.length * 100)}%"></div></div><span class="muted small">${CJ.i + 1}/${CJ.q.length}</span></div>
+  <section class="cjq">
+    <div class="cj-meta"><span class="tag new es" dir="ltr">${short(q.t)}</span><span class="muted small">${T.he} · <span dir="ltr">${esc(T.en)}</span></span></div>
+    <div class="cj-verb es" dir="ltr">${q.v.inf} <span class="muted small">· ${esc(q.v.en)}</span></div>
+    <div class="cj-sent es" dir="ltr">${esc(q.before)} <span class="blank" id="cj-blank">_____</span> ${esc(q.after)}.</div>
+    <div class="pt-opts">${q.opts.map(o => `<button class="opt es" dir="ltr" data-o="${esc(o)}">${esc(o)}</button>`).join("")}</div>
+    <div id="cj-fb"></div>
+  </section>`;
+  $("#cj-x").onclick = () => { CJ = null; go("verbs"); };
+  let answered = false;
+  document.querySelectorAll(".cjq .opt").forEach(b => b.onclick = () => {
+    if (answered) return; answered = true;
+    const ok = b.dataset.o === q.ans;
+    const r = S.conj[q.t] || (S.conj[q.t] = { c: 0, n: 0 }); r.n++; if (ok) r.c++;
+    if (ok) CJ.c++; else { CJ.wrong++; CJ.q.splice(Math.min(CJ.q.length, CJ.i + 4), 0, Object.assign({}, q, { opts: shuffle(q.opts) })); }
+    bumpStreak(); save();
+    document.querySelectorAll(".cjq .opt").forEach(x => { x.disabled = true; if (x.dataset.o === q.ans) x.classList.add("right"); });
+    if (!ok) b.classList.add("wrong");
+    const full = `${q.before} ${q.ans} ${q.after}.`;
+    $("#cj-blank").textContent = q.ans; $("#cj-blank").classList.add(ok ? "ok" : "bad");
+    $("#cj-fb").innerHTML = `<div class="cj-fb ${ok ? "ok" : "bad"}"><b>${ok ? "¡Correcto!" : "התשובה: " + esc(q.ans)}</b>
+      <div class="muted small">${allPersons(true)[q.pi].he} · ${T.he}</div>
+      <div class="cj-row"><button class="pill" id="cj-say">🔊 הקרא</button><button class="pill" id="cj-tab">📋 כל הטבלה</button></div>
+      <div id="cj-table"></div>
+      <button class="btn primary big" id="cj-next">הבא ←</button></div>`;
+    $("#cj-say").onclick = () => speak(full, S.settings.rate);
+    $("#cj-tab").onclick = () => { const f = allForms(q.v, q.t, useVos()); $("#cj-table").innerHTML = `<div class="mini-tab">${allPersons(useVos()).map((p, i) => `<div class="${i === q.pi ? "hl" : ""}"><span class="es" dir="ltr">${p.es[0]}</span><b class="es" dir="ltr">${esc(f[i])}</b></div>`).join("")}</div>`; };
+    $("#cj-next").onclick = () => { CJ.i++; renderConj(); };
+    if (S.settings.autoplay) speak(full, S.settings.rate);
+  });
+}
+function renderConjEnd() {
+  const s = CJ;
+  const first = s.q.length - s.wrong;
+  main().innerHTML = `<section class="done">
+    <div class="done-emoji">⏱️</div>
+    <h2 dir="ltr">¡Buen trabajo!</h2>
+    <p>${s.c} תשובות נכונות מתוך ${s.q.length} שאלות.</p>
+    <div class="pt-res">${s.tenses.slice(0, 6).map(k => `<div><span class="es" dir="ltr">${short(k)}</span><b>${tenseStat(k) ?? "—"}%</b></div>`).join("")}</div>
+    <button class="btn primary big" id="cj-again">🔁 עוד סבב</button>
+    <button class="btn ghost" id="cj-back">חזרה לזמנים</button>
+  </section>`;
+  $("#cj-again").onclick = () => startConj();
+  $("#cj-back").onclick = () => { CJ = null; go("verbs"); };
+}
+
+</script>
+</body>
+</html>
