@@ -325,7 +325,7 @@ function rerenderSoft() { if (["home", "cards", "stories", "progress", "verbs"].
 function renderWelcome() {
   main().innerHTML = `
   <section class="hero">
-    <div class="hero-badge" dir="ltr">¡Hola, Dror!</div>
+    <div class="hero-badge" dir="ltr">¡Hola${S.name ? ", " + esc(S.name) : ""}!</div>
     <h1>Cuentos y Tarjetas</h1>
     <p>סיפורים קצרים בספרדית שבונים אוצר מילים, וכרטיסיות שדואגות שהמילים יישארו.</p>
     <ul class="how">
@@ -333,11 +333,14 @@ function renderWelcome() {
       <li><b>🃏 מתרגלים</b> את המילים מהסיפור בכרטיסיות חכמות (FSRS).</li>
       <li><b>🔁 פוגשים אותן שוב</b> בסיפורים הבאים, וכך הן נקלטות.</li>
     </ul>
+    <label class="muted small" for="w-name">איך קוראים לך? (לא חובה)</label>
+    <input class="name-in" id="w-name" maxlength="30" autocomplete="given-name" value="${esc(S.name || "")}">
     <button class="btn primary big" id="w-test">מבחן רמה קצר (3–4 דק׳)</button>
     <button class="btn ghost" id="w-skip">דלג — התחל ברמת Inicial</button>
   </section>`;
-  $("#w-test").onclick = () => go("placement");
-  $("#w-skip").onclick = () => { S.placement = { done: true, skipped: true, date: Date.now() }; S.level = 1; save(); go("home"); };
+  const keepName = () => { const n = ($("#w-name").value || "").trim(); if (n) { S.name = n; save(); } };
+  $("#w-test").onclick = () => { keepName(); go("placement"); };
+  $("#w-skip").onclick = () => { keepName(); S.placement = { done: true, skipped: true, date: Date.now() }; S.level = 1; save(); go("home"); };
 }
 
 /* ============ home ============ */
@@ -376,7 +379,10 @@ function renderHome() {
     <div class="ns-row"><div><div class="ns-title es" dir="ltr">${esc(nx.title)}</div><div class="muted">${esc(nx.titleEn)} · ${LV[nx.level].icon} ${LV[nx.level].es}</div></div><div class="ns-go">📖</div></div>
     <div class="muted small">${(nx.targets || []).length} מילים חדשות מחכות בפנים</div>
   </section>` : `<section class="next-story"><div class="eyebrow">סיימת את כל הסיפורים ברמה</div><p>צור סיפור חדש עם Claude במסך הסיפורים.</p></section>`}
+  ${installCard()}
   <section class="tip"><b>טיפ:</b> קרא את הסיפור קודם, ורק אחר כך תרגל את המילים שלו — מפגש בהקשר ואז שליפה מהזיכרון זה השילוב שהכי מחזיק.</section>`;
+  if ($("#h-install")) $("#h-install").onclick = async () => { if (!INSTALL.prompt) return; INSTALL.prompt.prompt(); try { await INSTALL.prompt.userChoice; } catch (e) { } INSTALL.prompt = null; renderHome(); };
+  if ($("#h-install-x")) $("#h-install-x").onclick = () => { S.installHidden = true; save(); renderHome(); };
   $("#h-practice").onclick = () => due + nw ? go("cards") : startSession("extra");
   $("#h-verbs").onclick = () => go("verbs");
   if ($("#h-story")) $("#h-story").onclick = () => go("reader", nx.id);
@@ -892,7 +898,8 @@ function renderProgress() {
   </section>
   <h3 class="h3">גיבוי</h3>
   <section class="settings">
-    <div class="set"><span>שמירה</span><span class="muted small">${Store.status === "cloud" ? "☁️ בחשבון Claude + בטלפון" : "📱 בטלפון בלבד"}</span></div>
+    <div class="set"><span>שמירה</span><span class="muted small">${Store.status === "cloud" ? "☁️ בחשבון Claude + בטלפון" : "📱 שמור בטלפון הזה" + (INSTALL.persisted ? " (קבוע)" : "")}</span></div>
+    ${Store.status !== "cloud" ? `<div class="set"><span class="muted small">הנתונים נשמרים רק במכשיר הזה ונשארים גם כשהאפליקציה מתעדכנת. מדי פעם כדאי ללחוץ "העתק גיבוי" ולשמור את הטקסט אצלך.</span></div>` : ""}
     <div class="set"><button class="btn ghost small" id="pg-copy">העתק גיבוי</button><button class="btn ghost small" id="pg-restore">שחזר מגיבוי</button></div>
     <textarea id="pg-ta" hidden placeholder="הדבק כאן את הגיבוי ולחץ שוב על שחזר" dir="ltr"></textarea>
   </section>
@@ -922,6 +929,27 @@ function renderProgress() {
 }
 function toggle(k, label, on) { return `<div class="set"><span>${label}</span><button class="tgl ${on ? "on" : ""}" data-k="${k}" role="switch" aria-checked="${on}"><i></i></button></div>`; }
 
+/* ============ install (GitHub Pages / PWA) ============ */
+const INSTALL = { prompt: null, persisted: false };
+const inClaude = () => !!(window.claude && typeof window.claude.use === "function");
+const isStandalone = () => (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent);
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); INSTALL.prompt = e; if (VIEW === "home") renderHome(); });
+window.addEventListener("appinstalled", () => { INSTALL.prompt = null; if (VIEW === "home") renderHome(); });
+function installCard() {
+  if (inClaude() || isStandalone() || S.installHidden || location.protocol === "file:") return "";
+  return `<section class="install"><b>📲 להתקין כאפליקציה בטלפון</b>
+    ${INSTALL.prompt ? `<p>בלחיצה אחת — ואז היא תיפתח מהמסך הראשי כמו כל אפליקציה.</p><button class="btn primary" id="h-install">התקן</button>`
+      : isIOS() ? `<p>בספארי: כפתור השיתוף <b>⬆️</b> ← <b>"הוסף למסך הבית"</b>.</p>`
+      : `<p>בכרום: תפריט <b>⋮</b> ← <b>"הוספה למסך הבית"</b> / <b>"התקנת אפליקציה"</b>.</p>`}
+    <button class="btn ghost small" id="h-install-x">הסתר</button></section>`;
+}
+function setupPWA() {
+  if (inClaude() || (location.protocol !== "https:" && location.hostname !== "localhost")) return;
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().then(ok => { INSTALL.persisted = ok; }); } catch (e) { }
+}
+
 /* ============ boot ============ */
 function boot() {
   S = normalize(lsGet("cyt_state"));
@@ -930,6 +958,7 @@ function boot() {
   document.querySelectorAll("#nav button").forEach(b => b.onclick = () => go(b.dataset.v));
   $("#scrim").onclick = closeSheet;
   go(S.placement.done ? "home" : "welcome");
+  setupPWA();
   initCloud();
 }
 document.addEventListener("DOMContentLoaded", boot);
