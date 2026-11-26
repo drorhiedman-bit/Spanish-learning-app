@@ -102,13 +102,15 @@ function renderConj() {
     if (!ok) b.classList.add("wrong");
     const full = `${q.before} ${q.ans} ${q.after}.`;
     $("#cj-blank").textContent = q.ans; $("#cj-blank").classList.add(ok ? "ok" : "bad");
-    $("#cj-fb").innerHTML = `<div class="cj-fb ${ok ? "ok" : "bad"}"><b>${ok ? "¡Correcto!" : "התשובה: " + esc(q.ans)}</b>
+    $("#cj-fb").innerHTML = `<div class="cj-fb ${ok ? "ok" : "bad"}"><b>${ok ? '<bdi dir="ltr">¡Correcto!</bdi>' : 'התשובה: <bdi class="es" dir="ltr">' + esc(q.ans) + "</bdi>"}</b>
       <div class="muted small">${allPersons(true)[q.pi].he} · ${T.he}</div>
-      <div class="cj-row"><button class="pill" id="cj-say">🔊 הקרא</button><button class="pill" id="cj-tab">📋 כל הטבלה</button></div>
+      <div class="cj-row"><button class="pill" id="cj-say">🔊 הקרא</button><button class="pill" id="cj-tab">📋 כל הטבלה</button><button class="pill ${ok ? "" : "on"}" id="cj-why">💡 הסבר</button></div>
+      <div id="cj-exp">${ok ? "" : explainHTML(q, b.dataset.o)}</div>
       <div id="cj-table"></div>
       <button class="btn primary big" id="cj-next">הבא ←</button></div>`;
     $("#cj-say").onclick = () => speak(full, S.settings.rate);
     $("#cj-tab").onclick = () => { const f = allForms(q.v, q.t, useVos()); $("#cj-table").innerHTML = `<div class="mini-tab">${allPersons(useVos()).map((p, i) => `<div class="${i === q.pi ? "hl" : ""}"><span class="es" dir="ltr">${p.es[0]}</span><b class="es" dir="ltr">${esc(f[i])}</b></div>`).join("")}</div>`; };
+    $("#cj-why").onclick = () => { const box = $("#cj-exp"), open = !!box.innerHTML; box.innerHTML = open ? "" : explainHTML(q, ok ? null : b.dataset.o); $("#cj-why").classList.toggle("on", !open); };
     $("#cj-next").onclick = () => { CJ.i++; renderConj(); };
     if (S.settings.autoplay) speak(full, S.settings.rate);
   });
